@@ -24,6 +24,12 @@ CREATE TABLE competitions (
     start_amount INTEGER NOT NULL
 );
 
+CREATE TABLE competition_users (
+    id SERIAL PRIMARY KEY NOT NULL,
+    competition_id INTEGER REFERENCES competitions(id) ON DELETE CASCADE,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
+);
+
 CREATE TABLE portfolios (
   id SERIAL PRIMARY KEY NOT NULL,
   name VARCHAR(255) NOT NULL,
@@ -40,7 +46,7 @@ CREATE TABLE tickers (
 
 CREATE TABLE portfolio_datas (
   id SERIAL PRIMARY KEY NOT NULL,
-quantity INTEGER NOT NULL,
+  quantity INTEGER NOT NULL,
   portfolio_id INTEGER REFERENCES portfolios(id) ON DELETE CASCADE,
   ticker_id INTEGER REFERENCES tickers(id) ON DELETE CASCADE
 );
@@ -55,8 +61,3 @@ CREATE TABLE transactions (
 );
 
 
-CREATE TABLE compeition_users (
-    id SERIAL PRIMARY KEY NOT NULL,
-    competition_id INTEGER REFERENCES competitions(id) ON DELETE CASCADE,
-    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
-);
