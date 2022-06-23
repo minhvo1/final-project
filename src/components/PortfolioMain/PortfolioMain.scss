@@ -20,10 +20,68 @@ $radius: 1rem;
 }
 
 .portfolio-info {
-  background-color: $divcolor;
+  background-color: transparent;
   height: 20%;
   margin: 0.9rem 1.8rem 0.9rem 1.8rem;
   border-radius: $radius;
+  display: flex;
+  flex-direction: row;
+
+}
+
+.portfolio-info div {
+  background-color: $divcolor;
+  border-radius: $radius;
+
+}
+
+.portfolio-value-return {
+  width: 50%;
+  margin: 0 0.75rem 0 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: transparent;
+}
+
+.portfolio-value  {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width:50%;
+  padding: 1rem 0 1rem 1.6rem;
+}
+
+.portfolio-value span {
+  font-size: 35px;
+}
+
+.portfolio-return span {
+  font-size: 25px;
+  color: #33C15B
+}
+
+.portfolio-return  {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 1rem 1.6rem 1rem 0rem;
+}
+
+.portfolio-value-return div header {
+  color: #878080;
+  font-size: 15px;
+}
+
+.daily-return {
+  width: 20%;
+  margin: 0 0.75rem 0 0.75rem;
+}
+
+.available-funds {
+  width: 30%;
+  margin: 0 0 0 0.75rem;
 }
 
 .performance-graph {
