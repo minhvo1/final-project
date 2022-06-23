@@ -1,0 +1,32 @@
+$mainfont: 'Poppins';
+$bgcolor: #313335;
+$textcolor: #F0F0F0;
+$textcolor-selected: #A374D2;
+$textcolor-positive: #33C15B;
+$textcolor-small: #878080;
+$divcolor: #1F1F1F;
+$divcolor-selected: #9967CA;
+
+
+body {
+  font-family: $mainfont;
+}
+
+.App {
+  display: flex;
+  flex-direction: row;
+}
+
+.sidebar {
+  height: 100vh;
+  width: 18rem;
+  background-color: $divcolor;
+  color: $textcolor;
+}
+
+.main {
+  height: 100vh;
+  width: 100%;
+  background-color: $bgcolor;
+  color: $textcolor;
+}
