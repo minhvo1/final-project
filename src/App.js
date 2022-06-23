@@ -1,12 +1,17 @@
 import './App.scss';
 import Sidebar from './components/Sidebar';
-import Main from './components/PortfolioMain';
+import PortfolioMain from './components/PortfolioMain/index';
+import Header from './components/Header/index'
 
 function App() {
   return (
     <div className="App">
       <Sidebar />
-      <Main />
+      <div className="main-container">
+        <Header />
+        <PortfolioMain />
+
+      </div>
     </div>
   );
 }
