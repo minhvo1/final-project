@@ -1,7 +1,9 @@
 import React from 'react';
+import './PortfolioMain.scss';
+ 
 
-export default function Main(props) {
+export default function PortfolioMain(props) {
   return (
-    <div className="main">Test</div>
+    <div className="portfolio-main">Test</div>
   )
 }
