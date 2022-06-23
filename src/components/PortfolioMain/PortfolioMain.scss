@@ -6,10 +6,36 @@ $textcolor-positive: #33C15B;
 $textcolor-small: #878080;
 $divcolor: #1F1F1F;
 $divcolor-selected: #9967CA;
+$radius: 1rem;
 
 .portfolio-main {
   height: 90%;
   width: 100%;
   background-color: $bgcolor;
   color: $textcolor;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+}
+
+.portfolio-info {
+  background-color: $divcolor;
+  height: 20%;
+  margin: 0.9rem 1.8rem 0.9rem 1.8rem;
+  border-radius: $radius;
+}
+
+.performance-graph {
+  background-color: $divcolor;
+  height: 45%;
+  margin: 0.9rem 1.8rem 0.9rem 1.8rem;
+  border-radius: $radius;
+}
+
+.asset-table {
+  background-color: $divcolor;
+  height: 35%;
+  margin: 0.9rem 1.8rem 1.8rem 1.8rem;
+  border-radius: $radius;
 }
