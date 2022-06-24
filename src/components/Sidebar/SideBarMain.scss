@@ -1,0 +1,97 @@
+$mainfont: 'Poppins';
+$bgcolor: #313335;
+$textcolor: #F0F0F0;
+$textcolor-selected: #A374D2;
+$textcolor-positive: #33C15B;
+$textcolor-small: #878080;
+$divcolor: #1F1F1F;
+$divcolor-selected: #9967CA;
+$radius: 1rem;
+
+.portfolio-main {
+  height: 90%;
+  width: 100%;
+  background-color: $bgcolor;
+  color: $textcolor;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+}
+
+.portfolio-info {
+  background-color: $divcolor;
+  height: 20%;
+  margin: 0.9rem 1.8rem 0.9rem 1.8rem;
+  border-radius: $radius;
+}
+
+.performance-graph {
+  background-color: $divcolor;
+  height: 45%;
+  margin: 0.9rem 1.8rem 0.9rem 1.8rem;
+  border-radius: $radius;
+}
+
+.asset-table {
+  background-color: $divcolor;
+  height: 35%;
+  margin: 0.9rem 1.8rem 1.8rem 1.8rem;
+  border-radius: $radius;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+
+.Logo { 
+  width: 100%;
+  height: 10%;
+  padding-top: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom: solid;
+  border-color: #878080;
+}
+
+.logo-image {
+  width: 30%;
+}
+
+.menus-lists {
+  width: 100%;
+  height: 20%;
+
+}
+.portfolios-lists {
+  width: 100%;
+}
+
+.sideBar-titles {
+  font-size: smaller;
+  color: #878080;
+  padding-left: 1em;
+}
+
+.sideListItem {
+  font-weight:lighter;
+  padding-top: .5em;
+  padding-bottom: 0.5em;
+  padding-left: 1em;
+  margin-left: 1em;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+}
+
+.sideListItem--selected {
+
+  background-color: rgba($color: #9967CA, $alpha: .29);
+  border-radius: 10px;
+  color: #A374D2 ;
+  
+}
