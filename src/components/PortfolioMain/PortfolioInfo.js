@@ -14,11 +14,14 @@ export default function PortfolioInfo(props) {
         </div>
       </div>
       <div className="daily-return">
-
+        <header>Daily Return</header>
+        <span>+ 10%</span>
       </div>
       <div className="available-funds">
-        
+        <header>Available Funds</header>
+        <span>$50,000</span>
       </div>
+
     </div>
   );
 }

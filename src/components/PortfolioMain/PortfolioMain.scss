@@ -77,12 +77,42 @@ $radius: 1rem;
 .daily-return {
   width: 20%;
   margin: 0 0.75rem 0 0.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0 1rem 0;
+}
+
+.daily-return header {
+  color: #878080;
+  font-size: 15px;
+}
+
+.daily-return span {
+  font-size: 35px;
+  color: #33C15B
 }
 
 .available-funds {
   width: 30%;
   margin: 0 0 0 0.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem 0 1rem 1.6rem;
 }
+
+.available-funds header {
+  color: #878080;
+  font-size: 15px;
+}
+
+.available-funds span {
+  font-size: 35px;
+}
+
+
 
 .performance-graph {
   background-color: $divcolor;
