@@ -12,3 +12,7 @@ export function getPortfolios (db, id) {
         return err;
       });
 }
+
+export function addNewPortfolio (db, id, name) {
+  let query = `INSERT INTO por`
+}

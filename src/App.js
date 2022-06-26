@@ -2,15 +2,35 @@ import './App.scss';
 import Sidebar from './components/Sidebar';
 import PortfolioMain from './components/PortfolioMain/index';
 import Header from './components/Header/index'
+import Competitions from './components/CompetitionMain/index'
+import { useState } from "react";
+import { getPortfolios } from "./helpers/sidebarHelper"
+import useApplicationData from "./hooks/useApplicationData";
+
+/*
+const { Pool } = require("pg");
+const dbParams = require("./db.js");
+const db = new Pool(dbParams);
+db.connect();
+*/
 
 function App() {
+  const { view, setMenu, setPortfolio, portfolios } =
+  useApplicationData();
+
   return (
     <div className="App">
-      <Sidebar />
+      <Sidebar
+      portfolio = {view.portfolio}
+      setPortfolio = {setPortfolio} 
+      portfolios = {portfolios}
+      menu = {view.menu}
+      setMenu = {setMenu}
+      />
       <div className="main-container">
         <Header />
-        <PortfolioMain />
-
+        { view.menu === "Dashboard"  && <PortfolioMain/>}
+        { view.menu === "Competitions" &&<Competitions/>}
       </div>
     </div>
   );

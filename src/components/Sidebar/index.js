@@ -3,9 +3,8 @@ import './SideBarMain.scss';
 import Logo from './Logo';
 import MenuList from './MenuList';
 import PortfoliosList from './PortfoliosList';
-
+import NewPortfolio from './newPortfolio'
 export default function Sidebar(props) {
-  
 const menu =
 [
   {
@@ -22,40 +21,25 @@ const menu =
   }
 ]
 
-const portfolios =
-[
-  {
-    "id" : 1,
-    "name" : "YOLO Portfolio"
-  },
 
-  {
-    "id" : 2,
-    "name" : "Savings Portfolio"
-  },
-
-  {
-    "id" : 3,
-    "name" : "WSB Competition"
-  }
-]
 
   return (
     <div className="sidebar">
       <Logo/>
       <MenuList
       menus = {menu}
-      selected = "Dashboard"
-      setMenu = {console.log("youve selected this menu")}
-      transfer = {console.log("transfer")}
+      selected = {props.menu}
+      setMenu = {props.setMenu}
       />
       <PortfoliosList
-      portfolios = {portfolios}
-      selected = "YOLO Portfolio"
-      setPortfolio = {console.log("youve selected this portfolio")}
-      transfer = {console.log("transfer")}
-
+      portfolios = {props.portfolios}
+      selected = {props.portfolio}
+      setPortfolio = {props.setPortfolio}
+      setMenu = {props.setMenu}
       />
+      {props.menu === "New Portfolio" &&
+      <NewPortfolio/>
+      }
     </div>
   )
 }

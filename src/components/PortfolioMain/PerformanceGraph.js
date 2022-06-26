@@ -13,7 +13,7 @@ import {
 
 export default function PerformanceGraph(props) {
   const timeframes = ["1D", "1W", "1M", "3M", "1Y", "All"];
-  const options = {
+  /*const options = {
     method: "GET",
     url: "https://yfapi.net/v8/finance/chart/AAPL?comparisons=MSFT%2C%20GME&range=6mo&region=US&interval=1wk&lang=en&events=div%2Csplit",
     params: { modules: "defaultKeyStatistics,assetProfile" },
@@ -36,7 +36,7 @@ export default function PerformanceGraph(props) {
         }),
     ]);
   });
-
+*/
   const data = [
     {
       name: "Page A",

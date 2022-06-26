@@ -1,0 +1,20 @@
+$mainfont: 'Poppins';
+$bgcolor: #313335;
+$textcolor: #F0F0F0;
+$textcolor-selected: #A374D2;
+$textcolor-positive: #33C15B;
+$textcolor-small: #878080;
+$divcolor: #1F1F1F;
+$divcolor-selected: #9967CA;
+$radius: 1rem;
+
+.competition-main {
+  height: 90%;
+  width: 100%;
+  background-color: $bgcolor;
+  color: $textcolor;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+}
