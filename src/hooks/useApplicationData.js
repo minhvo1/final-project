@@ -3,27 +3,28 @@ import { useState, useEffect } from "react";
 export default function useApplicationData() {
   const [view, setView] = useState({
     menu: "Dashboard",
-    portfolio: "YOLO Portfolio",
+    portfolio: "YOLO Portfolio"
   });
 
-  const setPortfolio = (portfolio) => setView({ ...view, portfolio });
+  const setPortfolio = (portfolio) => {
+    setView({ menu: "Dashboard", portfolio})
+  };
 
   const setMenu = (menu) => setView({ ...view, menu });
 
   const portfolios = [
     {
-      id: 1,
+      id: 4,
       name: "YOLO Portfolio",
     },
 
     {
-      id: 2,
+      id: 5,
       name: "Savings Portfolio",
     },
 
     {
-      id: 3,
-      id : 1,
+      id: 6,
       name: "WSB Competition",
     },
   ];

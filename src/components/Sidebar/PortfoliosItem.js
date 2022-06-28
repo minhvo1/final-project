@@ -7,8 +7,8 @@ export default function PortfoliosItem(props) {
   });
 
   const setToPortfolio = () => {
-    props.setPortfolio(props.name);
     props.setMenu("Dashboard");
+    props.setPortfolio(props.name);
   }
 
   return (
