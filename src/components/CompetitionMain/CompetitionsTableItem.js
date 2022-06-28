@@ -2,33 +2,26 @@ import React from 'react';
 
 
 export default function CompetitionsTableItem (props) {
+
+  let dateStart = new Date(props.startDate);
+  dateStart = `${dateStart.getMonth()}/${dateStart.getDate()}/${dateStart.getFullYear()}` 
+
+  let dateEnd = new Date(props.endDate);
+  dateEnd = `${dateEnd.getMonth()}/${dateEnd.getDate()}/${dateEnd.getFullYear()}` 
+
+
     return (
-<tbody>
     <tr>
-      <td>WSB</td>
-      <td>5/10</td>
-      <td>$100,000</td>
-      <td>$1,000</td>
-      <td>08/12/2022</td>
-      <td>09/12/2022</td>
+      <td>{props.name}</td>
+      <td>{props.lobby}</td>
+      <td>{props.capital}</td>
+      <td>{props.prizePool}</td>
+      <td>{dateStart}</td>
+      <td>{dateEnd}</td>
+      {props.avaliability && <td><button className = "join-button">Join</button></td> }
+
     </tr>
-    <tr>
-    <td>WSB</td>
-      <td>5/10</td>
-      <td>$100,000</td>
-      <td>$1,000</td>
-      <td>08/12/2022</td>
-      <td>09/12/2022</td>
-    </tr>
-    <tr>
-    <td>WSB</td>
-      <td>5/10</td>
-      <td>$100,000</td>
-      <td>$1,000</td>
-      <td>08/12/2022</td>
-      <td>09/12/2022</td>
-    </tr>
-  </tbody>
+    
     )
 
 }

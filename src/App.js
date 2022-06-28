@@ -15,7 +15,7 @@ db.connect();
 */
 
 function App() {
-  const { view, setMenu, setPortfolio, portfolios } =
+  const { view, setMenu, setPortfolio, portfolios, competitions, user_competitions  } =
   useApplicationData();
 
   return (
@@ -30,7 +30,11 @@ function App() {
       <div className="main-container">
         <Header />
         { view.menu === "Dashboard"  && <PortfolioMain/>}
-        { view.menu === "Competitions" &&<Competitions/>}
+        { view.menu === "Competitions" &&<Competitions
+        competitions = {competitions}
+        user_competitions = {user_competitions}
+        
+        />}
       </div>
     </div>
   );

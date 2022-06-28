@@ -15,6 +15,89 @@ $radius: 1rem;
   color: $textcolor;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
+}
+
+.competition-list {
+  width: 90%;
+  height : 30rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: $divcolor;
+  border-radius: 10px;
+  overflow-y: auto;
+}
+
+.competition-user-list {
+  margin-top: 3rem;
+  height : 17rem;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: $divcolor;
+  border-radius: 10px;
+  overflow-y: auto;
 
 }
+
+.competition-titles {
+  margin-top : 1rem;
+  margin-left : 1.4rem;
+  font-size: larger;
+}
+
+table {
+  width: 97%;
+  margin-top: 1em;
+}
+
+
+thead{
+  text-align: center;
+  height : 2.4rem;
+}
+
+th {
+  background-color: $bgcolor;
+
+}
+
+.start-th {
+  border-radius: 10px 0 0 10px ;
+}
+
+.end-th {
+  border-radius: 0 10px 10px 0 ;
+}
+
+td {
+  text-align: center;
+  height: 3rem;
+}
+
+.Table-Div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.join-button {
+    width: 4rem;
+    background-color: rgba($color: #9967CA, $alpha: .29);
+    border-radius: 10px;
+    color: #A374D2 ;
+  }
+
+  .competition-profit {
+    color: red;
+  }
+  
+  .competition-profit-gain {
+    color : #33C15B;
+    ;
+  }
+

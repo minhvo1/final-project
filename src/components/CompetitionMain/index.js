@@ -2,19 +2,16 @@ import React from "react";
 import "./CompetitionMain.scss";
 
 import CompetitionsTable from "./CompetitionsTable";
-import UserCompetitions from "./UserCompetitions";
+import UserCompetitionsTable from "./UserCompetitions";
 
 export default function PortfolioMain(props) {
   return (
     <div className="competition-main">
-      <div className="competition-list">
-        Competitions
-        <CompetitionsTable />
-      </div>
-      <div className="competition-user-list">
-       Users Competitions
-        <UserCompetitions />
-      </div>
+        <CompetitionsTable 
+        competitions = {props.competitions}
+        />
+        <UserCompetitionsTable
+        user_competitions = {props.user_competitions} />
     </div>
   );
 }
