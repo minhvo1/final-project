@@ -143,13 +143,33 @@ $radius: 1rem;
   color:#D3CACA;
 }
 
-.main-graph {
-
-}
-
 .asset-table {
   background-color: $divcolor;
   height: 35%;
   margin: 0.9rem 1.8rem 1.8rem 1.8rem;
+  padding: 1rem 1.6rem 1rem 1.6rem;
   border-radius: $radius;
+  display: flex;
+  flex-direction: column;
+}
+
+.asset-table div span{
+  color: #878080;
+}
+
+.asset-table div table {
+  margin-top: 0.5rem;
+  width: 100%;
+  text-align: left;
+
+}
+
+.asset-table div table th {
+  background-color: #313335;
+
+}
+
+.asset-table div table tr td{
+  text-align: left;
+ 
 }
