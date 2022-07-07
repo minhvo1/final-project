@@ -12,7 +12,6 @@
     "isomorphic-ws": "^5.0.0",
     "protobufjs": "^6.11.3",
     "react": "^18.2.0",
-    "react-bootstrap-table-next": "^4.0.3",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
     "react-table": "^7.8.0",
