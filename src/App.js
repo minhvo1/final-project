@@ -33,7 +33,6 @@ function App() {
         { view.menu === "Competitions" &&<Competitions
         competitions = {competitions}
         user_competitions = {user_competitions}
-        
         />}
       </div>
     </div>

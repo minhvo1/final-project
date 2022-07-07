@@ -21,8 +21,6 @@ const menu =
   }
 ]
 
-
-
   return (
     <div className="sidebar">
       <Logo/>

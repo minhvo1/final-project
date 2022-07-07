@@ -10,7 +10,6 @@ export default function MenuItem(props) {
     props.onClick(props.name);
   }
 
-
   return (
     <div className={menuListClass}>
       <button className="sidebar-button" onClick={setToMenu}>
