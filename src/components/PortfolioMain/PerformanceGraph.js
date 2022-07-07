@@ -1,86 +1,51 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios';
+import axios from "axios";
 import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
   CartesianGrid,
-  Tooltip,
   Legend,
   ResponsiveContainer,
+  Scatter,
+  ScatterChart,
+  Tooltip,
+  XAxis,
+  YAxis,
 } from "recharts";
+
+import moment from "moment";
 
 export default function PerformanceGraph(props) {
   const timeframes = ["1D", "1W", "1M", "3M", "1Y", "All"];
-  /*const options = {
+
+  const options = {
     method: "GET",
-    url: "https://yfapi.net/v8/finance/chart/AAPL?comparisons=MSFT%2C%20GME&range=6mo&region=US&interval=1wk&lang=en&events=div%2Csplit",
+    url: "https://yfapi.net/v8/finance/chart/AMC?comparisons=MSFT%2CAAPL%2CGME%2CAMZN%2C&range=1mo&region=US&interval=1d&lang=en&events=div%2Csplit",
     params: { modules: "defaultKeyStatistics,assetProfile" },
     headers: {
-      "x-api-key": "4srRVAEAot50NQgO71T2s82w94GyqbIp23UpxDtf",
+      "x-api-key": "tBiKYaLo777hpz2ksuxSL7ERqNDrdIn27eqCExlQ",
     },
   };
-  // const [state, setState] = useState({});
+  const [data, setData] = useState([]);
 
-  // console.log('state',state)
   useEffect(() => {
-    Promise.all([
-      axios
-        .request(options)
-        .then(function (response) {
-          console.log('data',response.data);
-        })
-        .catch(function (error) {
-          console.error(error);
-        }),
-    ]);
+    Promise.all([axios.request(options)])
+      .then(function (response) {
+        console.log(response)
+        let resultData = [];
+        for (let i in response[0].data.chart.result[0].timestamp) {
+          resultData.push({
+            time: response[0].data.chart.result[0].timestamp[i],
+            value: response[0].data.chart.result[0].indicators.quote[0].close[i],
+          });
+        }
+
+        setData(resultData);
+      })
+
+      .catch(function (error) {
+        console.error(error);
+      });
   });
-*/
-  const data = [
-    {
-      name: "Page A",
-      uv: 4000,
-      pv: 2400,
-      amt: 2400,
-    },
-    {
-      name: "Page B",
-      uv: 3000,
-      pv: 1398,
-      amt: 2210,
-    },
-    {
-      name: "Page C",
-      uv: 2000,
-      pv: 9800,
-      amt: 2290,
-    },
-    {
-      name: "Page D",
-      uv: 2780,
-      pv: 3908,
-      amt: 2000,
-    },
-    {
-      name: "Page E",
-      uv: 1890,
-      pv: 4800,
-      amt: 2181,
-    },
-    {
-      name: "Page F",
-      uv: 2390,
-      pv: 3800,
-      amt: 2500,
-    },
-    {
-      name: "Page G",
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
-    },
-  ];
+
 
   return (
     <div className="performance-graph">
@@ -92,21 +57,25 @@ export default function PerformanceGraph(props) {
           })}
         </div>
       </div>
-      <ResponsiveContainer width="100%" height="100%" className="main-graph">
-        <LineChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Line
-            type="monotone"
-            dataKey="pv"
-            stroke="#8884d8"
-            activeDot={{ r: 8 }}
+      <ResponsiveContainer width="95%" height={500}>
+        <ScatterChart>
+          <XAxis
+            dataKey="time"
+            domain={["auto", "auto"]}
+            name="Time"
+            tickFormatter={(unixTime) => moment(unixTime).format("HH:mm Do")}
+            type="number"
           />
-          <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-        </LineChart>
+          <YAxis dataKey="value" name="Value" type="number" />
+
+          <Scatter
+            data={data}
+            line={{ stroke: "#eee" }}
+            lineJointType="monotoneX"
+            lineType="joint"
+            name="Values"
+          />
+        </ScatterChart>
       </ResponsiveContainer>
     </div>
   );
