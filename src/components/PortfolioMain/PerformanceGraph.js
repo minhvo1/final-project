@@ -28,7 +28,7 @@ export default function PerformanceGraph(props) {
 
   useEffect(() => {
     Promise.all([axios.request(options)])
-      .then(function (response) {
+      .then((response) => {
         console.log(response)
         let resultData = [];
         for (let i in response[0].data.chart.result[0].timestamp) {
@@ -37,14 +37,14 @@ export default function PerformanceGraph(props) {
             value: response[0].data.chart.result[0].indicators.quote[0].close[i],
           });
         }
-
-        setData(resultData);
+        setData(
+          ...data,
+          resultData);
       })
-
       .catch(function (error) {
         console.error(error);
       });
-  });
+  },[]);
 
 
   return (
