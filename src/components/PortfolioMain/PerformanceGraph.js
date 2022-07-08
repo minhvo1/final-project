@@ -33,8 +33,8 @@ export default function PerformanceGraph(props) {
         let resultData = [];
         for (let i in response[0].data.chart.result[0].timestamp) {
           resultData.push({
-            time: response[0].data.chart.result[0].timestamp[i],
             value: response[0].data.chart.result[0].indicators.quote[0].close[i],
+            time: response[0].data.chart.result[0].timestamp[i],
           });
         }
         setData(
@@ -46,7 +46,7 @@ export default function PerformanceGraph(props) {
       });
   },[]);
 
-
+  console.log(data)
   return (
     <div className="performance-graph">
       <div>
@@ -57,16 +57,16 @@ export default function PerformanceGraph(props) {
           })}
         </div>
       </div>
-      <ResponsiveContainer width="95%" height={500}>
+      <ResponsiveContainer width="100%" height="100%">
         <ScatterChart>
           <XAxis
             dataKey="time"
             domain={["auto", "auto"]}
-            name="Time"
-            tickFormatter={(unixTime) => moment(unixTime).format("HH:mm Do")}
-            type="number"
+            name="time"
+            tickFormatter={timeStr => moment(timeStr).format('D MMM YY')}
+        
           />
-          <YAxis dataKey="value" name="Value" type="number" />
+          <YAxis dataKey="value" name="Value" />
 
           <Scatter
             data={data}
