@@ -21,7 +21,8 @@ CREATE TABLE competitions (
     name VARCHAR(255) NOT NULL,
     start_datetime TIMESTAMP NOT NULL DEFAULT NOW(),
     end_datetime TIMESTAMP NOT NULL,
-    start_amount INTEGER NOT NULL
+    start_amount INTEGER NOT NULL,
+    avaliability BOOLEAN NOT NULL DEFAULT TRUE 
 );
 
 CREATE TABLE competition_users (

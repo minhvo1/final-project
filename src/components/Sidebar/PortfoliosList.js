@@ -8,8 +8,8 @@ export default function PortfoliosList(props) {
         key={portfolio.id}
         name={portfolio.name}
         selected={portfolio.name === props.selected}
-        setPorfolio={props.setPortfolio}
-        onClick ={props.transfer}
+        setPortfolio={props.setPortfolio}
+        setMenu = {props.setMenu}
       />
     );
   });

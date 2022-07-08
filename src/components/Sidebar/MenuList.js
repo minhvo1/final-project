@@ -8,8 +8,7 @@ export default function MenuList(props) {
       key={menu.id}
       name={menu.name}
       selected={menu.name === props.selected}
-      setMenu={props.setMenu}
-      onClick ={props.transfer}
+      onClick={props.setMenu}
       />
     );
   });
