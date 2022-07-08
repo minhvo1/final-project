@@ -6,9 +6,87 @@ $textcolor-positive: #33C15B;
 $textcolor-small: #878080;
 $divcolor: #1F1F1F;
 $divcolor-selected: #9967CA;
+$radius: 1rem;
 
 .header {
   background-color: $bgcolor;
   color: $textcolor;
   height: 10%;
+  margin: 0.9rem 1.8rem 0.9rem 1.8rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
+
+.header_portfolio-info {
+  font-size: 2.36rem;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.txt-search-bar {
+  display: flex;
+  flex-direction: row;
+  background-color: #1F1F1F;
+  border-radius: 1rem;
+  padding-left: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-top: 10px;
+  width: 90%
+}
+
+.user-info {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  width: 6%;
+  height: 30px;
+}
+
+.search {
+  margin-left: 10px;
+  width: 100%;
+}
+
+.search-result {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.search-result-li {
+  width: 100%;
+  line-height: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 8px;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: $radius;
+  z-index: 1000;
+}
+
+.search-result-li:hover{
+  background-color: #33C15B;
+}
+
+.search-result-symbol {
+  display: flex;
+}
+
+.search-result-name {
+  display: flex;
+}
+
+/* .frm-search {
+  margin-left: 10px;
+  width: 100%;
+} */
+
+/* .search-result {
+  display: none;
+} */
