@@ -42,7 +42,8 @@ CREATE TABLE portfolios (
 CREATE TABLE tickers (
     id SERIAL PRIMARY KEY NOT NULL,
     portfolio_id INTEGER REFERENCES portfolios(id) ON DELETE CASCADE,
-    ticker VARCHAR(255) NOT NULL
+    ticker VARCHAR(255) NOT NULL,
+    company_name TEXT
 );
 
 CREATE TABLE portfolio_datas (
