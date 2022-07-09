@@ -94,29 +94,21 @@ export default function SearchBar() {
 
   const search = function(event) {
     setQuery(event.target.value)
-    //const query = event.target.value
-    const options = {
-      method: "GET",
-      url: `https://yfapi.net/v6/finance/autocomplete?region=US&lang=en&query=${query}`,
-      //params: { modules: "defaultKeyStatistics,assetProfile" },
-      headers: {
-        "x-api-key": "4srRVAEAot50NQgO71T2s82w94GyqbIp23UpxDtf",
-      },
-    };
-    setResults(dummyResults.ResultSet.Result);
-   /*  Promise.all([
+    const query = event.target.value
+    const url = `http://localhost:3001/search?query=${query}`;
+    Promise.all([
       axios
-        .request(options)
+        .get(url)
         .then(function (response) {
-          console.log('data',response.data.ResultSet.Result);
-          //setResults(response.data.ResultSet.Result);
-          response.data = dummyResults;
+          console.log('data', response);
+          setResults(response.data);
+          //response.data = dummyResults;
           
         })
         .catch(function (error) {
           console.error(error);
         }),
-    ]); */
+    ]);
   };
 
   /* useEffect(() => {
@@ -130,9 +122,9 @@ export default function SearchBar() {
   const lists = Object.values(results).map((result) => {
 
     return (
-      <li className="search-result-li" key={result.symbol} onClick={() => selectsymbol(result.symbol)}>
-        <div className="search-result-symbol">{result.symbol}</div> 
-        <div className="search-result-name">{result.name}</div> 
+      <li className="search-result-li" key={result.id} onClick={() => selectsymbol(result.id)}>
+        <div className="search-result-symbol">{result.ticker}</div> 
+        <div className="search-result-name">{result.company_name}</div> 
       </li>
     );      
   });        
