@@ -1,18 +1,14 @@
 
-export function getPortfolios (db, id) {
-    let query = `select * from portfolios WHERE user_id = $1`
-    return db.query (query, [id])
-    .then((result) => {
-        if (result.rows[0] === undefined) {
-          return null;
-        }
-        return result.rows;
-      })
-      .catch((err) => {
-        return err;
-      });
-}
+export function getCompetitions (userComp, allComp) {
+  let listComp = [];
 
-export function addNewPortfolio (db, id, name) {
-  let query = `INSERT INTO por`
+  if(userComp.length = 0) {
+    return null;
+  }
+  for (let indivComp of userComp) {
+    listComp.push(indivComp.competition_id);
+  }
+  let res = allComp.filter(item => listComp.includes(item.id));
+
+  return res;
 }
