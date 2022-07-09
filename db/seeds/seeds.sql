@@ -71,6 +71,7 @@ INSERT INTO portfolios (name, date_created, user_id, competition_id) VALUES ('Do
 INSERT INTO portfolios (name, date_created, user_id, competition_id) VALUES ('Obie with Amazon', '2019-06-12T08:00:00.000Z', 10, 3);
 
 
+
 -- tickers table seeds here (Example)
 
 INSERT INTO tickers (ticker, company_name) VALUES ('A', 'Agilent Technologies Inc');
