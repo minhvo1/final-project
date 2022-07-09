@@ -34,7 +34,7 @@ export default function PerformanceGraph(props) {
         for (let i in response[0].data.chart.result[0].timestamp) {
           resultData.push({
             value: response[0].data.chart.result[0].indicators.quote[0].close[i],
-            time: response[0].data.chart.result[0].timestamp[i],
+            time: response[0].data.chart.result[0].timestamp[i] * 1000 ,
           });
         }
         setData(
@@ -63,7 +63,7 @@ export default function PerformanceGraph(props) {
             dataKey="time"
             domain={["auto", "auto"]}
             name="time"
-            tickFormatter={timeStr => moment(timeStr).format('D MMM YY')}
+            tickFormatter={timeStr => moment(timeStr).format('DD MMM YYYY')}
         
           />
           <YAxis dataKey="value" name="Value" />
