@@ -1,20 +1,24 @@
 require("dotenv").config();
 
 const express = require("express");
-const bodyparser = require("body-parser");
+const cors = require('cors');
+
 const PORT = process.env.PORT || 3001;
 
 const app = express();
+app.use(cors({
+  origin: '*',
+}));
 
-// PG database client/connection setup
-/* const csv = require('csv-parser')
-const fs = require('fs') */
+const bodyparser = require("body-parser");
+app.use(bodyparser.urlencoded({ extended: true }));
+app.use(bodyparser.json())
 
 const { Pool } = require("pg");
 const dbParams = require("./lib/db.js");
 const { json } = require("express");
 const db = new Pool(dbParams);
-//db.connect();
+db.connect();
 
 //console.log(db);
 app.use(function(req, res, next) {
@@ -58,7 +62,19 @@ app.get("/ticker/:id", (req, res) => {
   })
 })
 
-
+app.get("/search", (reg, res) => {
+  const searchTerm = reg.query.query;
+  if (searchTerm === ""){
+    return res.json({});
+  }
+  const query = `SELECT * FROM tickers WHERE ticker LIKE '%${searchTerm.toUpperCase()}%' LIMIT 10;`;
+  db.query(query)
+  .then(data => {
+    //console.log(data);
+    res.json(data.rows);
+  })
+  .catch(err => res.json({ message: err }));
+})
 
 
 /* app.get("/get_tickers", (req, res) => {

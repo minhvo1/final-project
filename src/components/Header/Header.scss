@@ -55,6 +55,12 @@ $radius: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-color: $divcolor-selected;
+  opacity: 90%;
+  position: absolute;
+  z-index: 999;
+  width: 35%;
+  border-radius: $radius;
 }
 
 .search-result-li {
