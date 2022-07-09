@@ -29,7 +29,7 @@ export default function PerformanceGraph(props) {
   useEffect(() => {
     Promise.all([axios.request(options)])
       .then((response) => {
-        console.log(response)
+   
         let resultData = [];
         for (let i in response[0].data.chart.result[0].timestamp) {
           resultData.push({
@@ -46,7 +46,7 @@ export default function PerformanceGraph(props) {
       });
   },[]);
 
-  console.log(data)
+
   return (
     <div className="performance-graph">
       <div>
