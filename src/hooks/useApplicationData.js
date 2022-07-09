@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import axios, { Axios } from "axios";
 import { getCompetitions } from "../helpers/sidebarHelper";
 
 export default function useApplicationData() {
@@ -32,11 +32,22 @@ export default function useApplicationData() {
           user: ans[0]["data"][1],
           competitions: ans[1]["data"],
         });
-      })
-    Promise.all ([axios.get(`http://localhost:3001/portfolios/${info.user.id}`), axios.get(`http://localhost:3001/competitions/user/${info.user.id}`)])
-        .then ((ans) => {
-          console.log(ans);
+        return ans[0]["data"][1]["id"];
+      }).then ((id) => {
+       let user_port = axios.get(`http://localhost:3001/portfolios/${id}`);
+        setInfo({
+          ...info,
+          portfolios:user_port
         })
+        return id;
+      }). then ((id) => {
+        let user_competitions = axios.get(`http://localhost:3001/competitions/user/${id}`);
+        let datauser = getCompetitions(user_competitions[1]["data"], info.competitions);
+         setInfo({
+           ...info,
+           user_competitions:datauser
+         })
+      })
 
     // eslint-disable-next-line
   }, []);
