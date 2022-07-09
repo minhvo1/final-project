@@ -27,6 +27,18 @@ app.get("/", (req, res) => {
     .catch(err => res.json({ message: err }));
 });
 
+app.get("/users", (req, res) => {
+  db.query(`SELECT * FROM users`)
+    .then(data => {
+      console.log(data);
+      res.json(data.rows);
+    })
+    .catch(err => res.json({ message: err }));
+});
+
+
+
+
 /* app.get("/get_tickers", (req, res) => {
   const results = [];
 
