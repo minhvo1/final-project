@@ -22,25 +22,6 @@ const { json } = require("express");
 const db = new Pool(dbParams);
 db.connect();
 
-//console.log(db);
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
-
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
-
 app.get("/", (req, res) => {
   db.query(`SELECT * FROM tickers`)
     .then((data) => {
@@ -91,6 +72,7 @@ app.get("/users", (req, res) => {
     .catch((err) => res.json({ message: err }));
 });
 
+<<<<<<< HEAD
 app.get("/portfolios/:id", (req, res) => {
   db.query(`SELECT * FROM portfolios WHERE user_id = $1`, [req.params["id"]])
     .then((data) => {
@@ -99,6 +81,8 @@ app.get("/portfolios/:id", (req, res) => {
     .catch((err) => res.json({ message: err }));
 });
 
+=======
+>>>>>>> master
 app.get("/portfolio/", (req, res) => {
   db.query(`SELECT * FROM portfolio_datas WHERE portfolio_id = 1`).then(
     (data) => {
@@ -110,11 +94,20 @@ app.get("/portfolio/", (req, res) => {
 app.get("/ticker/:id", (req, res) => {
   const { id } = req.params;
   let query = `SELECT * FROM tickers 
+<<<<<<< HEAD
     WHERE id = $1`;
   db.query(query, [id]).then((data) => {
     res.json(data.rows);
   });
 });
+=======
+    WHERE id = $1`
+  db.query(query, [id])
+  .then((data) => {
+    res.json(data.rows)
+  })
+})
+>>>>>>> master
 
 app.get("/search", (reg, res) => {
   const searchTerm = reg.query.query;

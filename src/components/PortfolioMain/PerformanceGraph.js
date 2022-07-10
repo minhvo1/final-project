@@ -62,7 +62,7 @@ export default function PerformanceGraph(props) {
             dataKey="time"
             domain={["auto", "auto"]}
             name="time"
-            tickFormatter={timeStr => moment(timeStr).format('DD MMM YYYY')}
+            tickFormatter={timeStr => moment(timeStr).format('DD MMM YY')}
         
           />
           <YAxis dataKey="value" name="Value" />
