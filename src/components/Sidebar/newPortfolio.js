@@ -10,7 +10,7 @@ export default function NewPortfolio(props) {
   }
 
   return (
-    <div className="sideListItem" >
+    <div className="sideListItem newPortfolio" >
      <form>
         <input className = "inputForm" type ="text" placeholder = "New Portfolio.."></input>
         <input type="submit" hidden />
