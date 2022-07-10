@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
     "classnames": "^2.3.1",
+    "cors": "^2.8.5",
     "isomorphic-ws": "^5.0.0",
     "moment": "^2.29.4",
     "protobufjs": "^6.11.3",
