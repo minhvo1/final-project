@@ -15,6 +15,8 @@ export default function useApplicationData() {
     user_competitions: {},
   });
 
+  const [loading, setLoading] = useState(true);
+
   const setPortfolio = (portfolio) => {
     setView({ menu: "Dashboard", portfolio });
   };
@@ -28,6 +30,7 @@ export default function useApplicationData() {
 
     Promise.all([axios.get(profileURL), axios.get(competitionURL)])
       .then((ans) => {
+        setLoading(true)
         let usersCompetition = [];
         let portfolio = [];
         let user = {
@@ -74,6 +77,7 @@ export default function useApplicationData() {
         return [user, usersCompetition, portfolio, ans[1]["data"]];
       })
       .then((ans) => {
+        setLoading(false);
         setInfo({
           ...info,
           user: ans[0],
@@ -200,5 +204,6 @@ export default function useApplicationData() {
     competitions,
     user_competitions,
     info,
+    loading
   };
 }
