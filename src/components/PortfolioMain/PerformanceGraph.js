@@ -46,7 +46,6 @@ export default function PerformanceGraph(props) {
       });
   },[]);
 
-
   return (
     <div className="performance-graph">
       <div>
