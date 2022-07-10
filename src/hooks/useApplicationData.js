@@ -3,9 +3,10 @@ import axios, { Axios } from "axios";
 import { getCompetitions } from "../helpers/sidebarHelper";
 
 export default function useApplicationData() {
+
   const [view, setView] = useState({
     menu: "Dashboard",
-    portfolio: "YOLO Portfolio",
+    portfolio: null,
   });
 
   const [info, setInfo] = useState({
@@ -22,36 +23,47 @@ export default function useApplicationData() {
   const setMenu = (menu) => setView({ ...view, menu });
 
   useEffect(() => {
-    const profileURL = "http://localhost:3001/users";
-    const competitionsURL = "http://localhost:3001/competitions";
+    const userId = 2;
+    const profileURL = `http://localhost:3001/userdata/${userId}`;
+    const competitionURL = `http://localhost:3001/competitions`;
 
-    Promise.all([axios.get(profileURL), axios.get(competitionsURL)])
-      .then((ans) => {
-        setInfo({
-          ...info,
-          user: ans[0]["data"][1],
-          competitions: ans[1]["data"],
-        });
-        return ans[0]["data"][1]["id"];
-      }).then ((id) => {
-       let user_port = axios.get(`http://localhost:3001/portfolios/${id}`);
-        setInfo({
-          ...info,
-          portfolios:user_port
-        })
-        return id;
-      }). then ((id) => {
-        let user_competitions = axios.get(`http://localhost:3001/competitions/user/${id}`);
-        let datauser = getCompetitions(user_competitions[1]["data"], info.competitions);
-         setInfo({
-           ...info,
-           user_competitions:datauser
-         })
-      })
+    Promise.all([axios.get(profileURL), axios.get(competitionURL)]).then(
+      (ans) => {
+        let usersCompetition = [];
+        let portfolio = [];
+        let user = {
+          id: ans[0]["data"][0]["id"],
+          name: ans[0]["data"][0]["username"],
+          email: ans[0]["data"][0]["email"],
+          type: ans[0]["data"][0]["type"],
+        }
+        for (let x = 0; x < ans[0].data.length; x++) {
+          portfolio.push({
+            name: ans[0].data[x]["portfolio_name"],
+            id: ans[0].data[x]["portfolio_id"],
+            created_date: ans[0].data[x]["portfoliodatecreated"],
+            portfolio_competition: ans[0].data[x]["portfoliocompetition"],
+          });
+          if (ans[0]["data"][x]["portfoliocompetition"]) {
+            usersCompetition.push(ans[0]["data"][x]["portfoliocompetition"]);
+          }
+        }
+        return [user, usersCompetition, portfolio, ans[1]["data"]]; 
+      }).then ((ans)=> {
+          setInfo({
+            ...info,
+            user: ans[0],
+            portfolios: ans[2],
+            competitions: ans[3],
+            user_competitions: ans[1],
+          });
+        }
 
+    );
     // eslint-disable-next-line
   }, []);
- /* .then((id) => {
+
+  /* .then((id) => {
     const userPortURL = `http://localhost:3001/portfolios/${id}`;
     const userCompURL = `http://localhost:3001/competitions/user/${id}`;
     Promise.all([axios.get(userPortURL), axios.get(userCompURL)]).then(
@@ -165,5 +177,6 @@ export default function useApplicationData() {
     portfolios,
     competitions,
     user_competitions,
+    info,
   };
 }

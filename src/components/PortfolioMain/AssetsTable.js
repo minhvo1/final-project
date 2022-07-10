@@ -3,7 +3,7 @@ import axios from 'axios';
 
 
 export default function AssetTable(props) {
-
+/*
   const [portfolioInfo, setPortfolioInfo] = useState([]);
   const [tickerInfo, setTickerInfo] = useState([]);
   useEffect(() => {
@@ -29,6 +29,7 @@ export default function AssetTable(props) {
   }, [])
   console.log(portfolioInfo)
   console.log(tickerInfo)
+  */
   return (
     <div className="asset-table">
       <div>

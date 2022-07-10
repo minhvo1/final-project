@@ -15,8 +15,9 @@ db.connect();
 */
 
 function App() {
-  const { view, setMenu, setPortfolio, portfolios, competitions, user_competitions  } =
+  const { view, setMenu, setPortfolio, portfolios, competitions, user_competitions, info  } =
   useApplicationData();
+
 
   return (
     <div className="App">
