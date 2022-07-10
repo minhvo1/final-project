@@ -18,6 +18,7 @@ function App() {
   const { view, setMenu, setPortfolio, portfolios, competitions, user_competitions, info  } =
   useApplicationData();
 
+console.log(info);
 
   return (
     <div className="App">

@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import axios, { Axios } from "axios";
-import { getCompetitions } from "../helpers/sidebarHelper";
+import { getCompetitions, checkArray } from "../helpers/sidebarHelper";
 
 export default function useApplicationData() {
-
   const [view, setView] = useState({
     menu: "Dashboard",
     portfolio: null,
@@ -27,8 +26,8 @@ export default function useApplicationData() {
     const profileURL = `http://localhost:3001/userdata/${userId}`;
     const competitionURL = `http://localhost:3001/competitions`;
 
-    Promise.all([axios.get(profileURL), axios.get(competitionURL)]).then(
-      (ans) => {
+    Promise.all([axios.get(profileURL), axios.get(competitionURL)])
+      .then((ans) => {
         let usersCompetition = [];
         let portfolio = [];
         let user = {
@@ -36,30 +35,53 @@ export default function useApplicationData() {
           name: ans[0]["data"][0]["username"],
           email: ans[0]["data"][0]["email"],
           type: ans[0]["data"][0]["type"],
-        }
+        };
+        let tickerAmount = 1;
         for (let x = 0; x < ans[0].data.length; x++) {
-          portfolio.push({
-            name: ans[0].data[x]["portfolio_name"],
-            id: ans[0].data[x]["portfolio_id"],
-            created_date: ans[0].data[x]["portfoliodatecreated"],
-            portfolio_competition: ans[0].data[x]["portfoliocompetition"],
-          });
-          if (ans[0]["data"][x]["portfoliocompetition"]) {
+          if (
+            ans[0]["data"][x]["portfoliocompetition"] &&
+            !usersCompetition.includes(
+              ans[0]["data"][x]["portfoliocompetition"]
+            )
+          ) {
             usersCompetition.push(ans[0]["data"][x]["portfoliocompetition"]);
           }
-        }
-        return [user, usersCompetition, portfolio, ans[1]["data"]]; 
-      }).then ((ans)=> {
-          setInfo({
-            ...info,
-            user: ans[0],
-            portfolios: ans[2],
-            competitions: ans[3],
-            user_competitions: ans[1],
-          });
-        }
 
-    );
+          let index = checkArray(
+            ans[0]["data"][x]["portfolio_name"],
+            portfolio
+          );
+
+          if (index === null) {
+            portfolio.push({
+              name: ans[0].data[x]["portfolio_name"],
+              id: ans[0].data[x]["portfolio_id"],
+              created_date: ans[0].data[x]["portfoliodatecreated"],
+              portfolio_competition: ans[0].data[x]["portfoliocompetition"],
+              ticker0: {
+                tickerId: ans[0].data[x]["portfoliodatastickerid"],
+                tickerQuantity: ans[0].data[x]["tickerquantity"],
+              },
+            });
+          } else {
+            portfolio[index][`ticker${tickerAmount}`] = {
+              tickerId: ans[0].data[x]["portfoliodatastickerid"],
+              tickerQuantity: ans[0].data[x]["tickerquantity"],
+            };
+            tickerAmount++;
+          }
+        }
+        return [user, usersCompetition, portfolio, ans[1]["data"]];
+      })
+      .then((ans) => {
+        setInfo({
+          ...info,
+          user: ans[0],
+          portfolios: ans[2],
+          competitions: ans[3],
+          user_competitions: ans[1],
+        });
+      });
     // eslint-disable-next-line
   }, []);
 

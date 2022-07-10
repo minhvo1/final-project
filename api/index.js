@@ -52,8 +52,9 @@ app.get("/competitions/user/:id", (req, res) => {
 app.get("/userdata/:id", (req, res) => {
   db.query(
     `SELECT users.id as id, users.name as userName, users.type as type, users.email as email, portfolios.name as portfolio_name, portfolios.id as portfolio_id, 
-    portfolios.date_created as portfolioDateCreated, portfolios.competition_id as portfolioCompetition, competition_users.competition_id as competitionsIds
-    FROM users FULL OUTER JOIN portfolios ON users.id = portfolios.user_id FULL OUTER JOIN competition_users ON portfolios.user_id = competition_users.user_id 
+    portfolios.date_created as portfolioDateCreated, portfolios.competition_id as portfolioCompetition, competition_users.competition_id as competitionsIds, 
+    portfolio_datas.quantity as tickerQuantity, portfolio_datas.ticker_id as portfolioDatasTickerId
+    FROM users FULL OUTER JOIN portfolios ON users.id = portfolios.user_id FULL OUTER JOIN competition_users ON portfolios.user_id = competition_users.user_id LEFT JOIN portfolio_datas ON portfolios.id = portfolio_datas.portfolio_id
     WHERE users.id = $1`, [req.params.id]
   )
     .then((data) => {
@@ -72,7 +73,6 @@ app.get("/users", (req, res) => {
     .catch((err) => res.json({ message: err }));
 });
 
-<<<<<<< HEAD
 app.get("/portfolios/:id", (req, res) => {
   db.query(`SELECT * FROM portfolios WHERE user_id = $1`, [req.params["id"]])
     .then((data) => {
@@ -81,8 +81,6 @@ app.get("/portfolios/:id", (req, res) => {
     .catch((err) => res.json({ message: err }));
 });
 
-=======
->>>>>>> master
 app.get("/portfolio/", (req, res) => {
   db.query(`SELECT * FROM portfolio_datas WHERE portfolio_id = 1`).then(
     (data) => {
@@ -94,20 +92,12 @@ app.get("/portfolio/", (req, res) => {
 app.get("/ticker/:id", (req, res) => {
   const { id } = req.params;
   let query = `SELECT * FROM tickers 
-<<<<<<< HEAD
-    WHERE id = $1`;
-  db.query(query, [id]).then((data) => {
-    res.json(data.rows);
-  });
-});
-=======
     WHERE id = $1`
   db.query(query, [id])
   .then((data) => {
     res.json(data.rows)
   })
 })
->>>>>>> master
 
 app.get("/search", (reg, res) => {
   const searchTerm = reg.query.query;
