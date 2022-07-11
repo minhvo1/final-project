@@ -5,7 +5,6 @@ import CompetitionsTable from "./CompetitionsTable";
 import UserCompetitionsTable from "./UserCompetitions";
 
 export default function PortfolioMain(props) {
-
   return (
     <div className="competition-main">
       <CompetitionsTable competitions={props.competitions} />

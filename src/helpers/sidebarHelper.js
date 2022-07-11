@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 
 export function getCompetitions (userComp, allComp) {
   let listComp = [];
@@ -20,8 +22,31 @@ export function checkArray (name, allArray) {
       return x;
     }
   }
-
-
   return null;
 
+}
+
+export function checkObject (id, array) {
+
+  for (let x = 0; x < array.length; x++) {
+    if (array[x].id === id) {
+      return x;
+    }
+  }
+  return null; 
+}
+
+
+export function seeUserInComp (id) {
+   Promise.all([axios.get(`http://localhost:3001/compUsers/${id}`)]).then ((ans) => {
+    return ans[0]["data"].length;
+  })
+}
+
+export function findCompetitionById (id, comps) {
+  for (let comp of comps) {
+    if (comp.id == id) {
+      return comp;
+    }
+  }
 }

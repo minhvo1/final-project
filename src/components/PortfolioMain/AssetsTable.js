@@ -21,8 +21,8 @@ export default function AssetTable(props) {
       })
   }, [props.selectedPortfolio])
 
-  console.log(tickersData)
-  console.log(tickers)
+  //console.log(tickersData)
+  //console.log(tickers)
   return (
     <div className="asset-table">
       <div>

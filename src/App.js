@@ -25,8 +25,8 @@ function App() {
     info,
     loading,
   } = useApplicationData();
-  console.log("info",info)
-  console.log("selectedPortfolio",view.portfolio)
+
+  //console.log("selectedPortfolio",view.portfolio)
   return (
     <div className="App">
       {loading ? (
@@ -45,8 +45,8 @@ function App() {
             {view.menu === "Dashboard" && <PortfolioMain data={info} selectedPortfolio={view.portfolio}/>}
             {view.menu === "Competitions" && (
               <Competitions
-                competitions={competitions}
-                user_competitions={user_competitions}
+                competitions={info.competitions}
+                user_competitions={info.user_competitions}
               />
             )}
           </div>

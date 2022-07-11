@@ -55,10 +55,20 @@ app.get("/userdata/:id", (req, res) => {
     portfolios.date_created as portfolioDateCreated, portfolios.competition_id as portfolioCompetition, competition_users.competition_id as competitionsIds, 
     portfolio_datas.quantity as tickerQuantity, portfolio_datas.ticker_id as portfolioDatasTickerId
     FROM users FULL OUTER JOIN portfolios ON users.id = portfolios.user_id FULL OUTER JOIN competition_users ON portfolios.user_id = competition_users.user_id LEFT JOIN portfolio_datas ON portfolios.id = portfolio_datas.portfolio_id
-    WHERE users.id = $1`, [req.params.id]
+    WHERE users.id = $1`,
+    [req.params.id]
   )
     .then((data) => {
       console.log(data);
+      res.json(data.rows);
+    })
+    .catch((err) => res.json({ message: err }));
+});
+
+app.get("/compUsers", (req, res) => {
+  const query = `SELECT competitions.id as competition_id, competitions.name as competition_Name, competitions.start_datetime as startTime, competitions.end_datetime as endTime, competitions.start_amount as startAmount, competitions.avaliability as avaliabilty, portfolios.name as portfolio_name FROM portfolios FULL OUTER JOIN competitions ON portfolios.competition_id = competitions.id`;
+  db.query(query)
+    .then((data) => {
       res.json(data.rows);
     })
     .catch((err) => res.json({ message: err }));
@@ -92,12 +102,11 @@ app.get("/portfolio/", (req, res) => {
 app.get("/ticker/:id", (req, res) => {
   const { id } = req.params;
   let query = `SELECT * FROM tickers 
-    WHERE id = $1`
-  db.query(query, [id])
-  .then((data) => {
-    res.json(data.rows)
-  })
-})
+    WHERE id = $1`;
+  db.query(query, [id]).then((data) => {
+    res.json(data.rows);
+  });
+});
 
 app.get("/search", (reg, res) => {
   const searchTerm = reg.query.query;

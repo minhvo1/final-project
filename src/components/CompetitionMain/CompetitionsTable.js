@@ -1,15 +1,16 @@
 import React from 'react';
 import CompetitionsTableItem from './CompetitionsTableItem'
-
+import { seeUserInComp } from '../../helpers/sidebarHelper';
 
 export default function CompetitionsTable (props) {
 
   const competitionsList = props.competitions.map((competition) => {
+
     return (
       <CompetitionsTableItem
       key={competition.id}
       name={competition.name}
-      lobby = {competition.lobby}
+      lobby = {competition.users}
       capital = {competition.capital}
       prizePool = {competition.prizePool}
       startDate = {competition.start_date}

@@ -3,17 +3,18 @@ import UserCompetitionsItem from './UserCompetitionsItem'
 
 export default function UserCompetitionsTable (props) {
 
+
   const user_competition = props.user_competitions.map((competition) => {
     return (
       <UserCompetitionsItem
       key={competition.id}
       name={competition.name}
-      lobby = {competition.lobby}
+      lobby = {competition.users}
       capital = {competition.capital}
       prizePool = {competition.prizePool}
       startDate = {competition.start_date}
       endDate = {competition.end_date}
-      profit = {competition.profit}
+      profit = {"100"}
       />
     );
   });
