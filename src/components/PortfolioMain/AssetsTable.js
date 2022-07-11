@@ -1,34 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { getPortfolioTickers, getPromiseArrayTickers } from "../../helpers/portfolioMainHelper"
 
 
 export default function AssetTable(props) {
-/*
-  const [portfolioInfo, setPortfolioInfo] = useState([]);
-  const [tickerInfo, setTickerInfo] = useState([]);
+  const [tickersData, setTickersData] = useState([])
+
+  const tickers = getPortfolioTickers(props.selectedPortfolio, props.data);
+  const promiseArray = getPromiseArrayTickers(tickers)
 
   useEffect(() => {
-   
-    Promise.all([axios.get('http://localhost:3001/portfolio')])
-      .then((response) => {
-        setPortfolioInfo(
-          ...portfolioInfo,
-          response[0].data
-        )
-    
-        for (const i in response[0].data) {
-          Promise.all([axios.get(`http://localhost:3001/ticker/${response[0].data[i].ticker_id}`)])
-            .then((response) => {
-              console.log('res',response)
- 
+    Promise.all(promiseArray)
+      .then((result) => {
 
-            })
+        let resultArray = [];
+        for (const item of result) {
+          resultArray.push(item.data[0])
         }
+        
+        setTickersData(resultArray)
       })
-  }, [])
-  console.log(portfolioInfo)
-  console.log(tickerInfo)
-  */
+  }, [props.selectedPortfolio])
+
+  console.log(tickersData)
+  console.log(tickers)
   return (
     <div className="asset-table">
       <div>

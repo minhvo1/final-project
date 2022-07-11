@@ -6,11 +6,12 @@ import PerformanceGraph from './PerformanceGraph';
 import AssetTable from './AssetsTable';
 
 export default function PortfolioMain(props) {
+
   return (
     <div className="portfolio-main">
       <PortfolioInfo />
       <PerformanceGraph />
-      <AssetTable />
+      <AssetTable selectedPortfolio={props.selectedPortfolio} data={props.data}/>
     </div>
   )
 }

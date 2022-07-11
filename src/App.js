@@ -3,7 +3,7 @@ import Sidebar from "./components/Sidebar";
 import PortfolioMain from "./components/PortfolioMain/index";
 import Header from "./components/Header/index";
 import Competitions from "./components/CompetitionMain/index";
-import {React, useEffect, useState, Fragment } from 'react';
+import { React, useEffect, useState, Fragment } from "react";
 import { getPortfolios } from "./helpers/sidebarHelper";
 import useApplicationData from "./hooks/useApplicationData";
 
@@ -15,7 +15,6 @@ db.connect();
 */
 
 function App() {
-  
   const {
     view,
     setMenu,
@@ -24,17 +23,15 @@ function App() {
     competitions,
     user_competitions,
     info,
-    loading
+    loading,
   } = useApplicationData();
-
-  console.log(info.portfolios, loading);
-
+  console.log("info",info)
+  console.log("selectedPortfolio",view.portfolio)
   return (
     <div className="App">
-      {
-        loading ?
-          <div>Loading...</div>
-        :
+      {loading ? (
+        <div>Loading...</div>
+      ) : (
         <Fragment>
           <Sidebar
             portfolio={view.portfolio}
@@ -45,7 +42,7 @@ function App() {
           />
           <div className="main-container">
             <Header />
-            {view.menu === "Dashboard" && <PortfolioMain />}
+            {view.menu === "Dashboard" && <PortfolioMain data={info} selectedPortfolio={view.portfolio}/>}
             {view.menu === "Competitions" && (
               <Competitions
                 competitions={competitions}
@@ -54,9 +51,8 @@ function App() {
             )}
           </div>
         </Fragment>
-      }
+      )}
     </div>
   );
 }
-
 export default App;

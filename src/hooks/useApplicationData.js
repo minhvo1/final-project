@@ -7,6 +7,7 @@ export default function useApplicationData() {
     menu: "Dashboard",
     portfolio: null,
   });
+  
 
   const [info, setInfo] = useState({
     user: {},
@@ -39,7 +40,6 @@ export default function useApplicationData() {
           email: ans[0]["data"][0]["email"],
           type: ans[0]["data"][0]["type"],
         };
-        let tickerAmount = 1;
         for (let x = 0; x < ans[0].data.length; x++) {
           if (
             ans[0]["data"][x]["portfoliocompetition"] &&
@@ -61,17 +61,16 @@ export default function useApplicationData() {
               id: ans[0].data[x]["portfolio_id"],
               created_date: ans[0].data[x]["portfoliodatecreated"],
               portfolio_competition: ans[0].data[x]["portfoliocompetition"],
-              ticker0: {
+              tickers: [{
                 tickerId: ans[0].data[x]["portfoliodatastickerid"],
                 tickerQuantity: ans[0].data[x]["tickerquantity"],
-              },
+              }],
             });
           } else {
-            portfolio[index][`ticker${tickerAmount}`] = {
+            portfolio[index].tickers.push({
               tickerId: ans[0].data[x]["portfoliodatastickerid"],
               tickerQuantity: ans[0].data[x]["tickerquantity"],
-            };
-            tickerAmount++;
+            })
           }
         }
         return [user, usersCompetition, portfolio, ans[1]["data"]];
