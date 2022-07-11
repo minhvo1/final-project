@@ -164,6 +164,25 @@ $radius: 1rem;
 
 }
 
+.main-asset-table {
+  overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #644d7a;
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3);
+
+  border-radius: 1rem;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: #f9f9fb;
+}
+
 .asset-table div table th {
   background-color: #313335;
 
@@ -171,5 +190,4 @@ $radius: 1rem;
 
 .asset-table div table tr td{
   text-align: left;
- 
 }

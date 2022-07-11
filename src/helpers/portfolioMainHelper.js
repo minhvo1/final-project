@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from 'axios';
 
 export function getPortfolioTickers(selectedPortfolio, data) {
   for (const portfolio of data.portfolios) {

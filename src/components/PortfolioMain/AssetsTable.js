@@ -1,35 +1,39 @@
-import React, { useState, useEffect } from 'react';
-import { getPortfolioTickers, getPromiseArrayTickers } from "../../helpers/portfolioMainHelper"
-
+import React, { useState, useEffect } from "react";
+import {
+  getPortfolioTickers,
+  getPromiseArrayTickers,
+} from "../../helpers/portfolioMainHelper";
 
 export default function AssetTable(props) {
-  const [tickersData, setTickersData] = useState([])
+  const [tickersData, setTickersData] = useState([]);
 
   const tickers = getPortfolioTickers(props.selectedPortfolio, props.data);
-  const promiseArray = getPromiseArrayTickers(tickers)
+  const promiseArray = getPromiseArrayTickers(tickers);
 
   useEffect(() => {
-    Promise.all(promiseArray)
-      .then((result) => {
+    Promise.all(promiseArray).then((result) => {
+      let resultArray = [];
+      for (const item of result) {
+        resultArray.push(item.data[0]);
+      }
 
-        let resultArray = [];
-        for (const item of result) {
-          resultArray.push(item.data[0])
-        }
-        
-        setTickersData(resultArray)
-      })
-  }, [props.selectedPortfolio])
+      const newResultArray = resultArray.map((item, index) => {
+        item.quantity = tickers[index].tickerQuantity;
+        return item;
+      });
+      setTickersData(newResultArray);
+    });
+  }, [props.selectedPortfolio]);
 
-  console.log(tickersData)
-  console.log(tickers)
+  console.log(tickersData);
+
   return (
     <div className="asset-table">
       <div>
         <span>Assets</span>
       </div>
 
-      <div>
+      <div className="main-asset-table">
         <table>
           <tr>
             <th>Name</th>
@@ -39,16 +43,21 @@ export default function AssetTable(props) {
             <th>Amount</th>
             <th>Return</th>
           </tr>
-          <tr>
-            <td>GameStop</td>
-            <td>GME</td>
-            <td>$100,000</td>
-            <td>$10,000</td>
-            <td>5,000,000</td>
-            <td>+ $5,000</td>
-          </tr>
+          {tickersData.map(ticker => {
+            return (
+              <tr>
+                <td>{ticker.company_name}</td>
+                <td>{ticker.ticker}</td>
+                <td></td>
+                <td>{ticker.quantity}</td>
+                <td></td>
+                <td></td>
+              </tr>
+            )
+          })}
+
         </table>
       </div>
     </div>
-  )
+  );
 }
