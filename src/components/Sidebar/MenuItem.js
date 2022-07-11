@@ -11,7 +11,7 @@ export default function MenuItem(props) {
   }
 
   return (
-    <div className={menuListClass}>
+    <div className={menuListClass}  onClick={setToMenu} >
       <button className="sidebar-button" onClick={setToMenu}>
         {props.name}
       </button>

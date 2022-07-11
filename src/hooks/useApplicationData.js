@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios, { Axios } from "axios";
-import { getCompetitions, checkArray, checkObject, findCompetitionById } from "../helpers/sidebarHelper";
+import { getCompetitions, checkArray, checkObject, findCompetitionById, findIndex } from "../helpers/sidebarHelper";
 
 export default function useApplicationData() {
   const [view, setView] = useState({
@@ -90,7 +90,8 @@ export default function useApplicationData() {
                   avaliability : ans[1].data[i]["avaliabilty"], 
                   portfolios : [ {
                     name : ans[1].data[i]["portfolio_name"]
-                  }]
+                  }],
+                  userComp : false
                 })
               } else { 
                 competitions[index].portfolios.push({
@@ -110,6 +111,10 @@ export default function useApplicationData() {
 
         for (let i = 0; i < usersCompetitionArray.length; i++) {
           usersCompetition.push(findCompetitionById(usersCompetitionArray[i],competitions))
+          
+          let index = findIndex(usersCompetitionArray[i], competitions);
+          competitions[index]["userComp"] = true;
+
         }
 
         return [user, usersCompetition, portfolio, competitions];
@@ -127,20 +132,6 @@ export default function useApplicationData() {
     // eslint-disable-next-line
   }, []);
 
-  /* .then((id) => {
-    const userPortURL = `http://localhost:3001/portfolios/${id}`;
-    const userCompURL = `http://localhost:3001/competitions/user/${id}`;
-    Promise.all([axios.get(userPortURL), axios.get(userCompURL)]).then(
-      (ans) => {
-        let users_comp = getCompetitions(ans[1]["data"], info.competitions);
-        setInfo({
-          ...info,
-          portfolios: ans[0]["data"],
-          user_competitions: users_comp,
-        });
-      }
-    );
-  })*/
   const portfolios = [
     {
       id: 4,

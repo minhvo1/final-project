@@ -4,7 +4,13 @@ import { seeUserInComp } from '../../helpers/sidebarHelper';
 
 export default function CompetitionsTable (props) {
 
+
+
   const competitionsList = props.competitions.map((competition) => {
+
+    if(competition.userComp === true) {
+      competition.avaliability = false;
+    }
 
     return (
       <CompetitionsTableItem

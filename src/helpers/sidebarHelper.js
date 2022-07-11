@@ -36,7 +36,6 @@ export function checkObject (id, array) {
   return null; 
 }
 
-
 export function seeUserInComp (id) {
    Promise.all([axios.get(`http://localhost:3001/compUsers/${id}`)]).then ((ans) => {
     return ans[0]["data"].length;
@@ -47,6 +46,14 @@ export function findCompetitionById (id, comps) {
   for (let comp of comps) {
     if (comp.id == id) {
       return comp;
+    }
+  }
+}
+
+export function findIndex (id, comps) {
+  for (let i = 0; i < comps.length; i++) {
+    if (comps[i].id == id) {
+      return i;
     }
   }
 }

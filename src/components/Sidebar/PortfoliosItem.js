@@ -12,7 +12,7 @@ export default function PortfoliosItem(props) {
   }
 
   return (
-    <div className={portfolioListClass}>
+    <div className={portfolioListClass}  onClick={setToPortfolio}>
       <button className="sidebar-button" onClick={setToPortfolio}>
         {props.name}
       </button>
