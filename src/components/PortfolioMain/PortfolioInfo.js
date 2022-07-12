@@ -1,12 +1,18 @@
 import React from 'react';
+import { numberWithCommas } from "../../helpers/portfolioMainHelper"
 
 export default function PortfolioInfo(props) {
+  let value = 0;
+  for (let ticker of props.data) {
+    value += ticker.price;
+  }
+  const portfolioValue = `$${numberWithCommas(Math.round((value + Number.EPSILON) * 100) / 100)}`
   return (
     <div className="portfolio-info">
       <div className="portfolio-value-return">
         <div className="portfolio-value">
           <header>Portfolio Value</header>
-          <span>$100,000</span>
+          <span>{portfolioValue}</span>
         </div>
         <div className="portfolio-return">
           <header>Total Return</header>
