@@ -116,7 +116,6 @@ export default function useApplicationData() {
           competitions[index]["userComp"] = true;
 
         }
-
         return [user, usersCompetition, portfolio, competitions];
       })
       .then((ans) => {

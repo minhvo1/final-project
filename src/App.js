@@ -26,7 +26,7 @@ function App() {
     loading,
   } = useApplicationData();
 
-  //console.log("selectedPortfolio",view.portfolio)
+  console.log(info);
   return (
     <div className="App">
       {loading ? (
