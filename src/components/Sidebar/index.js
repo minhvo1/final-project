@@ -3,10 +3,7 @@ import "./SideBarMain.scss";
 import Logo from "./Logo";
 import MenuList from "./MenuList";
 import PortfoliosList from "./PortfoliosList";
-import NewPortfolio from "./newPortfolio";
-import Header from "../Header/index";
-import Competitions from "../CompetitionMain/index";
-import PortfolioMain from "../PortfolioMain/index";
+
 export default function Sidebar(props) {
   const menu = [
     {
@@ -26,14 +23,18 @@ export default function Sidebar(props) {
   return (
     <div className="sidebar">
       <Logo />
-      <MenuList menus={menu} selected={props.menu} setMenu={props.setMenu} />
+      <MenuList
+        menus={menu}
+        selected={props.menu}
+        setMenu={props.setMenu}
+        setNewPopup={props.setNewPopup}
+      />
       <PortfoliosList
         portfolios={props.portfolios}
         selected={props.portfolio}
         setPortfolio={props.setPortfolio}
         setMenu={props.setMenu}
       />
-      {props.menu === "New Portfolio" && <NewPortfolio />}
     </div>
   );
 }
