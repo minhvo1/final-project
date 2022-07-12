@@ -131,7 +131,7 @@ export default function useApplicationData() {
       });
     // eslint-disable-next-line
   }, []);
-
+  
   const portfolios = [
     {
       id: 4,
