@@ -123,17 +123,25 @@ app.get("/search", (reg, res) => {
     .catch((err) => res.json({ message: err }));
 });
 
-app.put("/portfolios/:id/add", (req, res) => {
-  console.log(req.body.ticker_id);
-  console.log(req.params.id);
-   (1, 1, 1);
-  
-  db.query(`INSERT INTO portfolio_datas (quantity, portfolio_id, ticker_id) VALUES($1, $2, $3)`, [0, req.params.id, req.body.ticker_id])
+app.post("/newPortfolio", (req, res) => {
+  if (process.env.TEST_ERROR) {
+    setTimeout(() => response.status(500).json({}), 1000);
+    return;
+  }
+  const { portfolioName, user_id, competition_id } = req.body;
+  db.query(`INSERT INTO portfolios (name, user_id, competition_id) VALUES ($1, $2, $3)`
+  , [portfolioName, user_id, competition_id])
     .then((data) => {
-      res.json("success");
+      res.json(data.rows);
     })
     .catch((err) => res.json({ message: err }));
 });
+
+
+
+
+
+
 
 /* app.get("/get_tickers", (req, res) => {
   const results = [];

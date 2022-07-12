@@ -13,7 +13,7 @@ export default function useApplicationData() {
     popup : false,
     page : null
   })
-  
+
 
   const [info, setInfo] = useState({
     user: {},
@@ -147,6 +147,19 @@ export default function useApplicationData() {
     // eslint-disable-next-line
   }, []);
 
+  const savePortfolio = (portfolio_name, user_id, competition_id) => {
+    axios.post(`http://localhost:3001/newPortfolio`,{
+      portfolioName : portfolio_name,
+      user_id : user_id,
+      competition_id : competition_id
+    }).then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
 
   return {
     view,
@@ -155,6 +168,7 @@ export default function useApplicationData() {
     info,
     loading,
     popup,
-    setNewPopup
+    setNewPopup,
+    savePortfolio
   };
 }

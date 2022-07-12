@@ -22,9 +22,9 @@ function App() {
     info,
     loading,
     popup,
-    setNewPopup
+    setNewPopup,
+    savePortfolio
   } = useApplicationData();
-
 
   return (
     <div className="App">
@@ -53,6 +53,9 @@ function App() {
              {popup.popup === true && <Popup 
              type = {popup.page}
              competitions={info.competitions}
+             setMenu={setMenu}
+             savePortfolio = {savePortfolio}
+             userId = {info.user.id}
              /> }
           </div>
         </Fragment>

@@ -40,15 +40,19 @@ h1{
   justify-content: center;
   align-items : center;
   margin-top: 1rem;
-  color : #A374D2;
+  color : white;
 }
 
 .new-portfolio input {
-  color : black;
+  color : #A374D2;
+}
+
+.new-portfolio input::placeholder{
+  color : #A374D2;
 }
 
 .new-portfolio select {
-  color: black;
+  color: #A374D2;
 }
 
 .input-info {
@@ -56,18 +60,34 @@ h1{
   font-size: x-large;
 }
 
+.input-info select {
+  background-color: transparent;
+}
+
+.input-info input {
+  background-color: transparent;
+
+}
+
+.error-message{
+  color: red;
+  margin-top : 2rem;
+}
+
+
 .new-portfolio button {
-  margin-top: 4rem;
+    margin-top: 4rem;
+  width: 5rem;
+  height: 2rem;
   color: $textcolor;
   font-family: 'Poppins';
-  background-color: transparent;
   background-repeat: no-repeat;
   border: none;
   overflow: hidden;
   outline: none;
 }
 
-.new-portfolio button :hover {
-  background-color: rgba($color: #c6a8e4, $alpha: .1);
+.new-portfolio button:hover {
+  background-color: rgba($color: #9967CA, $alpha: .29) !important;
   border-radius: 10px;
 }
