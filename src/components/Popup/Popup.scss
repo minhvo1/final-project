@@ -1,0 +1,93 @@
+$mainfont: 'Poppins';
+$bgcolor: #313335;
+$textcolor: #F0F0F0;
+$textcolor-selected: #A374D2;
+$textcolor-positive: #33C15B;
+$textcolor-small: #878080;
+$divcolor: #1F1F1F;
+$divcolor-selected: #9967CA;
+$radius: 1rem;
+
+.popup {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  display: flex;
+  justify-content : center;
+  align-items: center;
+  color : #A374D2;
+}
+
+h1{
+  font-size: xx-large;
+}
+
+.popup-inner {
+  position: relative;
+  padding: 32px;
+  width: 70rem;
+  height: 45rem;
+  margin-right: 10rem;
+  margin-bottom : 10rem;
+  background-color: #313335;
+  border-radius: 20px;
+  color: $textcolor;
+}
+
+.new-portfolio{
+  display: flex;
+  padding : auto;
+  justify-content: center;
+  align-items : center;
+  margin-top: 1rem;
+  color : white;
+}
+
+.new-portfolio input {
+  color : #A374D2;
+}
+
+.new-portfolio input::placeholder{
+  color : #A374D2;
+}
+
+.new-portfolio select {
+  color: #A374D2;
+}
+
+.input-info {
+  margin-top: 5rem; 
+  font-size: x-large;
+}
+
+.input-info select {
+  background-color: transparent;
+}
+
+.input-info input {
+  background-color: transparent;
+
+}
+
+.error-message{
+  color: red;
+  margin-top : 2rem;
+}
+
+
+.new-portfolio button {
+    margin-top: 4rem;
+  width: 5rem;
+  height: 2rem;
+  color: $textcolor;
+  font-family: 'Poppins';
+  background-repeat: no-repeat;
+  border: none;
+  overflow: hidden;
+  outline: none;
+}
+
+.new-portfolio button:hover {
+  background-color: rgba($color: #9967CA, $alpha: .29) !important;
+  border-radius: 10px;
+}
