@@ -17,3 +17,7 @@ export function getPromiseArrayTickers (tickers) {
   }
   return promiseArray;
 }
+
+export function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}

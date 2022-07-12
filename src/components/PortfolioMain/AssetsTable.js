@@ -5,27 +5,6 @@ import {
 } from "../../helpers/portfolioMainHelper";
 
 export default function AssetTable(props) {
-  const [tickersData, setTickersData] = useState([]);
-
-  const tickers = getPortfolioTickers(props.selectedPortfolio, props.data);
-  const promiseArray = getPromiseArrayTickers(tickers);
-
-  useEffect(() => {
-    Promise.all(promiseArray).then((result) => {
-      let resultArray = [];
-      for (const item of result) {
-        resultArray.push(item.data[0]);
-      }
-
-      const newResultArray = resultArray.map((item, index) => {
-        item.quantity = tickers[index].tickerQuantity;
-        return item;
-      });
-      setTickersData(newResultArray);
-    });
-  }, [props.selectedPortfolio]);
-
-  console.log(tickersData);
 
   return (
     <div className="asset-table">
@@ -43,14 +22,14 @@ export default function AssetTable(props) {
             <th>Amount</th>
             <th>Return</th>
           </tr>
-          {tickersData.map(ticker => {
+          {props.data.map(ticker => {
             return (
               <tr>
                 <td>{ticker.company_name}</td>
                 <td>{ticker.ticker}</td>
-                <td></td>
+                <td>{ticker.price}</td>
                 <td>{ticker.quantity}</td>
-                <td></td>
+                <td>{ticker.amount}</td>
                 <td></td>
               </tr>
             )
