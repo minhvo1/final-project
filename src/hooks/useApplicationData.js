@@ -3,10 +3,16 @@ import axios, { Axios } from "axios";
 import { getCompetitions, checkArray, checkObject, findCompetitionById, findIndex } from "../helpers/sidebarHelper";
 
 export default function useApplicationData() {
+
   const [view, setView] = useState({
     menu: "Dashboard",
     portfolio: null,
   });
+
+  const[popup, setPopup] = useState ({
+    popup : false,
+    page : null
+  })
   
 
   const [info, setInfo] = useState({
@@ -22,7 +28,16 @@ export default function useApplicationData() {
     setView({ menu: "Dashboard", portfolio });
   };
 
-  const setMenu = (menu) => setView({ ...view, menu });
+  
+  const setNewPopup = (page) => setPopup({...popup, popup: true, page: page});
+
+  const setMenu = (menu) => {
+    setView({ ...view, menu })
+    if (menu === "New Portfolio") {
+      setNewPopup("New Portfolio");
+    }
+  }
+
 
   useEffect(() => {
     const userId = 2;
@@ -132,107 +147,14 @@ export default function useApplicationData() {
     // eslint-disable-next-line
   }, []);
 
-  const portfolios = [
-    {
-      id: 4,
-      name: "YOLO Portfolio",
-    },
-
-    {
-      id: 5,
-      name: "Savings Portfolio",
-    },
-
-    {
-      id: 6,
-      name: "WSB Competition",
-    },
-  ];
-
-  const competitions = [
-    {
-      id: 1,
-      name: "WSB Competition",
-      lobby: "1/5",
-      capital: 1000,
-      prizePool: 1000000,
-      start_date: "2019-06-12T08:00:00.000Z",
-      end_date: "2019-06-19T08:00:00.000Z",
-      avaliability: true,
-    },
-    {
-      id: 2,
-      name: "WSB Competition",
-      lobby: "2/5",
-      capital: 1000,
-      prizePool: 1000000,
-      start_date: "2019-06-12T08:00:00.000Z",
-      end_date: "2019-06-19T08:00:00.000Z",
-      avaliability: true,
-    },
-    {
-      id: 3,
-      name: "WSB Competition",
-      lobby: "3/5",
-      capital: 1000,
-      prizePool: 1000000,
-      start_date: "2019-06-12T08:00:00.000Z",
-      end_date: "2019-06-19T08:00:00.000Z",
-      avaliability: true,
-    },
-    {
-      id: 4,
-      name: "WSB Competition",
-      lobby: "5/5",
-      capital: 1000,
-      prizePool: 1000000,
-      start_date: "2019-06-12T08:00:00.000Z",
-      end_date: "2019-06-19T08:00:00.000Z",
-      avaliability: false,
-    },
-    {
-      id: 5,
-      name: "WSB Competition",
-      lobby: "5/5",
-      capital: 1000,
-      prizePool: 1000000,
-      start_date: "2019-06-12T08:00:00.000Z",
-      end_date: "2019-06-19T08:00:00.000Z",
-      avaliability: false,
-    },
-  ];
-
-  const user_competitions = [
-    {
-      id: 1,
-      name: "WSB Competition",
-      lobby: "1/5",
-      capital: 1000,
-      prizePool: 1000000,
-      start_date: "2019-06-12T08:00:00.000Z",
-      end_date: "2019-06-19T08:00:00.000Z",
-      profit: 1000,
-    },
-    {
-      id: 2,
-      name: "WSB Competition",
-      lobby: "2/5",
-      capital: 1000,
-      prizePool: 1000000,
-      start_date: "2019-06-12T08:00:00.000Z",
-      end_date: "2019-06-19T08:00:00.000Z",
-      profit: 1000,
-    },
-  ];
 
   return {
     view,
     setMenu,
     setPortfolio,
-    portfolios,
-    competitions,
-    user_competitions,
     info,
-    loading
+    loading,
+    popup,
+    setNewPopup
   };
 }

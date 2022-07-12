@@ -24,7 +24,12 @@ export default function Sidebar(props) {
   return (
     <div className="sidebar">
       <Logo />
-      <MenuList menus={menu} selected={props.menu} setMenu={props.setMenu} />
+      <MenuList
+        menus={menu}
+        selected={props.menu}
+        setMenu={props.setMenu}
+        setNewPopup={props.setNewPopup}
+      />
       <PortfoliosList
         portfolios={props.portfolios}
         selected={props.portfolio}

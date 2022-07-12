@@ -1,0 +1,73 @@
+$mainfont: 'Poppins';
+$bgcolor: #313335;
+$textcolor: #F0F0F0;
+$textcolor-selected: #A374D2;
+$textcolor-positive: #33C15B;
+$textcolor-small: #878080;
+$divcolor: #1F1F1F;
+$divcolor-selected: #9967CA;
+$radius: 1rem;
+
+.popup {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  display: flex;
+  justify-content : center;
+  align-items: center;
+  color : #A374D2;
+}
+
+h1{
+  font-size: xx-large;
+}
+
+.popup-inner {
+  position: relative;
+  padding: 32px;
+  width: 70rem;
+  height: 45rem;
+  margin-right: 10rem;
+  margin-bottom : 10rem;
+  background-color: #313335;
+  border-radius: 20px;
+  color: $textcolor;
+}
+
+.new-portfolio{
+  display: flex;
+  padding : auto;
+  justify-content: center;
+  align-items : center;
+  margin-top: 1rem;
+  color : #A374D2;
+}
+
+.new-portfolio input {
+  color : black;
+}
+
+.new-portfolio select {
+  color: black;
+}
+
+.input-info {
+  margin-top: 5rem; 
+  font-size: x-large;
+}
+
+.new-portfolio button {
+  margin-top: 4rem;
+  color: $textcolor;
+  font-family: 'Poppins';
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  overflow: hidden;
+  outline: none;
+}
+
+.new-portfolio button :hover {
+  background-color: rgba($color: #c6a8e4, $alpha: .1);
+  border-radius: 10px;
+}
