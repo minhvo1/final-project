@@ -1,88 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import classNames from "classnames";
+import {
+  getPortfolioTickersFromName,
+  checkTickerBelongToPortfolio,
+  getPortfolioIdFromName
+} from "../../helpers/headerHelper";
 
-const dummyResults = {
-  "ResultSet": {
-    "Query": "apple",
-    "Result": [
-      {
-        "exch": "NMS",
-        "exchDisp": "NASDAQ",
-        "name": "Apple Inc.",
-        "symbol": "AAPL",
-        "type": "S",
-        "typeDisp": "Equity"
-      },
-      {
-        "exch": "NYQ",
-        "exchDisp": "NYSE",
-        "name": "Apple Hospitality REIT, Inc.",
-        "symbol": "APLE",
-        "type": "S",
-        "typeDisp": "Equity"
-      },
-      {
-        "exch": "PNK",
-        "exchDisp": "OTC Markets",
-        "name": "Apple Rush Company, Inc.",
-        "symbol": "APRU",
-        "type": "S",
-        "typeDisp": "Equity"
-      },
-      {
-        "exch": "NAS",
-        "exchDisp": "NASDAQ",
-        "name": "Appleseed Fund Investor Share",
-        "symbol": "APPLX",
-        "type": "M",
-        "typeDisp": "Fund"
-      },
-      {
-        "exch": "NAS",
-        "exchDisp": "NASDAQ",
-        "name": "Appleseed Fund Institutional Share",
-        "symbol": "APPIX",
-        "type": "M",
-        "typeDisp": "Fund"
-      },
-      {
-        "exch": "PNK",
-        "exchDisp": "OTC Markets",
-        "name": "Golden Apple Oil & Gas Inc.",
-        "symbol": "GAPJ",
-        "type": "S",
-        "typeDisp": "Equity"
-      },
-      {
-        "exch": "WCB",
-        "exchDisp": "Chicago Board Options Exchange",
-        "name": "CBOE EQUITY VIXON APPLE",
-        "symbol": "^VXAPL",
-        "type": "I",
-        "typeDisp": "Index"
-      },
-      {
-        "exch": "PNK",
-        "exchDisp": "OTC Markets",
-        "name": "Apple Green Holding, Inc.",
-        "symbol": "AGPL",
-        "type": "S",
-        "typeDisp": "Equity"
-      },
-      {
-        "exch": "BUE",
-        "exchDisp": "Buenos Aires",
-        "name": "Apple Inc.",
-        "symbol": "AAPL.BA",
-        "type": "S",
-        "typeDisp": "Equity"
-      }
-    ]
-  }
-};
-
-export default function SearchBar() {
+export default function SearchBar(props) {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [symbol, setSymbol] = useState("");
@@ -92,7 +17,7 @@ export default function SearchBar() {
   const searchResult = "search-result";
 
 
-  const search = function(event) {
+  const search = function (event) {
     setQuery(event.target.value)
     const query = event.target.value
     const url = `http://localhost:3001/search?query=${query}`;
@@ -103,7 +28,7 @@ export default function SearchBar() {
           console.log('data', response);
           setResults(response.data);
           //response.data = dummyResults;
-          
+
         })
         .catch(function (error) {
           console.error(error);
@@ -115,23 +40,55 @@ export default function SearchBar() {
     
   
   }, [query]); */
-  const selectsymbol = function(symb) {
+  const selectsymbol = function (ticker_id) {
     //setSymbol(symb)
-    console.log("You selected:", symb);
-  }
-  const lists = Object.values(results).map((result) => {
+    console.log("You selected ticker ID:", ticker_id);
+    // Add symbol to portfolio
+    console.log("Ticker ID: ", ticker_id);
+    const portfolio_id = getPortfolioIdFromName(props.selectedPortfolio, props.portfolios);
+    console.log(portfolio_id);
+    // Call api to add new
+    if (portfolio_id) {
+      const url = `http://localhost:3001/portfolios/${portfolio_id}/add`;
 
-    return (
-      <li className="search-result-li" key={result.id} onClick={() => selectsymbol(result.id)}>
-        <div className="search-result-symbol">{result.ticker}</div> 
-        <div className="search-result-name">{result.company_name}</div> 
-      </li>
-    );      
-  });        
+      return axios.put(url, { ticker_id })
+        .then(res => {
+          console.log(res);
+          return res;
+        });
+    }
+  }
+
+  const lists = Object.values(results).map((result) => {
+    // Check symbol was in portfolio
+    const tickers = getPortfolioTickersFromName(props.selectedPortfolio, props.portfolios);
+    //console.log(tickers);
+    const check = checkTickerBelongToPortfolio(tickers, result.id);
+    //console.log(result.id);
+    //console.log(check);
+    if (check === false) {
+      return (
+        <li className="search-result-li" key={result.id} onClick={() => selectsymbol(result.id)}>
+          <div className="search-result-symbol">{result.ticker}</div>
+          <div className="search-result-name">{result.company_name}</div>
+        </li>
+      );
+    } else {
+      return (
+        <li className="search-result-li" key={result.id}>
+          <div className="search-result-symbol">
+            <div class="search-result-added"><i class="fa-solid fa-star"></i></div>
+            {result.ticker}</div>
+          <div className="search-result-name">{result.company_name}</div>
+        </li>
+      );
+    }
+
+  });
   return (
-    <div className="search"> 
+    <div className="search">
       <form className={searchFormClass} onSubmit={event => event.preventDefault()}>
-        <input type="text" placeholder="Search" /* value={query}  */className={searcClass} onChange={search} /> 
+        <input type="text" placeholder="Search" /* value={query}  */ className={searcClass} onChange={search} />
       </form>
       <ul className={searchResult}>
         {lists}
