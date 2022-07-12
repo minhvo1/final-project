@@ -4,9 +4,7 @@ import Logo from "./Logo";
 import MenuList from "./MenuList";
 import PortfoliosList from "./PortfoliosList";
 import NewPortfolio from "./newPortfolio";
-import Header from "../Header/index";
-import Competitions from "../CompetitionMain/index";
-import PortfolioMain from "../PortfolioMain/index";
+
 export default function Sidebar(props) {
   const menu = [
     {

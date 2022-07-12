@@ -116,6 +116,7 @@ export default function useApplicationData() {
           competitions[index]["userComp"] = true;
 
         }
+        setView({ ...view, portfolio : portfolio[0]["name"] });
         return [user, usersCompetition, portfolio, competitions];
       })
       .then((ans) => {
