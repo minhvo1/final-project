@@ -25,7 +25,7 @@ function App() {
     info,
     loading,
   } = useApplicationData();
-
+ 
   return (
     <div className="App">
       {loading ? (

@@ -31,7 +31,7 @@ export default function PortfolioMain(props) {
         return newResultArray;
       })
       .then((result) => {
-        console.log(result)
+
         let url = "https://api.polygon.io/v2/snapshot/locale/us/markets/stocks/tickers?tickers="
         for (const item of result) {
           url = url + item.ticker + ','

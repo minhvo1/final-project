@@ -72,6 +72,7 @@ export default function useApplicationData() {
             portfolio[index].tickers.push({
               tickerId: ans[0].data[x]["portfoliodatastickerid"],
               tickerQuantity: ans[0].data[x]["tickerquantity"],
+              
             })
           }
         }
@@ -116,6 +117,7 @@ export default function useApplicationData() {
           competitions[index]["userComp"] = true;
 
         }
+        
         return [user, usersCompetition, portfolio, competitions];
       })
       .then((ans) => {
@@ -130,7 +132,7 @@ export default function useApplicationData() {
       });
     // eslint-disable-next-line
   }, []);
-  
+  console.log(info.portfolios)
   const portfolios = [
     {
       id: 4,
