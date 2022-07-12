@@ -41,7 +41,7 @@ function App() {
             setMenu={setMenu}
           />
           <div className="main-container">
-            <Header />
+            <Header portfolios={info.portfolios} selectedPortfolio={view.portfolio} />
             {view.menu === "Dashboard" && <PortfolioMain data={info} selectedPortfolio={view.portfolio}/>}
             {view.menu === "Competitions" && (
               <Competitions
