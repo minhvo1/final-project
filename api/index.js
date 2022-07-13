@@ -141,9 +141,17 @@ app.post("/value", (req, res) => {
   const { portfolio_id, datetime, value } = req.body
 })
 
-
-
-
+app.put("/portfolios/:id/add", (req, res) => {
+  /* console.log(req.body.ticker_id);
+  console.log(req.params.id);
+   (1, 1, 1);
+ */
+  db.query(`INSERT INTO portfolio_datas (quantity, portfolio_id, ticker_id) VALUES($1, $2, $3)`, [0, req.params.id, req.body.ticker_id])
+    .then((data) => {
+      res.json("success");
+    })
+    .catch((err) => res.json({ message: err }));
+});
 
 
 /* app.get("/get_tickers", (req, res) => {

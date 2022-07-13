@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+
 import classNames from "classnames";
+
 import {
   getPortfolioTickersFromName,
   checkTickerBelongToPortfolio,
   getPortfolioIdFromName
 } from "../../helpers/headerHelper";
+import SearchResultItem from "./SearchResultItem";
 
 export default function SearchBar(props) {
   const [query, setQuery] = useState("");
@@ -40,24 +43,7 @@ export default function SearchBar(props) {
     
   
   }, [query]); */
-  const selectsymbol = function (ticker_id) {
-    //setSymbol(symb)
-    console.log("You selected ticker ID:", ticker_id);
-    // Add symbol to portfolio
-    console.log("Ticker ID: ", ticker_id);
-    const portfolio_id = getPortfolioIdFromName(props.selectedPortfolio, props.portfolios);
-    console.log(portfolio_id);
-    // Call api to add new
-    if (portfolio_id) {
-      const url = `http://localhost:3001/portfolios/${portfolio_id}/add`;
-
-      return axios.put(url, { ticker_id })
-        .then(res => {
-          console.log(res);
-          return res;
-        });
-    }
-  }
+  
 
   const lists = Object.values(results).map((result) => {
     // Check symbol was in portfolio
@@ -66,7 +52,15 @@ export default function SearchBar(props) {
     const check = checkTickerBelongToPortfolio(tickers, result.id);
     //console.log(result.id);
     //console.log(check);
-    if (check === false) {
+    return <SearchResultItem 
+        ticker={result}
+        selectedPortfolio={props.selectedPortfolio}
+        portfolios={props.portfolios}
+        //onClick={() => selectsymbol(result.id)}
+        //selectsymbol={selectsymbol}
+        selected={check}
+      />
+    /* if (check === false) {
       return (
         <li className="search-result-li" key={result.id} onClick={() => selectsymbol(result.id)}>
           <div className="search-result-symbol">{result.ticker}</div>
@@ -82,8 +76,7 @@ export default function SearchBar(props) {
           <div className="search-result-name">{result.company_name}</div>
         </li>
       );
-    }
-
+    } */
   });
   return (
     <div className="search">
