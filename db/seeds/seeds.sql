@@ -12738,21 +12738,21 @@ INSERT INTO tickers (ticker, company_name) VALUES ('ZZZ', 'TEST TICKER FOR UTP')
 
 -- portfolio_datas table seeds here (Example)
 
-INSERT INTO portfolio_datas (quantity, portfolio_id, ticker_id) VALUES (1, 1, 1);
+INSERT INTO portfolio_datas (quantity, portfolio_id, ticker_id) VALUES (1, 1, 28);
 
-INSERT INTO portfolio_datas (quantity, portfolio_id, ticker_id) VALUES (2, 1, 2);
+INSERT INTO portfolio_datas (quantity, portfolio_id, ticker_id) VALUES (2, 1, 4973);
 
-INSERT INTO portfolio_datas (quantity, portfolio_id, ticker_id) VALUES (1, 1, 3);
+INSERT INTO portfolio_datas (quantity, portfolio_id, ticker_id) VALUES (1, 1, 7649);
 
-INSERT INTO portfolio_datas (quantity, portfolio_id, ticker_id) VALUES (1, 1, 4);
+INSERT INTO portfolio_datas (quantity, portfolio_id, ticker_id) VALUES (1, 1, 539);
 
-INSERT INTO portfolio_datas (quantity, portfolio_id, ticker_id) VALUES (1, 1, 5);
+INSERT INTO portfolio_datas (quantity, portfolio_id, ticker_id) VALUES (1, 1, 5042);
 
-INSERT INTO portfolio_datas (quantity, portfolio_id, ticker_id) VALUES (10, 2, 6);
+INSERT INTO portfolio_datas (quantity, portfolio_id, ticker_id) VALUES (10, 2, 4973);
 
-INSERT INTO portfolio_datas (quantity, portfolio_id, ticker_id) VALUES (5, 2, 7);
+INSERT INTO portfolio_datas (quantity, portfolio_id, ticker_id) VALUES (5, 2, 8968);
 
-INSERT INTO portfolio_datas (quantity, portfolio_id, ticker_id) VALUES (1, 2, 8);
+INSERT INTO portfolio_datas (quantity, portfolio_id, ticker_id) VALUES (1, 2, 28);
 
 INSERT INTO portfolio_datas (quantity, portfolio_id, ticker_id) VALUES (10, 3, 9);
 
@@ -12786,21 +12786,21 @@ INSERT INTO portfolio_datas (quantity, portfolio_id, ticker_id) VALUES (3, 9, 23
 
 -- transactions table seeds here (Example)
 
-INSERT INTO transactions (type, amount, datetime, ticker_id, user_id) VALUES (true, 1, '2020-06-12T08:00:00.000Z', 1, 2);
+INSERT INTO transactions (type, amount, datetime, ticker_id, user_id) VALUES (true, 1, '2020-06-12T08:00:00.000Z', 28, 2);
 
-INSERT INTO transactions (type, amount, datetime, ticker_id, user_id) VALUES (true, 2, '2020-06-12T08:00:00.000Z', 2, 2);
+INSERT INTO transactions (type, amount, datetime, ticker_id, user_id) VALUES (true, 2, '2020-06-12T08:00:00.000Z', 4973, 2);
 
-INSERT INTO transactions (type, amount, datetime, ticker_id, user_id) VALUES (true, 1, '2020-06-12T08:00:00.000Z', 3, 2);
+INSERT INTO transactions (type, amount, datetime, ticker_id, user_id) VALUES (true, 1, '2020-06-12T08:00:00.000Z', 7649, 2);
 
-INSERT INTO transactions (type, amount, datetime, ticker_id, user_id) VALUES (true, 1, '2020-06-12T08:00:00.000Z', 4, 2);
+INSERT INTO transactions (type, amount, datetime, ticker_id, user_id) VALUES (true, 1, '2020-06-12T08:00:00.000Z', 539, 2);
 
-INSERT INTO transactions (type, amount, datetime, ticker_id, user_id) VALUES (true, 1, '2020-06-12T08:00:00.000Z', 5, 2);
+INSERT INTO transactions (type, amount, datetime, ticker_id, user_id) VALUES (true, 1, '2020-06-12T08:00:00.000Z', 5042, 2);
 
-INSERT INTO transactions (type, amount, datetime, ticker_id, user_id) VALUES (true, 10, '2020-06-12T08:00:00.000Z', 6, 3);
+INSERT INTO transactions (type, amount, datetime, ticker_id, user_id) VALUES (true, 10, '2020-06-12T08:00:00.000Z', 4973, 3);
 
-INSERT INTO transactions (type, amount, datetime, ticker_id, user_id) VALUES (true, 5, '2020-06-12T08:00:00.000Z', 7, 3);
+INSERT INTO transactions (type, amount, datetime, ticker_id, user_id) VALUES (true, 5, '2020-06-12T08:00:00.000Z', 8968, 3);
 
-INSERT INTO transactions (type, amount, datetime, ticker_id, user_id) VALUES (true, 1, '2020-06-12T08:00:00.000Z', 8, 3);
+INSERT INTO transactions (type, amount, datetime, ticker_id, user_id) VALUES (true, 1, '2020-06-12T08:00:00.000Z', 28, 3);
 
 INSERT INTO transactions (type, amount, datetime, ticker_id, user_id) VALUES (true, 10, '2020-06-12T08:00:00.000Z', 9, 4);
 
@@ -12831,4 +12831,35 @@ INSERT INTO transactions (type, amount, datetime, ticker_id, user_id) VALUES (tr
 INSERT INTO transactions (type, amount, datetime, ticker_id, user_id) VALUES (true, 3, '2020-06-12T08:00:00.000Z', 22, 9);
 
 INSERT INTO transactions (type, amount, datetime, ticker_id, user_id) VALUES (true, 3, '2020-06-12T08:00:00.000Z', 23, 10);
+
+-- portfolio_values table seeds here (Example)
+
+INSERT INTO portfolio_values (portfolio_id, datetime, value) VALUES (1,'2022-01-12T08:00:00.000Z',3601.25);
+
+INSERT INTO portfolio_values (portfolio_id, datetime, value) VALUES (1,'2022-02-12T08:00:00.000Z',3416.64);
+
+INSERT INTO portfolio_values (portfolio_id, datetime, value) VALUES (1,'2022-03-12T08:00:00.000Z',3231.89);
+
+INSERT INTO portfolio_values (portfolio_id, datetime, value) VALUES (1,'2022-04-12T08:00:00.000Z',3311.17);
+
+INSERT INTO portfolio_values (portfolio_id, datetime, value) VALUES (1,'2022-05-12T08:00:00.000Z',2845.13);
+
+INSERT INTO portfolio_values (portfolio_id, datetime, value) VALUES (1,'2022-06-12T08:00:00.000Z',2857.03);
+
+INSERT INTO portfolio_values (portfolio_id, datetime, value) VALUES (1,'2022-07-12T08:00:00.000Z',2969.78);
+
+INSERT INTO portfolio_values (portfolio_id, datetime, value) VALUES (2,'2022-01-12T08:00:00.000Z',1539.73);
+
+INSERT INTO portfolio_values (portfolio_id, datetime, value) VALUES (2,'2022-02-12T08:00:00.000Z',1476.79);
+
+INSERT INTO portfolio_values (portfolio_id, datetime, value) VALUES (2,'2022-03-12T08:00:00.000Z',1138.58);
+
+INSERT INTO portfolio_values (portfolio_id, datetime, value) VALUES (2,'2022-04-12T08:00:00.000Z',1678.66);
+
+INSERT INTO portfolio_values (portfolio_id, datetime, value) VALUES (2,'2022-05-12T08:00:00.000Z',1074.96);
+
+INSERT INTO portfolio_values (portfolio_id, datetime, value) VALUES (2,'2022-06-12T08:00:00.000Z',1355.68);
+
+INSERT INTO portfolio_values (portfolio_id, datetime, value) VALUES (2,'2022-07-12T08:00:00.000Z',1564.51);
+
 
