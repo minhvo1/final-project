@@ -161,6 +161,10 @@ export default function useApplicationData() {
     });
   }
 
+  const getPortfolioValue = () => {
+    axios.get()
+  }
+
 
   return {
     view,
