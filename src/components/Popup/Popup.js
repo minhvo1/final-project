@@ -17,7 +17,13 @@ export default function Popup(props) {
         userId = {props.userId}
         />}
         {props.type === "Ticker" &&  <Ticker/>}
-        {props.type === "Competitions" && <Competition/>}
+        {props.type === "Competitions" && <Competition
+         competitions = {props.competitions}
+         setMenu = {props.setMenu}
+         savePortfolio = {props.savePortfolio}
+         userId = {props.userId}
+         info = {props.info}
+        />}
       </div>
     </div>
   );
