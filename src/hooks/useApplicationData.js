@@ -146,101 +146,6 @@ export default function useApplicationData() {
       });
     // eslint-disable-next-line
   }, []);
-<<<<<<< HEAD
-  
-  const portfolios = [
-    {
-      id: 4,
-      name: "YOLO Portfolio",
-    },
-
-    {
-      id: 5,
-      name: "Savings Portfolio",
-    },
-
-    {
-      id: 6,
-      name: "WSB Competition",
-    },
-  ];
-
-  const competitions = [
-    {
-      id: 1,
-      name: "WSB Competition",
-      lobby: "1/5",
-      capital: 1000,
-      prizePool: 1000000,
-      start_date: "2019-06-12T08:00:00.000Z",
-      end_date: "2019-06-19T08:00:00.000Z",
-      avaliability: true,
-    },
-    {
-      id: 2,
-      name: "WSB Competition",
-      lobby: "2/5",
-      capital: 1000,
-      prizePool: 1000000,
-      start_date: "2019-06-12T08:00:00.000Z",
-      end_date: "2019-06-19T08:00:00.000Z",
-      avaliability: true,
-    },
-    {
-      id: 3,
-      name: "WSB Competition",
-      lobby: "3/5",
-      capital: 1000,
-      prizePool: 1000000,
-      start_date: "2019-06-12T08:00:00.000Z",
-      end_date: "2019-06-19T08:00:00.000Z",
-      avaliability: true,
-    },
-    {
-      id: 4,
-      name: "WSB Competition",
-      lobby: "5/5",
-      capital: 1000,
-      prizePool: 1000000,
-      start_date: "2019-06-12T08:00:00.000Z",
-      end_date: "2019-06-19T08:00:00.000Z",
-      avaliability: false,
-    },
-    {
-      id: 5,
-      name: "WSB Competition",
-      lobby: "5/5",
-      capital: 1000,
-      prizePool: 1000000,
-      start_date: "2019-06-12T08:00:00.000Z",
-      end_date: "2019-06-19T08:00:00.000Z",
-      avaliability: false,
-    },
-  ];
-
-  const user_competitions = [
-    {
-      id: 1,
-      name: "WSB Competition",
-      lobby: "1/5",
-      capital: 1000,
-      prizePool: 1000000,
-      start_date: "2019-06-12T08:00:00.000Z",
-      end_date: "2019-06-19T08:00:00.000Z",
-      profit: 1000,
-    },
-    {
-      id: 2,
-      name: "WSB Competition",
-      lobby: "2/5",
-      capital: 1000,
-      prizePool: 1000000,
-      start_date: "2019-06-12T08:00:00.000Z",
-      end_date: "2019-06-19T08:00:00.000Z",
-      profit: 1000,
-    },
-  ];
-=======
 
   const savePortfolio = (portfolio_name, user_id, competition_id) => {
     axios.post(`http://localhost:3001/newPortfolio`,{
@@ -255,7 +160,6 @@ export default function useApplicationData() {
     });
   }
 
->>>>>>> sidebar
 
   return {
     view,
