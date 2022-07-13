@@ -45,7 +45,6 @@ export default function useApplicationData() {
   const setNewPopup = (page, infos = null) => {
     setMenu(null);
     setPopup({ ...popup, popup: true, page: page, info: infos });
-
   };
 
   useEffect(() => {

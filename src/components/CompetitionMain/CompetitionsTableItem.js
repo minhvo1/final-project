@@ -9,7 +9,7 @@ export default function CompetitionsTableItem (props) {
   dateEnd = `${dateEnd.getMonth()}/${dateEnd.getDate()}/${dateEnd.getFullYear()}` 
  
   const moreInfo = () => {
-    props.setNewPopup("Competitions",props.id)
+    props.setNewPopup("Competitions" ,props.id)
 
   }
 

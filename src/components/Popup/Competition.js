@@ -7,7 +7,7 @@ export default function Competition(props) {
     const competition1 = findCompetitionById(props.info, props.competitions)  
   
     const users = props.competitions[props.info]["portfolios"].map((portfolios) => {
-      return <ul>{`- ` + portfolios.name}</ul>;
+      return <ul>{portfolios.name}</ul>;
     });
   
     let dateEnd = new Date(competition1.end_date);
