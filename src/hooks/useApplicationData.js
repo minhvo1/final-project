@@ -3,11 +3,17 @@ import axios, { Axios } from "axios";
 import { getCompetitions, checkArray, checkObject, findCompetitionById, findIndex } from "../helpers/sidebarHelper";
 
 export default function useApplicationData() {
+
   const [view, setView] = useState({
     menu: "Dashboard",
     portfolio: null,
   });
-  
+
+  const[popup, setPopup] = useState ({
+    popup : false,
+    page : null
+  })
+
 
   const [info, setInfo] = useState({
     user: {},
@@ -22,7 +28,16 @@ export default function useApplicationData() {
     setView({ menu: "Dashboard", portfolio });
   };
 
-  const setMenu = (menu) => setView({ ...view, menu });
+  
+  const setNewPopup = (page) => setPopup({...popup, popup: true, page: page});
+
+  const setMenu = (menu) => {
+    setView({ ...view, menu })
+    if (menu === "New Portfolio") {
+      setNewPopup("New Portfolio");
+    }
+  }
+
 
   useEffect(() => {
     const userId = 2;
@@ -117,7 +132,7 @@ export default function useApplicationData() {
           competitions[index]["userComp"] = true;
 
         }
-        
+        setView({ ...view, portfolio : portfolio[0]["name"] });
         return [user, usersCompetition, portfolio, competitions];
       })
       .then((ans) => {
@@ -132,7 +147,9 @@ export default function useApplicationData() {
       });
     // eslint-disable-next-line
   }, []);
-  console.log(info.portfolios)
+
+  
+
   const portfolios = [
     {
       id: 4,
@@ -226,14 +243,31 @@ export default function useApplicationData() {
     },
   ];
 
+
+  const savePortfolio = (portfolio_name, user_id, competition_id) => {
+    axios.post(`http://localhost:3001/newPortfolio`,{
+      portfolioName : portfolio_name,
+      user_id : user_id,
+      competition_id : competition_id
+    }).then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
+
+
   return {
     view,
     setMenu,
     setPortfolio,
-    portfolios,
-    competitions,
-    user_competitions,
     info,
-    loading
+    loading,
+    popup,
+    setNewPopup,
+    savePortfolio
   };
 }
+

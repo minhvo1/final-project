@@ -125,7 +125,7 @@ app.get("/search", (reg, res) => {
 
 app.post("/newPortfolio", (req, res) => {
   if (process.env.TEST_ERROR) {
-    setTimeout(() => response.status(500).json({}), 1000);
+    setTimeout((response) => response.status(500).json({}), 1000);
     return;
   }
   const { portfolioName, user_id, competition_id } = req.body;
@@ -137,6 +137,9 @@ app.post("/newPortfolio", (req, res) => {
     .catch((err) => res.json({ message: err }));
 });
 
+app.post("/value", (req, res) => {
+  const { portfolio_id, datetime, value } = req.body
+})
 
 
 

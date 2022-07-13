@@ -7,6 +7,7 @@ import { React, useEffect, useState, Fragment } from "react";
 import { getPortfolios } from "./helpers/sidebarHelper";
 import useApplicationData from "./hooks/useApplicationData";
 import Popup from "./components/Popup/Popup";
+import schedule from 'node-schedule'
 /*
 const { Pool } = require("pg");
 const dbParams = require("./db.js");
@@ -25,6 +26,15 @@ function App() {
     setNewPopup,
     savePortfolio
   } = useApplicationData();
+
+  useEffect(() => {
+    console.log(info)
+    // schedule.scheduleJob('*/5 * * * * *', () => {
+
+    //   console.log('test')
+    
+    // })
+  }, [])
  
   return (
     <div className="App">
