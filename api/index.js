@@ -101,10 +101,12 @@ app.get("/portfolio/", (req, res) => {
 });
 
 app.get("/ticker/:id", (req, res) => {
+
   const { id } = req.params;
   let query = `SELECT * FROM tickers 
     WHERE id = $1`;
   db.query(query, [id]).then((data) => {
+    console.log(data.rows)
     res.json(data.rows);
   });
 });

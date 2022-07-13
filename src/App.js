@@ -27,14 +27,14 @@ function App() {
     savePortfolio
   } = useApplicationData();
 
-  useEffect(() => {
-    console.log(info)
-    // schedule.scheduleJob('*/5 * * * * *', () => {
-
-    //   console.log('test')
+  // useEffect(() => {
     
-    // })
-  }, [])
+  //   schedule.scheduleJob('*/5 * * * * *', () => {
+
+  //     console.log('test')
+    
+  //   })
+  // }, [])
  
   return (
     <div className="App">

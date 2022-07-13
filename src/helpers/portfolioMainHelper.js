@@ -12,8 +12,10 @@ export function getPortfolioTickers(selectedPortfolio, data) {
 export function getPromiseArrayTickers (tickers) {
   let promiseArray = [];
   for (const ticker of tickers) {
-    const URL = `http://localhost:3001/ticker/${ticker.tickerId}`
-    promiseArray.push(axios.get(URL));
+    if (!(ticker.tickerId === null)) {
+      const URL = `http://localhost:3001/ticker/${ticker.tickerId}`
+      promiseArray.push(axios.get(URL));
+    }
   }
   return promiseArray;
 }
