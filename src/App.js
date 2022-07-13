@@ -24,7 +24,7 @@ function App() {
     loading,
     popup,
     setNewPopup,
-    savePortfolio
+    savePortfolio,
   } = useApplicationData();
 
   // useEffect(() => {
@@ -48,25 +48,33 @@ function App() {
             portfolios={info.portfolios}
             menu={view.menu}
             setMenu={setMenu}
-            setNewPopup = {setNewPopup}
+            setNewPopup={setNewPopup}
           />
           <div className="main-container">
-        
-            <Header portfolios={info.portfolios} selectedPortfolio={view.portfolio} />
-            {view.menu === "Dashboard" && <PortfolioMain data={info} selectedPortfolio={view.portfolio}/>}
-            {view.menu === "Competitions" && (
+            <Header
+              portfolios={info.portfolios}
+              selectedPortfolio={view.portfolio}
+            />
+            {view.menu === "Dashboard" && (
+              <PortfolioMain data={info} selectedPortfolio={view.portfolio} />
+            )}
+            {view.menu === "Competitions"  && (
               <Competitions
                 competitions={info.competitions}
                 user_competitions={info.user_competitions}
+                setNewPopup={setNewPopup}
               />
             )}
-             {popup.popup === true && <Popup 
-             type = {popup.page}
-             competitions={info.competitions}
-             setMenu={setMenu}
-             savePortfolio = {savePortfolio}
-             userId = {info.user.id}
-             /> }
+            {popup.popup === true && (
+              <Popup
+                type={popup.page}
+                info = {popup.info}
+                competitions={info.competitions}
+                setMenu={setMenu}
+                savePortfolio={savePortfolio}
+                userId={info.user.id}
+              />
+            )}
           </div>
         </Fragment>
       )}
