@@ -4,7 +4,7 @@ const express = require("express");
 const cors = require("cors");
 
 // Handle schedule jobs
-const scheduledFunctions = require('./scheduled_jobs/cron');
+const scheduledFunctions = require("./scheduled_jobs/cron");
 
 const PORT = process.env.PORT || 3001;
 
@@ -12,7 +12,7 @@ const app = express();
 app.use(
   cors({
     origin: "*",
-    methods: ['GET', 'PUT', 'POST']
+    methods: ["GET", "PUT", "POST"],
   })
 );
 
@@ -105,12 +105,20 @@ app.get("/portfolio/", (req, res) => {
   );
 });
 
+app.get("/portfolioLatest/", (req, res) => {
+  db.query(`SELECT id FROM portfolios ORDER BY id DESC LIMIT 1`)
+    .then((data) => {
+      res.json(data.rows);
+    })
+    .catch((err) => res.json({ message: err }));
+});
+
 app.get("/ticker/:id", (req, res) => {
   const { id } = req.params;
   let query = `SELECT * FROM tickers 
     WHERE id = $1`;
   db.query(query, [id]).then((data) => {
-    console.log(data.rows)
+    console.log(data.rows);
     res.json(data.rows);
   });
 });
@@ -135,8 +143,39 @@ app.post("/newPortfolio", (req, res) => {
     return;
   }
   const { portfolioName, user_id, competition_id } = req.body;
-  db.query(`INSERT INTO portfolios (name, user_id, competition_id) VALUES ($1, $2, $3)`
-  , [portfolioName, user_id, competition_id])
+  db.query(
+    `INSERT INTO portfolios (name, user_id, competition_id) VALUES ($1, $2, $3)`,
+    [portfolioName, user_id, competition_id]
+  )
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => res.json({ message: err }));
+});
+
+app.post("/newPortfolioValue", (req, res) => {
+  if (process.env.TEST_ERROR) {
+    setTimeout((response) => response.status(500).json({}), 1000);
+    return;
+  }
+  const { portfolio_id, value } = req.body;
+  db.query(
+    `INSERT INTO portfolio_values (portfolio_id, value) VALUES ($1, $2)`,
+    [portfolio_id, value]
+  )
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => res.json({ message: err }));
+});
+
+app.get("/portfolio_values", (reg, res) => {
+  const searchTerm = reg.query.query;
+  if (searchTerm === "") {
+    return res.json({});
+  }
+  const query = `SELECT * FROM portfolio_values;`;
+  db.query(query)
     .then((data) => {
       res.json(data.rows);
     })
@@ -144,33 +183,33 @@ app.post("/newPortfolio", (req, res) => {
 });
 
 app.post("/value", (req, res) => {
-  const { portfolio_id, datetime, value } = req.body
-})
+  const { portfolio_id, datetime, value } = req.body;
+});
 
 app.get("/value/:id", (req, res) => {
   const { id } = req.params;
-  if (id === "null") return res.json([])
+  if (id === "null") return res.json([]);
   let query = `SELECT * FROM portfolio_values 
   WHERE portfolio_id = $1`;
   db.query(query, [id]).then((data) => {
     res.json(data.rows);
   });
 
-
   app.put("/portfolios/:id/add", (req, res) => {
     /* console.log(req.body.ticker_id);
     console.log(req.params.id);
      (1, 1, 1);
    */
-    db.query(`INSERT INTO portfolio_datas (quantity, portfolio_id, ticker_id) VALUES($1, $2, $3)`, [0, req.params.id, req.body.ticker_id])
+    db.query(
+      `INSERT INTO portfolio_datas (quantity, portfolio_id, ticker_id) VALUES($1, $2, $3)`,
+      [0, req.params.id, req.body.ticker_id]
+    )
       .then((data) => {
         res.json("success");
       })
       .catch((err) => res.json({ message: err }));
   });
-  
 });
-
 
 /* app.get("/get_tickers", (req, res) => {
   const results = [];

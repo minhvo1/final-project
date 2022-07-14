@@ -12,7 +12,7 @@ export default function useApplicationData() {
   const [view, setView] = useState({
     menu: "Dashboard",
     portfolio: null,
-    portfolio_id: null
+    portfolio_id: null,
   });
 
   const [popup, setPopup] = useState({
@@ -30,8 +30,9 @@ export default function useApplicationData() {
 
   const [loading, setLoading] = useState(true);
 
-  const setPortfolio = (portfolio, portfolio_id=null) => {
-    if (portfolio_id !== null) setView({ menu: "Dashboard", portfolio, portfolio_id });
+  const setPortfolio = (portfolio, portfolio_id = null) => {
+    if (portfolio_id !== null)
+      setView({ menu: "Dashboard", portfolio, portfolio_id });
     else setView({ menu: "Dashboard", portfolio });
   };
 
@@ -45,7 +46,6 @@ export default function useApplicationData() {
   };
 
   const setNewPopup = (page, infos = null) => {
-    setMenu(null);
     setPopup({ ...popup, popup: true, page: page, info: infos });
   };
 
@@ -167,24 +167,54 @@ export default function useApplicationData() {
     // eslint-disable-next-line
   }, []);
 
-
-
-  const savePortfolio = (portfolio_name, user_id, competition_id) => {
-    axios
-      .post(`http://localhost:3001/newPortfolio`, {
+  const savePortfolio = (
+    portfolio_name,
+    user_id,
+    competition_id,
+    startValue
+  ) => {
+    Promise.all([
+      axios.post(`http://localhost:3001/newPortfolio`, {
         portfolioName: portfolio_name,
         user_id: user_id,
         competition_id: competition_id,
+      }),
+      axios.get(`http://localhost:3001/portfolioLatest`),
+    ]).then((ans) => {
+      let newportfolio_id = ans[1]["data"][0]["id"] + 1 ;
+      Promise.all([axios
+        .post(`http://localhost:3001/newPortfolioValue`, {
+          portfolio_id: newportfolio_id,
+          value: startValue,
+        })]).then((ans) => {
+          console.log(ans);
+        }).catch(function (error) {
+          console.log(error);
+        });
+    }).catch(function (error) {
+      console.log(error);
+    });
+  }
+/*
+      .then(() => {
+        axios.get(`http://localhost:3001/portfolioLatest`);
       })
-      .then(function (response) {
-        console.log(response);
+      .then((ans) => {
+        console.log(ans);
+        axios
+          .post(`http://localhost:3001/newPortfolioValue`, {
+            portfolio_id: ans[0]["id"],
+            value: startValue,
+          })
+          .then((ans) => {
+            console.log(ans);
+          });
       })
       .catch(function (error) {
         console.log(error);
       });
   };
- 
-
+*/
   return {
     view,
     setMenu,
@@ -196,4 +226,3 @@ export default function useApplicationData() {
     savePortfolio,
   };
 }
-

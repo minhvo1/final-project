@@ -5,6 +5,7 @@ import MenuList from "./MenuList";
 import PortfoliosList from "./PortfoliosList";
 
 export default function Sidebar(props) {
+  console.log(props.portfolios);
   const menu = [
     {
       id: 1,

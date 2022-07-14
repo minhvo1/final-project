@@ -57,3 +57,12 @@ export function findIndex (id, comps) {
     }
   }
 }
+
+export function findCapital (id, comps) {
+  let intID = Number(id);
+  for (let comp of comps) {
+    if (comp.id === intID){
+      return comp.capital;
+    }
+  } 
+}
