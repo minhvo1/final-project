@@ -3,6 +3,9 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 
+// Handle schedule jobs
+const scheduledFunctions = require('./scheduled_jobs/cron');
+
 const PORT = process.env.PORT || 3001;
 
 const app = express();
@@ -22,6 +25,8 @@ const dbParams = require("./lib/db.js");
 const { json } = require("express");
 const db = new Pool(dbParams);
 db.connect();
+
+scheduledFunctions.initScheduledJobs(db);
 
 app.get("/", (req, res) => {
   db.query(`SELECT * FROM tickers`)
