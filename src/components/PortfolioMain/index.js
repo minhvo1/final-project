@@ -71,6 +71,7 @@ export default function PortfolioMain(props) {
       <AssetTable
         selectedPortfolio={props.selectedPortfolio}
         data={tickersData}
+        setNewPopup={props.setNewPopup}
       />
     </div>
   );

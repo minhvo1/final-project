@@ -5,11 +5,9 @@ import Ticker from "./Ticker.js";
 import NewPortfolio from "./NewPortfolio.js";
 
 export default function Popup(props) {
-
   const exit = () => {
     props.setMenu("Dashboard") 
   }
-
   return (
     <div className="popup">
       <div className="popup-inner">
@@ -23,7 +21,13 @@ export default function Popup(props) {
         savePortfolio = {props.savePortfolio}
         userId = {props.userId}
         />}
-        {props.type === "Ticker" &&  <Ticker/>}
+        {props.type === "Ticker" &&  <Ticker
+        setMenu = {props.setMenu}
+        info = {props.info}
+        buyTicker = {props.buyTicker}
+        sellTicker = {props.sellTicker}
+        portfolios = {props.portfolios}
+        />}
         {props.type === "Competitions" && <Competition
          competitions = {props.competitions}
          setMenu = {props.setMenu}

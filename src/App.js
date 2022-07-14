@@ -25,9 +25,10 @@ function App() {
     popup,
     setNewPopup,
     savePortfolio,
+    buyTicker,
+    sellTicker
   } = useApplicationData();
 
- 
   // useEffect(() => {
     
   //   schedule.scheduleJob('*/5 * * * * *', () => {
@@ -36,7 +37,6 @@ function App() {
     
   //   })
   // }, [])
- 
   return (
     <div className="App">
       {loading ? (
@@ -56,24 +56,27 @@ function App() {
               portfolios={info.portfolios}
               selectedPortfolio={view.portfolio}
             />
-            {view.menu === "Dashboard" && (
-              <PortfolioMain data={info} selectedPortfolio={view.portfolio} selectedPortfolioId={view.portfolio_id} />
+            {view.menu === "Dashboard"  && popup.popupStatus === false && (
+              <PortfolioMain data={info} selectedPortfolio={view.portfolio} selectedPortfolioId={view.portfolio_id} setNewPopup={setNewPopup} />
             )}
-            {view.menu === "Competitions"  && (
+            {view.menu === "Competitions" && popup.popupStatus === false &&(
               <Competitions
                 competitions={info.competitions}
                 user_competitions={info.user_competitions}
                 setNewPopup={setNewPopup}
               />
             )}
-            {popup.popup === true && (
+            {popup.popupStatus === true && (
               <Popup
                 type={popup.page}
                 info = {popup.info}
                 competitions={info.competitions}
+                portfolios = {info.portfolios}
                 setMenu={setMenu}
                 savePortfolio={savePortfolio}
                 userId={info.user.id}
+                buyTicker = {buyTicker}
+                sellTicker = {sellTicker}
               />
             )}
           </div>

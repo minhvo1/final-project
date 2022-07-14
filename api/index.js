@@ -58,7 +58,7 @@ app.get("/competitions/user/:id", (req, res) => {
 app.get("/userdata/:id", (req, res) => {
   db.query(
     `SELECT users.id as id, users.name as userName, users.type as type, users.email as email, portfolios.name as portfolio_name, portfolios.id as portfolio_id, 
-    portfolios.date_created as portfolioDateCreated, portfolios.competition_id as portfolioCompetition, competition_users.competition_id as competitionsIds, 
+    portfolios.date_created as portfolioDateCreated, portfolios.competition_id as portfolioCompetition, portfolios.funds as portfolioFunds, portfolios.total_value as portfolioTotalValue, competition_users.competition_id as competitionsIds, 
     portfolio_datas.quantity as tickerQuantity, portfolio_datas.ticker_id as portfolioDatasTickerId
     FROM users FULL OUTER JOIN portfolios ON users.id = portfolios.user_id FULL OUTER JOIN competition_users ON portfolios.user_id = competition_users.user_id LEFT JOIN portfolio_datas ON portfolios.id = portfolio_datas.portfolio_id
     WHERE users.id = $1`,
@@ -73,6 +73,15 @@ app.get("/userdata/:id", (req, res) => {
 
 app.get("/compUsers", (req, res) => {
   const query = `SELECT competitions.id as competition_id, competitions.name as competition_Name, competitions.start_datetime as startTime, competitions.end_datetime as endTime, competitions.start_amount as startAmount, competitions.avaliability as avaliabilty, portfolios.name as portfolio_name FROM portfolios FULL OUTER JOIN competitions ON portfolios.competition_id = competitions.id`;
+  db.query(query)
+    .then((data) => {
+      res.json(data.rows);
+    })
+    .catch((err) => res.json({ message: err }));
+});
+
+app.get("/portfolio_datas", (req, res) => {
+  const query = `SELECT * from portfolio_datas`;
   db.query(query)
     .then((data) => {
       res.json(data.rows);
@@ -142,10 +151,11 @@ app.post("/newPortfolio", (req, res) => {
     setTimeout((response) => response.status(500).json({}), 1000);
     return;
   }
-  const { portfolioName, user_id, competition_id } = req.body;
+
+  const { portfolioName, user_id, competition_id, funds, total_value } = req.body;
   db.query(
-    `INSERT INTO portfolios (name, user_id, competition_id) VALUES ($1, $2, $3)`,
-    [portfolioName, user_id, competition_id]
+    `INSERT INTO portfolios (name, user_id, competition_id, funds, total_value) VALUES ($1, $2, $3, $4, $5)`,
+    [portfolioName, user_id, competition_id, funds, total_value]
   )
     .then((data) => {
       res.json(data);

@@ -5,6 +5,14 @@ import {
 } from "../../helpers/portfolioMainHelper";
 
 export default function AssetTable(props) {
+ 
+  const moreInfo = (ticker) => {
+    let dataToRender = {
+      ticker : ticker, 
+      portfolio : props.selectedPortfolio
+    }
+    props.setNewPopup("Ticker", dataToRender)
+  }
 
   return (
     <div className="asset-table">
@@ -21,6 +29,7 @@ export default function AssetTable(props) {
             <th>Quanity</th>
             <th>Amount</th>
             <th>Return</th>
+            <th>View</th>
           </tr>
           {props.data.map(ticker => {
             return (
@@ -31,6 +40,7 @@ export default function AssetTable(props) {
                 <td>{ticker.quantity}</td>
                 <td>{ticker.amount}</td>
                 <td></td>
+                <td><button className = "join-button" onClick={() => {moreInfo(ticker)}}>Info</button></td>
               </tr>
             )
           })}

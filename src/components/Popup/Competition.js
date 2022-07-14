@@ -3,11 +3,10 @@ import "./Popup.scss";
 import {findCompetitionById} from "../../helpers/sidebarHelper";
 
 export default function Competition(props) {
-
     const competition1 = findCompetitionById(props.info, props.competitions)  
   
-    const users = props.competitions[props.info]["portfolios"].map((portfolios) => {
-      return <ul>{portfolios.name}</ul>;
+    const users = props.competitions[props.info-1]["portfolios"].map((portfolios) => {
+      return <li key = {portfolios.id}>{portfolios.name}</li>;
     });
   
     let dateEnd = new Date(competition1.end_date);
@@ -45,15 +44,16 @@ export default function Competition(props) {
             <br />
            <h2 className = "title">{dateEnd}</h2>
           </div>
-
-          <div className="competition-info-box">
-            <h2>Lobby</h2>
+          <div className="competition-info-box competition-info-lobby">
+          <h2>Lobby</h2>
             <br />
-           <h2 className = "title">{users}</h2>
-          </div>
+        
+           <h2 className = "title"><ul>{users}</ul></h2>
+           </div>
+
 
           <div className="competition-info-box">
-            <h2>User </h2>
+            <h2>User</h2>
 
            {competition1.userComp === true && <p>🟢 In lobby</p>}
            {competition1.userComp === false && <p>🔴 Not participating</p>}

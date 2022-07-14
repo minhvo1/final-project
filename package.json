@@ -15,6 +15,7 @@
     "node-schedule": "^2.1.0",
     "protobufjs": "^6.11.3",
     "react": "^18.2.0",
+    "react-confirm-alert": "^3.0.6",
     "react-confirm-box": "^1.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",

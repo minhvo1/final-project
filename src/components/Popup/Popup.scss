@@ -33,7 +33,6 @@ h1{
   background-color: #1F1F1F;
   border-radius: 20px;
   color: $textcolor;
-  overflow-y: scroll;
 }
 
 .new-portfolio{
@@ -111,7 +110,8 @@ h1{
   display: flex;
   flex-direction:column;
   justify-content: flex-start;
-  height: 100%;
+  height: 85%;
+  overflow-y: scroll;
 }
 
 .competition-info-box button {
@@ -132,4 +132,54 @@ h1{
   color : white;
   margin-top: -0.5rem;
   margin-bottom: 1rem;
+}
+
+.ticker-info {
+  margin-top: 1.5rem;
+}
+
+.buy-sell {
+  width:100%;
+  display: flex; 
+  flex-direction: row;
+  justify-content:space-around;
+  margin-top : 4rem;
+  
+}
+.buy-sell b{
+  color: #A374D2;
+}
+
+.buy-sell input {
+  color: white;
+  width: 60%;
+  margin-top: 1.7rem;
+  margin-right: 1.5rem;
+  background-color: transparent;
+  text-align: center;
+}
+
+.buy-ticker { 
+  background-color: #313335;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  width : 20rem;
+  height: 10rem;
+}
+
+.sell-ticker { 
+  background-color: #313335;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  width : 20rem;
+  height: 10rem;
+}
+
+.ticker-info p {
+  color: #A374D2;
+  margin-top : 0.5rem;
 }

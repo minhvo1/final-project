@@ -47,7 +47,7 @@ export default function SearchResultItem(props) {
     (
       <li className="search-result-li" key={props.ticker.id}>
         <div className="search-result-symbol">
-          <div class="search-result-added"><i class="fa-solid fa-star"></i></div>
+          <div class="search-result-added"><i className="fa-solid fa-star"></i></div>
           {props.ticker.ticker}</div>
         <div className="search-result-name">{props.ticker.company_name}</div>
       </li>

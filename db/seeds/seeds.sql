@@ -50,25 +50,25 @@ INSERT INTO competition_users (competition_id, user_id) VALUES (3, 10);
 
 -- portfolios table seeds here (Example)
 
-INSERT INTO portfolios (name, date_created, user_id, competition_id) VALUES ('Stephanies savings', '2019-06-12T08:00:00.000Z', 2, NULL);
+INSERT INTO portfolios (name, date_created, funds, total_value, user_id, competition_id) VALUES ('Stephanies savings', '2019-06-12T08:00:00.000Z', 1000, 5000, 2, NULL);
 
-INSERT INTO portfolios (name, date_created, user_id, competition_id) VALUES ('Stephanies playing money', '2019-06-12T08:00:00.000Z', 2, 1);
+INSERT INTO portfolios (name, date_created, funds, total_value, user_id, competition_id) VALUES ('Stephanies playing money', '2019-06-12T08:00:00.000Z', 1000, 5000, 2, 1);
 
-INSERT INTO portfolios (name, date_created, user_id, competition_id) VALUES ('STAN TO THE MOON', '2019-06-12T08:00:00.000Z', 3, 1);
+INSERT INTO portfolios (name, date_created, funds, total_value, user_id, competition_id) VALUES ('STAN TO THE MOON', '2019-06-12T08:00:00.000Z', 1000, 5000,  3, 1);
 
-INSERT INTO portfolios (name, date_created, user_id, competition_id) VALUES ('GME IS THE ONLY PLAY - ELLIOT', '2019-06-12T08:00:00.000Z', 4, 1);
+INSERT INTO portfolios (name, date_created, funds, total_value, user_id, competition_id) VALUES ('GME IS THE ONLY PLAY - ELLIOT', '2019-06-12T08:00:00.000Z', 1000, 5000, 4, 1);
 
-INSERT INTO portfolios (name, date_created, user_id, competition_id) VALUES ('Lloyds cryptocurrency play money', '2019-06-12T08:00:00.000Z', 5, 2);
+INSERT INTO portfolios (name, date_created, funds, total_value, user_id, competition_id) VALUES ('Lloyds cryptocurrency play money', '2019-06-12T08:00:00.000Z', 1000, 5000, 5, 2);
 
-INSERT INTO portfolios (name, date_created, user_id, competition_id) VALUES ('Ernas btc bank', '2019-06-12T08:00:00.000Z', 6, 2);
+INSERT INTO portfolios (name, date_created, funds, total_value, user_id, competition_id) VALUES ('Ernas btc bank', '2019-06-12T08:00:00.000Z', 1000, 5000, 6, 2);
 
-INSERT INTO portfolios (name, date_created, user_id, competition_id) VALUES ('Edisons FAANG money', '2019-06-12T08:00:00.000Z', 7, 3);
+INSERT INTO portfolios (name, date_created, funds, total_value, user_id, competition_id) VALUES ('Edisons FAANG money', '2019-06-12T08:00:00.000Z', 1000, 5000, 7, 3);
 
-INSERT INTO portfolios (name, date_created, user_id, competition_id) VALUES ('Lionels savings/playing on FAANG ', '2019-06-12T08:00:00.000Z', 8, 3);
+INSERT INTO portfolios (name, date_created, funds, total_value, user_id, competition_id) VALUES ('Lionels savings/playing on FAANG ', '2019-06-12T08:00:00.000Z', 1000, 5000, 8, 3);
 
-INSERT INTO portfolios (name, date_created, user_id, competition_id) VALUES ('Donnie and Meta', '2019-06-12T08:00:00.000Z', 9, 3);
+INSERT INTO portfolios (name, date_created, funds, total_value, user_id, competition_id) VALUES ('Donnie and Meta', '2019-06-12T08:00:00.000Z', 1000, 5000, 9, 3);
 
-INSERT INTO portfolios (name, date_created, user_id, competition_id) VALUES ('Obie with Amazon', '2019-06-12T08:00:00.000Z', 10, 3);
+INSERT INTO portfolios (name, date_created, funds, total_value, user_id, competition_id) VALUES ('Obie with Amazon', '2019-06-12T08:00:00.000Z', 1000, 5000, 10, 3);
 
 
 

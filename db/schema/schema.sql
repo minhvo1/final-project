@@ -35,6 +35,8 @@ CREATE TABLE portfolios (
   id SERIAL PRIMARY KEY NOT NULL,
   name VARCHAR(255) NOT NULL,
   date_created TIMESTAMP NOT NULL DEFAULT NOW(),
+  funds INTEGER NOT NULL,
+  total_value INTEGER NOT NULL,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   competition_id INTEGER REFERENCES competitions(id) ON DELETE CASCADE
 );

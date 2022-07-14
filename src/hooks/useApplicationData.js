@@ -16,7 +16,7 @@ export default function useApplicationData() {
   });
 
   const [popup, setPopup] = useState({
-    popup: false,
+    popupStatus: false,
     page: null,
     info: null,
   });
@@ -31,22 +31,22 @@ export default function useApplicationData() {
   const [loading, setLoading] = useState(true);
 
   const setPortfolio = (portfolio, portfolio_id = null) => {
-    if (portfolio_id !== null)
-      setView({ menu: "Dashboard", portfolio, portfolio_id });
-    else setView({ menu: "Dashboard", portfolio });
+    if (portfolio_id !== null){
+      setView({ ...view, menu: "Dashboard", portfolio, portfolio_id });}
+    else setView({ ...view, menu: "Dashboard", portfolio });
+  };
+
+  const setNewPopup = (page, infos = null) => {
+    setPopup({ ...popup, popupStatus: true, page: page, info: infos });
   };
 
   const setMenu = (menu) => {
     setView({ ...view, menu });
     if (menu === "New Portfolio") {
       setNewPopup("New Portfolio");
-    } else {
-      setPopup(false);
+    } else { 
+      setPopup({...popup, popupStatus : false})
     }
-  };
-
-  const setNewPopup = (page, infos = null) => {
-    setPopup({ ...popup, popup: true, page: page, info: infos });
   };
 
   useEffect(() => {
@@ -90,6 +90,8 @@ export default function useApplicationData() {
               id: ans[0].data[x]["portfolio_id"],
               created_date: ans[0].data[x]["portfoliodatecreated"],
               portfolio_competition: ans[0].data[x]["portfoliocompetition"],
+              funds : ans[0].data[x]["portfoliofunds"],
+              total_value : ans[0].data[x]["portfoliototalvalue"],
               tickers: [
                 {
                   tickerId: ans[0].data[x]["portfoliodatastickerid"],
@@ -178,6 +180,8 @@ export default function useApplicationData() {
         portfolioName: portfolio_name,
         user_id: user_id,
         competition_id: competition_id,
+        funds : startValue, 
+        total_value : startValue,
       }),
       axios.get(`http://localhost:3001/portfolioLatest`),
     ]).then((ans) => {
@@ -195,26 +199,15 @@ export default function useApplicationData() {
       console.log(error);
     });
   }
-/*
-      .then(() => {
-        axios.get(`http://localhost:3001/portfolioLatest`);
-      })
-      .then((ans) => {
-        console.log(ans);
-        axios
-          .post(`http://localhost:3001/newPortfolioValue`, {
-            portfolio_id: ans[0]["id"],
-            value: startValue,
-          })
-          .then((ans) => {
-            console.log(ans);
-          });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-*/
+
+  const buyTicker = () => {
+
+  }
+
+  const sellTicker = () => {
+    
+  }
+
   return {
     view,
     setMenu,
@@ -224,5 +217,7 @@ export default function useApplicationData() {
     popup,
     setNewPopup,
     savePortfolio,
+    buyTicker,
+    sellTicker
   };
 }
