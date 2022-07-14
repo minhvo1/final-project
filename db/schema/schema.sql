@@ -66,7 +66,7 @@ CREATE TABLE portfolio_values (
   id SERIAL PRIMARY KEY NOT NULL,
   portfolio_id INTEGER REFERENCES portfolios(id) ON DELETE CASCADE,
   datetime TIMESTAMP NOT NULL DEFAULT NOW(),
-  value INTEGER NOT NULL 
+  value decimal NOT NULL 
 )
 
 
