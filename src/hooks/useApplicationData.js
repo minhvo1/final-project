@@ -151,7 +151,7 @@ export default function useApplicationData() {
           let index = findIndex(usersCompetitionArray[i], competitions);
           competitions[index]["userComp"] = true;
         }
-        setView({ ...view, portfolio: portfolio[0]["name"] });
+        setPortfolio(portfolio[0]["name"], portfolio[0]["id"]);
         return [user, usersCompetition, portfolio, competitions];
       })
       .then((ans) => {
@@ -166,6 +166,8 @@ export default function useApplicationData() {
       });
     // eslint-disable-next-line
   }, []);
+
+
 
   const savePortfolio = (portfolio_name, user_id, competition_id) => {
     axios
