@@ -8,7 +8,7 @@ export default function CompetitionPortfoliosItem(props) {
 
   const setToPortfolio = () => {
     props.setMenu("Dashboard");
-    props.setPortfolio(props.name);
+    props.setPortfolio(props.name, props.portfolioId);
   }
 
   return (

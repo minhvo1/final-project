@@ -144,10 +144,10 @@ app.post("/value", (req, res) => {
 
 app.get("/value/:id", (req, res) => {
   const { id } = req.params;
+  if (id === "null") return res.json([])
   let query = `SELECT * FROM portfolio_values 
-  WHERE id = $1`;
+  WHERE portfolio_id = $1`;
   db.query(query, [id]).then((data) => {
-    console.log(data.rows);
     res.json(data.rows);
   });
 

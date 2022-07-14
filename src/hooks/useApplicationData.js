@@ -1,19 +1,25 @@
 import { useState, useEffect } from "react";
 import axios, { Axios } from "axios";
-import { getCompetitions, checkArray, checkObject, findCompetitionById, findIndex } from "../helpers/sidebarHelper";
+import {
+  getCompetitions,
+  checkArray,
+  checkObject,
+  findCompetitionById,
+  findIndex,
+} from "../helpers/sidebarHelper";
 
 export default function useApplicationData() {
-
   const [view, setView] = useState({
     menu: "Dashboard",
     portfolio: null,
+    portfolio_id: null
   });
 
-  const[popup, setPopup] = useState ({
-    popup : false,
-    page : null
-  })
-
+  const [popup, setPopup] = useState({
+    popup: false,
+    page: null,
+    info: null,
+  });
 
   const [info, setInfo] = useState({
     user: {},
@@ -24,20 +30,24 @@ export default function useApplicationData() {
 
   const [loading, setLoading] = useState(true);
 
-  const setPortfolio = (portfolio) => {
-    setView({ menu: "Dashboard", portfolio });
+  const setPortfolio = (portfolio, portfolio_id=null) => {
+    if (portfolio_id !== null) setView({ menu: "Dashboard", portfolio, portfolio_id });
+    else setView({ menu: "Dashboard", portfolio });
   };
 
-  
-  const setNewPopup = (page) => setPopup({...popup, popup: true, page: page});
-
   const setMenu = (menu) => {
-    setView({ ...view, menu })
+    setView({ ...view, menu });
     if (menu === "New Portfolio") {
       setNewPopup("New Portfolio");
+    } else {
+      setPopup(false);
     }
-  }
+  };
 
+  const setNewPopup = (page, infos = null) => {
+    setMenu(null);
+    setPopup({ ...popup, popup: true, page: page, info: infos });
+  };
 
   useEffect(() => {
     const userId = 2;
@@ -46,7 +56,7 @@ export default function useApplicationData() {
 
     Promise.all([axios.get(profileURL), axios.get(competitionURL)])
       .then((ans) => {
-        setLoading(true)
+        setLoading(true);
         let usersCompetitionArray = [];
         let portfolio = [];
         let competitions = [];
@@ -64,7 +74,9 @@ export default function useApplicationData() {
               ans[0]["data"][x]["portfoliocompetition"]
             )
           ) {
-            usersCompetitionArray.push(ans[0]["data"][x]["portfoliocompetition"]);
+            usersCompetitionArray.push(
+              ans[0]["data"][x]["portfoliocompetition"]
+            );
           }
 
           let index = checkArray(
@@ -78,61 +90,68 @@ export default function useApplicationData() {
               id: ans[0].data[x]["portfolio_id"],
               created_date: ans[0].data[x]["portfoliodatecreated"],
               portfolio_competition: ans[0].data[x]["portfoliocompetition"],
-              tickers: [{
-                tickerId: ans[0].data[x]["portfoliodatastickerid"],
-                tickerQuantity: ans[0].data[x]["tickerquantity"],
-              }],
+              tickers: [
+                {
+                  tickerId: ans[0].data[x]["portfoliodatastickerid"],
+                  tickerQuantity: ans[0].data[x]["tickerquantity"],
+                },
+              ],
             });
           } else {
             portfolio[index].tickers.push({
               tickerId: ans[0].data[x]["portfoliodatastickerid"],
               tickerQuantity: ans[0].data[x]["tickerquantity"],
-              
-            })
+            });
           }
         }
 
-        for(let i = 0; i < ans[1].data.length; i++) {
-          let index = checkObject(ans[1].data[i]["competition_id"],competitions)
-            if(ans[1].data[i].competition_id) {
-
-              if (index === null) {
-                competitions.push ({ 
-                  id : ans[1].data[i]["competition_id"],
-                  name: ans[1].data[i]["competition_name"],
-                  capital : ans[1].data[i]["startamount"],
-                  start_date : ans[1].data[i]["starttime"],
-                  end_date :ans[1].data[i]["endtime"], 
-                  avaliability : ans[1].data[i]["avaliabilty"], 
-                  portfolios : [ {
-                    name : ans[1].data[i]["portfolio_name"]
-                  }],
-                  userComp : false
-                })
-              } else { 
-                competitions[index].portfolios.push({
-                  name : ans[1].data[i]["portfolio_name"]
-                })
-              }
+        for (let i = 0; i < ans[1].data.length; i++) {
+          let index = checkObject(
+            ans[1].data[i]["competition_id"],
+            competitions
+          );
+          if (ans[1].data[i].competition_id) {
+            if (index === null) {
+              competitions.push({
+                id: ans[1].data[i]["competition_id"],
+                name: ans[1].data[i]["competition_name"],
+                capital: ans[1].data[i]["startamount"],
+                start_date: ans[1].data[i]["starttime"],
+                end_date: ans[1].data[i]["endtime"],
+                avaliability: ans[1].data[i]["avaliabilty"],
+                portfolios: [
+                  {
+                    name: ans[1].data[i]["portfolio_name"],
+                  },
+                ],
+                userComp: false,
+              });
+            } else {
+              competitions[index].portfolios.push({
+                name: ans[1].data[i]["portfolio_name"],
+              });
             }
+          }
         }
 
         for (let j = 0; j < competitions.length; j++) {
           let theLength = competitions[j]["portfolios"].length;
-          competitions[j]["users"] = theLength; 
-          competitions[j]["prizePool"] = (competitions[j]["capital"] * theLength)/2
+          competitions[j]["users"] = theLength;
+          competitions[j]["prizePool"] =
+            (competitions[j]["capital"] * theLength) / 2;
         }
 
         let usersCompetition = [];
 
         for (let i = 0; i < usersCompetitionArray.length; i++) {
-          usersCompetition.push(findCompetitionById(usersCompetitionArray[i],competitions))
-          
+          usersCompetition.push(
+            findCompetitionById(usersCompetitionArray[i], competitions)
+          );
+
           let index = findIndex(usersCompetitionArray[i], competitions);
           competitions[index]["userComp"] = true;
-
         }
-        setView({ ...view, portfolio : portfolio[0]["name"] });
+        setView({ ...view, portfolio: portfolio[0]["name"] });
         return [user, usersCompetition, portfolio, competitions];
       })
       .then((ans) => {
@@ -149,22 +168,20 @@ export default function useApplicationData() {
   }, []);
 
   const savePortfolio = (portfolio_name, user_id, competition_id) => {
-    axios.post(`http://localhost:3001/newPortfolio`,{
-      portfolioName : portfolio_name,
-      user_id : user_id,
-      competition_id : competition_id
-    }).then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-  }
-
-  const getPortfolioValue = () => {
-    axios.get()
-  }
-
+    axios
+      .post(`http://localhost:3001/newPortfolio`, {
+        portfolioName: portfolio_name,
+        user_id: user_id,
+        competition_id: competition_id,
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+ 
 
   return {
     view,
@@ -174,7 +191,7 @@ export default function useApplicationData() {
     loading,
     popup,
     setNewPopup,
-    savePortfolio
+    savePortfolio,
   };
 }
 

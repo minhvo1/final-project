@@ -5,10 +5,9 @@ export default function PortfoliosItem(props) {
   const portfolioListClass = classNames("sideListItem", {
     "sideListItem--selected": props.selected,
   });
-
   const setToPortfolio = () => {
     props.setMenu("Dashboard");
-    props.setPortfolio(props.name);
+    props.setPortfolio(props.name, props.portfolioId);
   }
 
   return (

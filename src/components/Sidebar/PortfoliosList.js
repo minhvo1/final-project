@@ -8,6 +8,7 @@ export default function PortfoliosList(props) {
       return (
         <PortfoliosItem
           key={portfolio.id}
+          portfolioId={portfolio.id}
           name={portfolio.name}
           selected={portfolio.name === props.selected}
           setPortfolio={props.setPortfolio}
@@ -22,6 +23,7 @@ export default function PortfoliosList(props) {
       return (
         <CompetitionPortfoliosItem
           key={portfolio.id}
+          portfolioId={portfolio.id}
           name={portfolio.name}
           selected={portfolio.name === props.selected}
           setPortfolio={props.setPortfolio}

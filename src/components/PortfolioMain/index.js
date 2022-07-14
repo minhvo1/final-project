@@ -11,10 +11,10 @@ import AssetTable from "./AssetsTable";
 
 export default function PortfolioMain(props) {
   const [tickersData, setTickersData] = useState([]);
-
+  const [portfolioValue, setPortfolioValue] = useState([]);
   const tickers = getPortfolioTickers(props.selectedPortfolio, props.data);
   const promiseArray = getPromiseArrayTickers(tickers);
-
+  
   useEffect(() => {
     Promise.all(promiseArray)
       .then((result) => {
@@ -40,6 +40,7 @@ export default function PortfolioMain(props) {
   
         Promise.all([axios.get(url)])
           .then((response) => {
+
             let responseDataTicker = response[0].data.tickers
             for (const i in result) {
               for (const j in responseDataTicker) {
@@ -53,13 +54,20 @@ export default function PortfolioMain(props) {
         
             setTickersData(result)
           })
+          .then(() => {
+            Promise.all([axios.get(`http://localhost:3001/value/${props.selectedPortfolioId}`)])
+              .then((response) => {
+                setPortfolioValue(response[0].data)
+              })
+          })
       })
+
   }, [props.selectedPortfolio]);
 
   return (
     <div className="portfolio-main">
       <PortfolioInfo data={tickersData}/>
-      <PerformanceGraph />
+      <PerformanceGraph data={portfolioValue} />
       <AssetTable
         selectedPortfolio={props.selectedPortfolio}
         data={tickersData}

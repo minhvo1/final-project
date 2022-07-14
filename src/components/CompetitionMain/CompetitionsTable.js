@@ -5,16 +5,13 @@ import { seeUserInComp } from '../../helpers/sidebarHelper';
 export default function CompetitionsTable (props) {
 
 
-
   const competitionsList = props.competitions.map((competition) => {
 
-    if(competition.userComp === true) {
-      competition.avaliability = false;
-    }
-
+   
     return (
       <CompetitionsTableItem
       key={competition.id}
+      id={competition.id}
       name={competition.name}
       lobby = {competition.users}
       capital = {competition.capital}
@@ -22,6 +19,7 @@ export default function CompetitionsTable (props) {
       startDate = {competition.start_date}
       endDate = {competition.end_date}
       avaliability = {competition.avaliability}
+      setNewPopup = {props.setNewPopup}
       />
     );
   });

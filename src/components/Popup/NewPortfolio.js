@@ -6,6 +6,7 @@ export default function NewPortfolio(props) {
   const [portfolio_name, setPortfolio_name] = useState("");
   const [competition, setCompetition] = useState("");
 
+
   const competitions = props.competitions.map((competition) => {
     return <option value={competition.id}>{competition.name}</option>;
   });
@@ -21,6 +22,7 @@ export default function NewPortfolio(props) {
     setPortfolio_name("");
     props.savePortfolio(portfolio_name, props.userId, competition)
     props.setMenu("Dashboard")
+    
   }
 
   function cancel() {

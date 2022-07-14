@@ -6,10 +6,17 @@ import NewPortfolio from "./NewPortfolio.js";
 
 export default function Popup(props) {
 
+  const exit = () => {
+    props.setMenu("Dashboard") 
+  }
+
   return (
     <div className="popup">
       <div className="popup-inner">
-        <h1>{props.type}</h1>
+        <div className = "popup-title">
+      <h1>{props.type}</h1> 
+       <div className = "exit-button"><button onClick={exit}><img src="https://icons-for-free.com/download-icon-close+exit+out+thiago+pontes+x+icon-1320086033086568320_512.png" ></img></button></div>
+       </div>
         {props.type === "New Portfolio" && <NewPortfolio
         competitions = {props.competitions}
         setMenu = {props.setMenu}
@@ -17,7 +24,13 @@ export default function Popup(props) {
         userId = {props.userId}
         />}
         {props.type === "Ticker" &&  <Ticker/>}
-        {props.type === "Competitions" && <Competition/>}
+        {props.type === "Competitions" && <Competition
+         competitions = {props.competitions}
+         setMenu = {props.setMenu}
+         savePortfolio = {props.savePortfolio}
+         userId = {props.userId}
+         info = {props.info}
+        />}
       </div>
     </div>
   );
