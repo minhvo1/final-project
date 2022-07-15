@@ -208,6 +208,10 @@ export default function useApplicationData() {
     
   }
 
+  const deleteTicker = () => {
+    
+  }
+
   return {
     view,
     setMenu,
@@ -218,6 +222,7 @@ export default function useApplicationData() {
     setNewPopup,
     savePortfolio,
     buyTicker,
-    sellTicker
+    sellTicker,
+    deleteTicker
   };
 }

@@ -219,7 +219,58 @@ app.get("/value/:id", (req, res) => {
       })
       .catch((err) => res.json({ message: err }));
   });
+
+  app.put("/editPortfolios", (req, res) => {
+    db.query(
+      `UPDATE portfolios SET funds = $1 WHERE id = $2`,
+      [req.body.funds ,req.body.portfolioId]
+    )
+      .then((data) => {
+        res.json("success");
+      })
+      .catch((err) => res.json({ message: err }));
+  });
+
+  app.put("/editPortfolio_datas", (req, res) => {
+    if (req.body.existing) {
+      db.query(
+        `UPDATE portfolio_datas SET quantity = $1, WHERE portfolio_id = $2 AND ticker_id = $3`,
+        [req.body.quantity ,req.body.portfolioId, req.body.tickerId]
+      )
+        .then((data) => {
+          res.json("success");
+        })
+        .catch((err) => res.json({ message: err }));
+    } else {
+      db.query(
+        `INSERT INTO portfolio_datas (quantity, portfolio_id, ticker_id) VALUES ($1, $2, $3)`,
+        [req.body.quantity ,req.body.portfolioId, req.body.tickerId]
+      )
+        .then((data) => {
+          res.json("success");
+        })
+        .catch((err) => res.json({ message: err }));
+    }
+    
+  });
+
+
+  app.post("/newTransactions", (req, res) => {
+    db.query(
+      `INSERT INTO transactions (type, amount, ticker_id, user_id) VALUES ($1, $2, $3, $4)`,
+      [req.body.type ,req.body.amount, req.body.ticker_id, req.body.userId]
+    )
+      .then((data) => {
+        res.json("success");
+      })
+      .catch((err) => res.json({ message: err }));
+  });
+
+
+
 });
+
+
 
 /* app.get("/get_tickers", (req, res) => {
   const results = [];

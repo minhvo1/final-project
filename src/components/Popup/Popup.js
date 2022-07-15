@@ -27,6 +27,8 @@ export default function Popup(props) {
         buyTicker = {props.buyTicker}
         sellTicker = {props.sellTicker}
         portfolios = {props.portfolios}
+        deleteTicker = {props.deleteTicker}
+        user_id = {props.userId}
         />}
         {props.type === "Competitions" && <Competition
          competitions = {props.competitions}

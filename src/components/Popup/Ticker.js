@@ -1,18 +1,21 @@
 import React, { Fragment, useState } from "react";
-import { checkArray } from "../../helpers/sidebarHelper";
+import { checkArray, sharesExist } from "../../helpers/sidebarHelper";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
+import { info } from "autoprefixer";
 
 export default function Ticker(props) {
+
+    console.log(props);
   const [error, setError] = useState("");
-  const [shares, setShares] = useState({
-    share: null,
-    action: null,
-  });
+
+  const [buyShares, setBuyShares] = useState("");
+  const [sellShares, setSellShares] = useState("");
+  const [action, setAction] = useState("");
 
   const portfolio =
     props.portfolios[checkArray(props.info.portfolio, props.portfolios)];
-  console.log(portfolio);
+console.log(portfolio);
   const maxAmount = Math.floor(portfolio.funds / props.info.ticker.price);
 
   let disabled = true;
@@ -22,22 +25,65 @@ export default function Ticker(props) {
     disabled = false;
   }
 
+  let disabled_buy = true;
+  if (maxAmount < 1) {
+    disabled_buy = true;
+  } else {
+    disabled_buy = false;
+  }
+
   function validate() {
     setError("");
-    let action;
     let Msg = "";
-    if (shares.action === "buy") {
-      Msg = `Confirmation to buy ${shares.share} shares of ${props.info.ticker.ticker}?`;
-      action = props.buyTicker;
-    } else {
-      Msg = `Confirmation to sell ${shares.share} shares of ${props.info.ticker.ticker}?`;
-      action = props.sellTicker;
-    }
+    let actionToDo;
+    let dataToRender = {};
 
-    if (shares.share === null) {
-      setError("Pick Shares to buy or sell");
-      return;
+    if (action === "buy") {
+      Msg = `Confirmation to buy ${buyShares} shares of ${props.info.ticker.ticker}?`;
+      actionToDo = props.buyTicker;
+      if (buyShares === null) {
+        setError("Pick Shares to buy");
+        return;
+      }
+
+      dataToRender = {
+        portfolioId : portfolio.id,
+        funds : portfolio.funds - (buyShares * props.info.ticker.price),
+        quantity : { 
+            amount : buyShares + info.ticker.quantity,
+            existing : sharesExist(info.ticker.id, portfolio)
+        },
+        transaction : { 
+            type: true, 
+            amount : buyShares,
+            ticker_id : info.ticker.id,
+            userId : info.userId
+        }
+
+      }
+    } else {
+      Msg = `Confirmation to sell ${sellShares} shares of ${props.info.ticker.ticker}?`;
+      actionToDo = props.sellTicker;
+      if (sellShares === null) {
+        setError("Pick Shares to sell");
+        return;
+      }
+      dataToRender = {
+        portfolioId : portfolio.id,
+        funds : portfolio.funds + (buyShares * props.info.ticker.price),
+        quantity : { 
+            amount : props.info.ticker.quantity-sellShares,
+            existing : true
+        },
+        transaction : { 
+            type: false, 
+            amount : sellShares,
+            ticker_id : info.ticker.id,
+            userId : info.userId
+        }
+
     }
+}
 
     confirmAlert({
       title: "Confirm to submit",
@@ -45,7 +91,28 @@ export default function Ticker(props) {
       buttons: [
         {
           label: "Yes",
-          onClick: () => action(),
+          onClick: () => actionToDo(dataToRender),
+        },
+        {
+          label: "No",
+          onClick: () => {
+            return;
+          },
+        },
+      ],
+    });
+  }
+
+  function validateDelete() {
+    let Msg = `Are you sure you want to delete this ticker from your portfolio?`;
+
+    confirmAlert({
+      title: "Confirm to Delete from Portfolio",
+      message: Msg,
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => props.deleteTicker(portfolio.id,props.info.ticker.id),
         },
         {
           label: "No",
@@ -98,11 +165,20 @@ export default function Ticker(props) {
               name="share-buy"
               min="1"
               max={maxAmount}
+              disabled={disabled_buy}
               onChange={(e) => {
-                setShares({ ...shares, share: e.target.value, action: "buy" });
+                setBuyShares(e.target.value);
+                setAction("buy");
               }}
             ></input>
-            <button className="join-button" onClick={validate}>
+            <button
+              className="join-button"
+              onClick={() => {
+                setAction("buy");
+                validate();
+              }}
+              disabled={disabled_buy}
+            >
               Buy
             </button>
           </form>
@@ -126,12 +202,16 @@ export default function Ticker(props) {
               max={props.info.ticker.quantity}
               disabled={disabled}
               onChange={(e) => {
-                setShares({ ...shares, share: e.target.value, action: "sell" });
+                setAction("sell");
+                setSellShares(e.target.value);
               }}
             ></input>
             <button
               className="join-button"
-              onClick={validate}
+              onClick={() => {
+                setAction("sell");
+                validate();
+              }}
               disabled={disabled}
             >
               Sell
@@ -139,7 +219,12 @@ export default function Ticker(props) {
           </form>
         </div>
       </div>
-      <section className="error-message">{error}</section>
+      <div className="error-delete">
+        <section className="error-message">{error}</section>
+        {props.info.ticker.quantity === 0 && <button className="delete-button" onClick={validateDelete}>
+          Delete
+        </button>}
+      </div>
     </div>
   );
 }

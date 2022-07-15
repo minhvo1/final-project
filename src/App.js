@@ -26,7 +26,8 @@ function App() {
     setNewPopup,
     savePortfolio,
     buyTicker,
-    sellTicker
+    sellTicker,
+    deleteTicker
   } = useApplicationData();
 
   // useEffect(() => {
@@ -77,6 +78,7 @@ function App() {
                 userId={info.user.id}
                 buyTicker = {buyTicker}
                 sellTicker = {sellTicker}
+                deleteTicker = {deleteTicker}
               />
             )}
           </div>
