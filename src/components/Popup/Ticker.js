@@ -5,7 +5,6 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 import { info } from "autoprefixer";
 
 export default function Ticker(props) {
-
     console.log(props);
   const [error, setError] = useState("");
 
@@ -15,7 +14,6 @@ export default function Ticker(props) {
 
   const portfolio =
     props.portfolios[checkArray(props.info.portfolio, props.portfolios)];
-console.log(portfolio);
   const maxAmount = Math.floor(portfolio.funds / props.info.ticker.price);
 
   let disabled = true;
@@ -50,14 +48,14 @@ console.log(portfolio);
         portfolioId : portfolio.id,
         funds : portfolio.funds - (buyShares * props.info.ticker.price),
         quantity : { 
-            amount : buyShares + info.ticker.quantity,
-            existing : sharesExist(info.ticker.id, portfolio)
+            amount : buyShares + props.info.ticker.quantity,
+            existing : sharesExist(props.info.ticker.id, portfolio)
         },
         transaction : { 
             type: true, 
             amount : buyShares,
-            ticker_id : info.ticker.id,
-            userId : info.userId
+            ticker_id : props.info.ticker.id,
+            userId : props.userId
         }
 
       }
@@ -78,20 +76,21 @@ console.log(portfolio);
         transaction : { 
             type: false, 
             amount : sellShares,
-            ticker_id : info.ticker.id,
-            userId : info.userId
+            ticker_id : props.info.ticker.id,
+            userId : props.userId
         }
 
     }
 }
-
     confirmAlert({
       title: "Confirm to submit",
       message: Msg,
       buttons: [
         {
           label: "Yes",
-          onClick: () => actionToDo(dataToRender),
+          onClick: () => {actionToDo(dataToRender)
+            props.setMenu("Dashboard");
+        }
         },
         {
           label: "No",
@@ -112,7 +111,9 @@ console.log(portfolio);
       buttons: [
         {
           label: "Yes",
-          onClick: () => props.deleteTicker(portfolio.id,props.info.ticker.id),
+          onClick: () => {props.deleteTicker(portfolio.id,props.info.ticker.id);
+            props.setMenu("Dashboard");
+        },
         },
         {
           label: "No",
@@ -167,7 +168,7 @@ console.log(portfolio);
               max={maxAmount}
               disabled={disabled_buy}
               onChange={(e) => {
-                setBuyShares(e.target.value);
+                setBuyShares(Number(e.target.value));
                 setAction("buy");
               }}
             ></input>
@@ -203,7 +204,7 @@ console.log(portfolio);
               disabled={disabled}
               onChange={(e) => {
                 setAction("sell");
-                setSellShares(e.target.value);
+                setSellShares(Number(e.target.value));
               }}
             ></input>
             <button

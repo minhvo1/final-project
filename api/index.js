@@ -31,7 +31,7 @@ scheduledFunctions.initScheduledJobs(db);
 app.get("/", (req, res) => {
   db.query(`SELECT * FROM tickers`)
     .then((data) => {
-      console.log(data);
+      //console.log(data);
       res.json(data.rows);
     })
     .catch((err) => res.json({ message: err }));
@@ -65,7 +65,7 @@ app.get("/userdata/:id", (req, res) => {
     [req.params.id]
   )
     .then((data) => {
-      console.log(data);
+      //console.log(data);
       res.json(data.rows);
     })
     .catch((err) => res.json({ message: err }));
@@ -92,7 +92,7 @@ app.get("/portfolio_datas", (req, res) => {
 app.get("/users", (req, res) => {
   db.query(`SELECT * FROM users`)
     .then((data) => {
-      console.log(data);
+      //console.log(data);
       res.json(data.rows);
     })
     .catch((err) => res.json({ message: err }));
@@ -127,7 +127,7 @@ app.get("/ticker/:id", (req, res) => {
   let query = `SELECT * FROM tickers 
     WHERE id = $1`;
   db.query(query, [id]).then((data) => {
-    console.log(data.rows);
+    //console.log(data.rows);
     res.json(data.rows);
   });
 });
@@ -221,27 +221,36 @@ app.get("/value/:id", (req, res) => {
   });
 
   app.put("/editPortfolios", (req, res) => {
+    let funds = Math.round(req.body.funds);
+    let id = Number(req.body.portfolioId);
+
     db.query(
-      `UPDATE portfolios SET funds = $1 WHERE id = $2`,
-      [req.body.funds ,req.body.portfolioId]
+      `UPDATE portfolios SET funds = $1 WHERE id = $2;`,
+      [funds, id]
     )
       .then((data) => {
         res.json("success");
       })
-      .catch((err) => res.json({ message: err }));
+      .catch((err) => {
+        res.json({ message: err })
+    
+    });
   });
 
   app.put("/editPortfolio_datas", (req, res) => {
     if (req.body.existing) {
+      console.log(req.body.quantity, req.body.portfolioId, req.body.tickerId)
       db.query(
-        `UPDATE portfolio_datas SET quantity = $1, WHERE portfolio_id = $2 AND ticker_id = $3`,
+        `UPDATE portfolio_datas SET quantity = $1 WHERE portfolio_id = $2 AND ticker_id = $3`,
         [req.body.quantity ,req.body.portfolioId, req.body.tickerId]
       )
         .then((data) => {
           res.json("success");
         })
-        .catch((err) => res.json({ message: err }));
-    } else {
+        .catch((err) => {
+          res.json({ message: err })
+          console.log(err);
+      })}else {
       db.query(
         `INSERT INTO portfolio_datas (quantity, portfolio_id, ticker_id) VALUES ($1, $2, $3)`,
         [req.body.quantity ,req.body.portfolioId, req.body.tickerId]
@@ -249,8 +258,11 @@ app.get("/value/:id", (req, res) => {
         .then((data) => {
           res.json("success");
         })
-        .catch((err) => res.json({ message: err }));
-    }
+        .catch((err) => {
+          res.json({ message: err })
+          console.log(err);
+
+      })}
     
   });
 

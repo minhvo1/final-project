@@ -66,3 +66,12 @@ export function findCapital (id, comps) {
     }
   } 
 }
+
+export function sharesExist (id, portfolio) {
+  for (let ticker of portfolio.tickers) {
+    if (ticker.tickerId === id) {
+      return true;
+    }
+  }
+  return false; 
+}

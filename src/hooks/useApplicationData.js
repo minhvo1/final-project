@@ -206,6 +206,7 @@ export default function useApplicationData() {
   };
 
   const buyTicker = (data) => {
+    console.log(data);
     Promise.all([
       axios.put(`http://localhost:3001/editPortfolios`, {
       portfolioId : data["portfolioId"], 
@@ -256,8 +257,7 @@ export default function useApplicationData() {
 };
 
   const deleteTicker = (portfolio_id, ticker_id) => {
-
-    Promise.all([axios.post(`http://localhost:3001/newTransactions`,{
+    Promise.all([axios.post(`http://localhost:3001/deleteTicker`,{
       portfolioId : portfolio_id, 
       tickerId : ticker_id
     })]).then((ans) => {
@@ -265,7 +265,7 @@ export default function useApplicationData() {
     }).catch((err) => {
       console.log(err);
     })
-  
+
   };
 
   return {
