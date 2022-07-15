@@ -10,7 +10,6 @@ export default function CompetitionsTableItem (props) {
  
   const moreInfo = () => {
     props.setNewPopup("Competitions" ,props.id)
-
   }
 
     return (
@@ -21,7 +20,7 @@ export default function CompetitionsTableItem (props) {
       <td>{props.prizePool}</td>
       <td>{dateStart}</td>
       <td>{dateEnd}</td>
-      <td><button className = "join-button" onClick={moreInfo}>Info</button></td>
+      <td><button className = "join-button" onClick = {moreInfo}>Info</button></td>
 
     </tr>
     

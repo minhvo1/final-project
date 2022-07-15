@@ -6,8 +6,6 @@ export default function CompetitionsTable (props) {
 
 
   const competitionsList = props.competitions.map((competition) => {
-
-   
     return (
       <CompetitionsTableItem
       key={competition.id}
