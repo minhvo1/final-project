@@ -3,8 +3,9 @@ import { numberWithCommas } from "../../helpers/portfolioMainHelper"
 
 export default function PortfolioInfo(props) {
   let value = 0;
+  console.log(props.data)
   for (let ticker of props.data) {
-    value += ticker.price;
+    value += (ticker.price * ticker.quantity);
   }
   const portfolioValue = `$${numberWithCommas(Math.round((value + Number.EPSILON) * 100) / 100)}`
   return (

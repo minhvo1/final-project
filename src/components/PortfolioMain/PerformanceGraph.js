@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { numberWithCommas } from '../../helpers/portfolioMainHelper'
 import {
   CartesianGrid,
   Legend,
+  Line,
   ResponsiveContainer,
   Scatter,
   ScatterChart,
+  LineChart,
   Tooltip,
   XAxis,
   YAxis,
@@ -15,12 +18,18 @@ import moment from "moment";
 
 export default function PerformanceGraph(props) {
   const timeframes = ["1D", "1W", "1M", "3M", "1Y", "All"];
+  // const test = new Date(props.data[0].datetime).getTime()
+  // console.log(test)
+  for (const item of props.data) {
+    const timestamp = new Date(item.datetime).getTime();
+    item.new_date = timestamp;
+  }
 
   // const options = {
   //   method: "GET",
   //   url: "https://api.polygon.io/v2/aggs/ticker/AAPL/range/1/day/2020-06-01/2020-06-17?apiKey=KR_4M5C_Bx0OkMvz3ncgz2brEnmUmDPpo&region=US&interval=1d&lang=en&events=div%2Csplit"
   // };
-  console.log(props.data)
+  console.log(props.data);
   return (
     <div className="performance-graph">
       <div>
@@ -32,24 +41,35 @@ export default function PerformanceGraph(props) {
         </div>
       </div>
       <ResponsiveContainer width="100%" height="100%">
-        <ScatterChart>
+        <LineChart>
           <XAxis
-            dataKey="datetime"
-            domain={["auto", "auto"]}
-            name="time"
-            tickFormatter={timeStr => moment(timeStr).format('DD MMM YY')}
-        
+            dataKey="new_date"
+            domain={["dataMin", "dataMax"]}
+            name="Time"
+            tickFormatter={(timeStr) => moment(timeStr).format("DD-MMM-YY")}
+            type="number"
+            dy={10}
           />
-          <YAxis dataKey="value" name="Value" />
+          <YAxis 
+            dataKey="value" 
+            name="Value" 
+            domain={["auto", "auto"]} 
+            dx={-10}
+            type="number"
+            tickFormatter={value => {
+              return (`$${numberWithCommas(value)}`)
+            }}
+          />
 
-          <Scatter
+          <Line
             data={props.data}
-            line={{ stroke: "#eee" }}
-            lineJointType="monotoneX"
-            lineType="joint"
+            dataKey="value"
+            stroke="#A374D2"
+            dot={false}
+            type="monotone"
             name="Values"
           />
-        </ScatterChart>
+        </LineChart>
       </ResponsiveContainer>
     </div>
   );
