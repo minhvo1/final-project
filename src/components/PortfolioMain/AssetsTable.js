@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import {
   getPortfolioTickers,
   getPromiseArrayTickers,
+  numberWithCommas
 } from "../../helpers/portfolioMainHelper";
+
 
 export default function AssetTable(props) {
 
@@ -27,9 +29,9 @@ export default function AssetTable(props) {
               <tr>
                 <td>{ticker.company_name}</td>
                 <td>{ticker.ticker}</td>
-                <td>{ticker.price}</td>
+                <td>{`$${numberWithCommas(Math.round((ticker.price + Number.EPSILON) * 100) / 100)}`}</td>
                 <td>{ticker.quantity}</td>
-                <td>{ticker.amount}</td>
+                <td>{`$${numberWithCommas(Math.round((ticker.amount + Number.EPSILON) * 100) / 100)}`}</td>
                 <td></td>
               </tr>
             )
