@@ -32,7 +32,6 @@ export default function NewPortfolio(props) {
       startValue = findCapital(competition, props.competitions);
       competition_ID = competition; 
     }
-    console.log(startValue);
     props.savePortfolio(portfolio_name, props.userId, competition_ID, startValue);
     props.setMenu("Dashboard");
     setPortfolio_name("");

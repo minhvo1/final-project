@@ -44,7 +44,7 @@ export default function Competition(props) {
             <br />
            <h2 className = "title">{dateEnd}</h2>
           </div>
-          <div className="competition-info-box competition-info-lobby">
+          <div className="competition-info-box ">
           <h2>Lobby</h2>
             <br />
         

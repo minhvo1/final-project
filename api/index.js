@@ -266,7 +266,16 @@ app.get("/value/:id", (req, res) => {
       .catch((err) => res.json({ message: err }));
   });
 
-
+app.post("/deleteTicker", (req, res) => {
+  db.query(
+    `DELETE from portfolio_datas WHERE portfolio_id = $1 AND ticker_id = $2`,
+    [req.body.portfolioId, req.body.tickerId]
+  )
+    .then((data) => {
+      res.json("success");
+    })
+    .catch((err) => res.json({ message: err }));
+  })
 
 });
 

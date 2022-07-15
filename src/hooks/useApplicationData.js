@@ -31,9 +31,9 @@ export default function useApplicationData() {
   const [loading, setLoading] = useState(true);
 
   const setPortfolio = (portfolio, portfolio_id = null) => {
-    if (portfolio_id !== null){
-      setView({ ...view, menu: "Dashboard", portfolio, portfolio_id });}
-    else setView({ ...view, menu: "Dashboard", portfolio });
+    if (portfolio_id !== null) {
+      setView({ ...view, menu: "Dashboard", portfolio, portfolio_id });
+    } else setView({ ...view, menu: "Dashboard", portfolio });
   };
 
   const setNewPopup = (page, infos = null) => {
@@ -44,8 +44,8 @@ export default function useApplicationData() {
     setView({ ...view, menu });
     if (menu === "New Portfolio") {
       setNewPopup("New Portfolio");
-    } else { 
-      setPopup({...popup, popupStatus : false})
+    } else {
+      setPopup({ ...popup, popupStatus: false });
     }
   };
 
@@ -90,8 +90,8 @@ export default function useApplicationData() {
               id: ans[0].data[x]["portfolio_id"],
               created_date: ans[0].data[x]["portfoliodatecreated"],
               portfolio_competition: ans[0].data[x]["portfoliocompetition"],
-              funds : ans[0].data[x]["portfoliofunds"],
-              total_value : ans[0].data[x]["portfoliototalvalue"],
+              funds: ans[0].data[x]["portfoliofunds"],
+              total_value: ans[0].data[x]["portfoliototalvalue"],
               tickers: [
                 {
                   tickerId: ans[0].data[x]["portfoliodatastickerid"],
@@ -180,37 +180,93 @@ export default function useApplicationData() {
         portfolioName: portfolio_name,
         user_id: user_id,
         competition_id: competition_id,
-        funds : startValue, 
-        total_value : startValue,
+        funds: startValue,
+        total_value: startValue,
       }),
       axios.get(`http://localhost:3001/portfolioLatest`),
+    ])
+      .then((ans) => {
+        let newportfolio_id = ans[1]["data"][0]["id"] + 1;
+        Promise.all([
+          axios.post(`http://localhost:3001/newPortfolioValue`, {
+            portfolio_id: newportfolio_id,
+            value: startValue,
+          }),
+        ])
+          .then((ans) => {
+            console.log(ans);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const buyTicker = (data) => {
+    Promise.all([
+      axios.put(`http://localhost:3001/editPortfolios`, {
+      portfolioId : data["portfolioId"], 
+      funds : data["funds"]
+      }),
+      axios.put(`http://localhost:3001/editPortfolio_datas`,{ 
+        quantity : data["quantity"]["amount"],
+        existing: data["quantity"]["existing"],
+        portfolioId : data["portfolioId"],
+        tickerId : data["transaction"]["ticker_id"]
+      }),
+      axios.post(`http://localhost:3001/newTransactions`, {
+        type : data["transaction"]["type"],
+        amount : data["transaction"]["amount"],
+        ticker_id : data["transaction"]["ticker_id"],
+        userId : data["transaction"]["userId"],
+      }),
     ]).then((ans) => {
-      let newportfolio_id = ans[1]["data"][0]["id"] + 1 ;
-      Promise.all([axios
-        .post(`http://localhost:3001/newPortfolioValue`, {
-          portfolio_id: newportfolio_id,
-          value: startValue,
-        })]).then((ans) => {
-          console.log(ans);
-        }).catch(function (error) {
-          console.log(error);
-        });
-    }).catch(function (error) {
-      console.log(error);
-    });
-  }
+      console.log(ans);
+    }).catch((err) => {
+      console.log(err);
+    })
+  };
 
-  const buyTicker = () => {
+  const sellTicker = (data) => { Promise.all([
+    axios.put(`http://localhost:3001/editPortfolios`, {
+    portfolioId : data["portfolioId"], 
+    funds : data["funds"]
+    }),
+    axios.put(`http://localhost:3001/editPortfolio_datas`,{ 
+      quantity : data["quantity"]["amount"],
+      existing: data["quantity"]["existing"],
+      portfolioId : data["portfolioId"],
+      tickerId : data["transaction"]["ticker_id"]
+    }),
+    axios.post(`http://localhost:3001/newTransactions`, {
+      type : data["transaction"]["type"],
+      amount : data["transaction"]["amount"],
+      ticker_id : data["transaction"]["ticker_id"],
+      userId : data["transaction"]["userId"],
 
-  }
+    }),
+  ]).then((ans) => {
+    console.log(ans);
+  }).catch((err) => {
+    console.log(err);
+  })
+};
 
-  const sellTicker = () => {
-    
-  }
+  const deleteTicker = (portfolio_id, ticker_id) => {
 
-  const deleteTicker = () => {
-    
-  }
+    Promise.all([axios.post(`http://localhost:3001/newTransactions`,{
+      portfolioId : portfolio_id, 
+      tickerId : ticker_id
+    })]).then((ans) => {
+      console.log(ans);
+    }).catch((err) => {
+      console.log(err);
+    })
+  
+  };
 
   return {
     view,
@@ -223,6 +279,6 @@ export default function useApplicationData() {
     savePortfolio,
     buyTicker,
     sellTicker,
-    deleteTicker
+    deleteTicker,
   };
 }
