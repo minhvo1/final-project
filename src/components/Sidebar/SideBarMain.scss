@@ -37,6 +37,7 @@ $radius: 1rem;
 
 }
 .portfolios-lists {
+  margin-top: 1.5rem;
   width: 100%;
 }
 
@@ -44,6 +45,8 @@ $radius: 1rem;
   font-size: smaller;
   color: #878080;
   padding-left: 1rem;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
 }
 
 .sideListItem {
@@ -51,12 +54,11 @@ $radius: 1rem;
   padding-top: .5rem;
   padding-bottom: 0.5rem;
   padding-left: 1rem;
-  margin-right: 1rem;
-  margin-left: 1rem;
+  margin: 0.5rem 1rem 0.5rem 1rem;
   flex-direction: column;
   cursor: pointer;
-  align-items: center;
-  width: 11rem;
+  width: 13rem;
+
 }
 
 .sideListItem:hover {
@@ -68,7 +70,8 @@ $radius: 1rem;
 .sideListItem--selected {
   background-color: rgba($color: #9967CA, $alpha: .29) !important;
   border-radius: 10px;
-  color: #A374D2 ;
+  color: #A374D2 !important;
+  
 }
 
 .sidebar-button {
@@ -78,7 +81,8 @@ $radius: 1rem;
   border: none;
   overflow: hidden;
   outline: none;
-  color: white;
+  
+  text-align: left;
 }
 
 .inputForm { 

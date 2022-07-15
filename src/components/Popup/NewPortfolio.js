@@ -49,13 +49,13 @@ export default function NewPortfolio(props) {
         }}
       >
         <div className="input-info">
-          <h2>Portfolio Name</h2>
+          <h2>1. Enter a portfolio name</h2>
           <br />
           <input
             value={portfolio_name}
             className="input"
             type="text"
-            placeholder="Portfolio Name"
+            placeholder=""
             onChange={(e) => {
               setPortfolio_name(e.target.value);
             }}
@@ -63,7 +63,7 @@ export default function NewPortfolio(props) {
         </div>
         
         <div className="input-info">
-          <h2>Which Competition? (Select Portfolio for no competition)</h2>
+          <h2>2. Select a competition</h2>
           <br />
           <select
             id="competitionChoose"
@@ -75,7 +75,7 @@ export default function NewPortfolio(props) {
             <option value="default" disabled hidden>
               Choose your type
             </option>
-            <option value={null}>Portfolio</option>
+            <option value={null}>Standard Portfolio</option>
             {competitions}
           </select>
         </div>
@@ -95,14 +95,16 @@ export default function NewPortfolio(props) {
           </div>
         )}
         <section className="error-message">{error}</section>
+        <div className="buttons">
 
-        <button confirm onClick={validate}>
-          Save
-        </button>
+          <button className="save-button" confirm onClick={validate}>
+            Save
+          </button>
 
-        <button danger onClick={cancel}>
-          Cancel
-        </button>
+          <button className="cancel-button" danger onClick={cancel}>
+            Cancel
+          </button>
+        </div>
 
       </form>
     </div>

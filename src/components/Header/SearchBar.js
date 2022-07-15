@@ -81,7 +81,7 @@ export default function SearchBar(props) {
   return (
     <div className="search">
       <form className={searchFormClass} onSubmit={event => event.preventDefault()}>
-        <input type="text" placeholder="Search" /* value={query}  */ className={searcClass} onChange={search} />
+        <input type="text" placeholder="Search a ticker (e.g. AAPL)" /* value={query}  */ className={searcClass} onChange={search} />
       </form>
       <ul className={searchResult}>
         {lists}

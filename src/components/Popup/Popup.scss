@@ -20,10 +20,14 @@ $radius: 1rem;
 }
 
 h1{
-  font-size: xx-large;
+  font-size: 1.2rem;
+  color: #878080;
 }
 
 .popup-inner {
+  display: flex;
+  flex-direction: column;
+  
   position: relative;
   padding: 32px;
   width: 70rem;
@@ -35,21 +39,29 @@ h1{
   color: $textcolor;
 }
 
-.new-portfolio{
+.new-portfolio {
   display: flex;
-  padding : auto;
   justify-content: center;
   align-items : center;
-  margin-top: 1rem;
   color : white;
+  width: 100%;
 }
+
+.new-portfolio form {
+  padding: 0 2rem 0 2rem;
+  width: 100%
+}
+
+
 
 .new-portfolio input {
   color : #A374D2;
+ 
 }
 
 .new-portfolio input::placeholder{
-  color : #A374D2;
+  color : #564d5c;
+  font-size: smaller;
 }
 
 .new-portfolio select {
@@ -59,6 +71,11 @@ h1{
 .input-info {
   margin-top: 5rem; 
   font-size: x-large;
+} 
+
+.input-info h2 {
+  font-size: smaller;
+
 }
 
 .input-info select {
@@ -67,7 +84,11 @@ h1{
 
 .input-info input {
   background-color: transparent;
-
+  border-style: solid;
+  border-width: 0 0 0.15rem 0;
+  border-color: #9967CA;
+  width: 100%
+  
 }
 
 .error-message{
@@ -87,13 +108,22 @@ h1{
   height: 1.5rem;
 }
 
+.buttons {
+  padding-top: 8rem;
+  padding-left: 12rem;
+}
+
 .new-portfolio button {
   margin-top: 4rem;
-  width: 5rem;
-  height: 2rem;
+  font-size: 1.2rem;
+  width: 8rem;
+  height: 4rem;
+  margin: 0 5rem 0 5rem;
   color: $textcolor;
   font-family: 'Poppins';
   background-repeat: no-repeat;
+  background-color: rgba(153, 103, 202, 0.6);
+  border-radius: 10px;
   border: none;
   overflow: hidden;
   outline: none;
@@ -120,6 +150,7 @@ h1{
 
 .competition-info-box h2 {
   color : #A374D2;
+
 
 }
 

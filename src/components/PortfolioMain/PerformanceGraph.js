@@ -29,7 +29,7 @@ export default function PerformanceGraph(props) {
   //   method: "GET",
   //   url: "https://api.polygon.io/v2/aggs/ticker/AAPL/range/1/day/2020-06-01/2020-06-17?apiKey=KR_4M5C_Bx0OkMvz3ncgz2brEnmUmDPpo&region=US&interval=1d&lang=en&events=div%2Csplit"
   // };
-  console.log(props.data);
+
   return (
     <div className="performance-graph">
       <div>

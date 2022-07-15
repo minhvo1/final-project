@@ -130,6 +130,10 @@ $radius: 1rem;
   font-size: 15px;
 }
 
+.recharts-surface {
+  margin: 0 0 0 1.2rem;
+}
+
 .timeframe-buttons {
   font-family: 'Poppins';
 }
@@ -151,6 +155,7 @@ $radius: 1rem;
   border-radius: $radius;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 }
 
 .asset-table div span{
@@ -166,7 +171,34 @@ $radius: 1rem;
 
 .main-asset-table {
   overflow-y: scroll;
-  height: 20rem
+  height: 20rem;
+  width: 100%;
+}
+
+
+.th-start {
+  border-radius: 10px 0 0 10px ;
+}
+
+.th-end {
+  border-radius: 0 10px 10px 0 ;
+}
+
+thead {
+  text-align: center;
+  height: 3rem;
+  background-color: #313335;
+  border-radius: 10px 0 0 10px ;
+}
+
+td {
+  text-align: center;
+  height: 3rem;
+}
+
+.ticker-name{
+  text-align: left;
+  padding-left: 1rem;
 }
 
 ::-webkit-scrollbar {
@@ -184,11 +216,5 @@ $radius: 1rem;
   background-color: #f9f9fb;
 }
 
-.asset-table div table th {
-  background-color: #313335;
 
-}
 
-.asset-table div table tr td{
-  text-align: left;
-}
