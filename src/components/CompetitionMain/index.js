@@ -4,6 +4,7 @@ import CompetitionsTable from "./CompetitionsTable";
 import UserCompetitionsTable from "./UserCompetitions";
 
 export default function PortfolioMain(props) {
+  console.log(props);
   return (
     <div className="competition-main">
       <CompetitionsTable 
@@ -11,7 +12,9 @@ export default function PortfolioMain(props) {
       setNewPopup = {props.setNewPopup}
        />
       <UserCompetitionsTable user_competitions={props.user_competitions} 
-      competitions = {props.competitions}/>
+      competitions = {props.competitions}
+      data = {props.data}
+      />
     </div>
   );
 }

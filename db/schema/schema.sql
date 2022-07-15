@@ -35,8 +35,8 @@ CREATE TABLE portfolios (
   id SERIAL PRIMARY KEY NOT NULL,
   name VARCHAR(255) NOT NULL,
   date_created TIMESTAMP NOT NULL DEFAULT NOW(),
-  funds INTEGER NOT NULL,
-  total_value INTEGER NOT NULL,
+  funds DECIMAL NOT NULL,
+  total_value DECIMAL NOT NULL,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   competition_id INTEGER REFERENCES competitions(id) ON DELETE CASCADE
 );
@@ -52,7 +52,8 @@ CREATE TABLE portfolio_datas (
   id SERIAL PRIMARY KEY NOT NULL,
   quantity INTEGER NOT NULL,
   portfolio_id INTEGER REFERENCES portfolios(id) ON DELETE CASCADE,
-  ticker_id INTEGER REFERENCES tickers(id) ON DELETE CASCADE
+  ticker_id INTEGER REFERENCES tickers(id) ON DELETE CASCADE,
+  avgPrice decimal NOT NULL 
 );
 
 CREATE TABLE transactions (
@@ -61,7 +62,8 @@ CREATE TABLE transactions (
     amount INTEGER NOT NULL,
     datetime TIMESTAMP NOT NULL DEFAULT NOW(),
     ticker_id INTEGER REFERENCES tickers(id) ON DELETE CASCADE,
-    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    price decimal NOT NULL 
 );
 
 CREATE TABLE portfolio_values (

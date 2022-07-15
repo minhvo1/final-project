@@ -2,7 +2,6 @@ import React from 'react';
 import classNames from "classnames";
 
 export default function UserCompetitionsItem (props) {
-
   const menuListClass = classNames("competition-profit", {
     "competition-profit-gain" : props.profit > 0 ,
   });

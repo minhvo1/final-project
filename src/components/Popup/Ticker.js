@@ -5,7 +5,6 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 import { info } from "autoprefixer";
 
 export default function Ticker(props) {
-    console.log(props);
   const [error, setError] = useState("");
 
   const [buyShares, setBuyShares] = useState("");
@@ -45,20 +44,21 @@ export default function Ticker(props) {
       }
 
       dataToRender = {
-        portfolioId : portfolio.id,
-        funds : portfolio.funds - (buyShares * props.info.ticker.price),
-        quantity : { 
-            amount : buyShares + props.info.ticker.quantity,
-            existing : sharesExist(props.info.ticker.id, portfolio)
+        portfolioId: portfolio.id,
+        funds: portfolio.funds - buyShares * props.info.ticker.price,
+        tickerPrice: props.info.ticker.price,
+        quantity: {
+          amount: buyShares + props.info.ticker.quantity,
+          existing: sharesExist(props.info.ticker.id, portfolio),
         },
-        transaction : { 
-            type: true, 
-            amount : buyShares,
-            ticker_id : props.info.ticker.id,
-            userId : props.userId
-        }
-
-      }
+        originalPrice : ((props.info.ticker.avgBoughtPrice * props.info.ticker.quantity) + (props.info.ticker.price * Number(buyShares)))/ (props.info.ticker.quantity + Number(buyShares)),
+        transaction: {
+          type: true,
+          amount: buyShares,
+          ticker_id: props.info.ticker.id,
+          userId: props.userId,
+        },
+      };
     } else {
       Msg = `Confirmation to sell ${sellShares} shares of ${props.info.ticker.ticker}?`;
       actionToDo = props.sellTicker;
@@ -67,30 +67,33 @@ export default function Ticker(props) {
         return;
       }
       dataToRender = {
-        portfolioId : portfolio.id,
-        funds : portfolio.funds + (buyShares * props.info.ticker.price),
-        quantity : { 
-            amount : props.info.ticker.quantity-sellShares,
-            existing : true
+        portfolioId: portfolio.id,
+        funds: portfolio.funds + buyShares * props.info.ticker.price,
+        tickerPrice: props.info.ticker.price,
+        quantity: {
+          amount: props.info.ticker.quantity - sellShares,
+          existing: true,
         },
-        transaction : { 
-            type: false, 
-            amount : sellShares,
-            ticker_id : props.info.ticker.id,
-            userId : props.userId
-        }
-
+        originalPrice : ((props.info.ticker.avgBoughtPrice * props.info.ticker.quantity) - (props.info.ticker.price * Number(buyShares)))/ (props.info.ticker.quantity - Number(buyShares)),
+        transaction: {
+          type: false,
+          amount: sellShares,
+          ticker_id: props.info.ticker.id,
+          userId: props.userId,
+        },
+      };
     }
-}
     confirmAlert({
       title: "Confirm to submit",
       message: Msg,
       buttons: [
         {
           label: "Yes",
-          onClick: () => {actionToDo(dataToRender)
+          onClick: () => {
+            actionToDo(dataToRender);
+            console.log(dataToRender);
             props.setMenu("Dashboard");
-        }
+          },
         },
         {
           label: "No",
@@ -111,9 +114,10 @@ export default function Ticker(props) {
       buttons: [
         {
           label: "Yes",
-          onClick: () => {props.deleteTicker(portfolio.id,props.info.ticker.id);
+          onClick: () => {
+            props.deleteTicker(portfolio.id, props.info.ticker.id);
             props.setMenu("Dashboard");
-        },
+          },
         },
         {
           label: "No",
@@ -143,8 +147,35 @@ export default function Ticker(props) {
         <h2>User</h2>
         {props.info.ticker.quantity > 0 && (
           <p>
-            🟢{props.info.ticker.quantity} Share(s), Total Price :{" "}
-            {props.info.ticker.quantity * props.info.ticker.price}🟢
+            🟢{props.info.ticker.quantity} Share(s), bought average price of{" "}
+            <b>
+              ${" "}
+              {(Math.round(props.info.ticker.avgBoughtPrice + Number.EPSILON) *
+                100) /
+                100}
+            </b>🟢
+            <br />
+            🟢Total Price :{" "}
+            <b>
+              ${" "}
+              {(Math.round(
+                props.info.ticker.quantity * props.info.ticker.price +
+                  Number.EPSILON
+              ) *
+                100) /
+                100}
+            </b>🟢
+            <br/>
+            🟢 Total Return :{" "} 
+            <b>
+            ${" "}
+              {(Math.round(
+                props.info.ticker.returnAmount +
+                  Number.EPSILON
+              ) *
+                100) /
+                100}
+                            </b>🟢
           </p>
         )}
         {!props.info.ticker.quantity && <p>🔴No Shares🔴</p>}
@@ -222,9 +253,11 @@ export default function Ticker(props) {
       </div>
       <div className="error-delete">
         <section className="error-message">{error}</section>
-        {props.info.ticker.quantity === 0 && <button className="delete-button" onClick={validateDelete}>
-          Delete
-        </button>}
+        {props.info.ticker.quantity === 0 && (
+          <button className="delete-button" onClick={validateDelete}>
+            Delete
+          </button>
+        )}
       </div>
     </div>
   );

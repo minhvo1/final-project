@@ -1,10 +1,16 @@
 import React from 'react';
 import UserCompetitionsItem from './UserCompetitionsItem'
+import { findUserCompPortfolio, checkArray } from '../../helpers/sidebarHelper';
+import { numberWithCommas } from "../../helpers/portfolioMainHelper"
 
 export default function UserCompetitionsTable (props) {
 
-
+  
   const user_competition = props.user_competitions.map((competition) => {
+
+    const userCompPortfolio = findUserCompPortfolio(props.data.portfolios, competition);
+    let profit = userCompPortfolio.total_value - competition.capital
+    profit = `$${numberWithCommas(Math.round((profit + Number.EPSILON) * 100) / 100)}`
     return (
       <UserCompetitionsItem
       key={competition.id}
@@ -14,7 +20,7 @@ export default function UserCompetitionsTable (props) {
       prizePool = {competition.prizePool}
       startDate = {competition.start_date}
       endDate = {competition.end_date}
-      profit = {"100"}
+      profit = {profit}
       />
     );
   });

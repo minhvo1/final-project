@@ -65,6 +65,7 @@ function App() {
                 competitions={info.competitions}
                 user_competitions={info.user_competitions}
                 setNewPopup={setNewPopup}
+                data = {info}
               />
             )}
             {popup.popupStatus === true && (

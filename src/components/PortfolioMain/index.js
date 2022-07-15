@@ -15,7 +15,8 @@ export default function PortfolioMain(props) {
   const tickers = getPortfolioTickers(props.selectedPortfolio, props.data);
   const promiseArray = getPromiseArrayTickers(tickers);
   
-  useEffect(() => {
+useEffect(() => {
+  async function render () {
     Promise.all(promiseArray)
       .then((result) => {
         let resultArray = [];
@@ -52,6 +53,8 @@ export default function PortfolioMain(props) {
               result[i].amount =  result[i].price * result[i].quantity
             }
         
+            return result;
+          }) . then((result) => {
             setTickersData(result)
           })
           .then(() => {
@@ -62,15 +65,22 @@ export default function PortfolioMain(props) {
           })
       })
 
-  }, [props.selectedPortfolio]);
+}
+  await render()
+}, [props.selectedPortfolio]);
+
 
   return (
     <div className="portfolio-main">
-      <PortfolioInfo data={tickersData}/>
+      <PortfolioInfo data={tickersData}
+      assetData = {props.data}
+      portfolio = {props.selectedPortfolio}
+      />
       <PerformanceGraph data={portfolioValue} />
       <AssetTable
         selectedPortfolio={props.selectedPortfolio}
         data={tickersData}
+        assetData = {props.data}
         setNewPopup={props.setNewPopup}
       />
     </div>

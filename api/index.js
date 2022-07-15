@@ -61,7 +61,7 @@ app.get("/userdata/:id", (req, res) => {
   db.query(
     `SELECT users.id as id, users.name as userName, users.type as type, users.email as email, portfolios.name as portfolio_name, portfolios.id as portfolio_id, 
     portfolios.date_created as portfolioDateCreated, portfolios.competition_id as portfolioCompetition, portfolios.funds as portfolioFunds, portfolios.total_value as portfolioTotalValue, competition_users.competition_id as competitionsIds, 
-    portfolio_datas.quantity as tickerQuantity, portfolio_datas.ticker_id as portfolioDatasTickerId
+    portfolio_datas.quantity as tickerQuantity, portfolio_datas.ticker_id as portfolioDatasTickerId, portfolio_datas.avgPrice as tickerAveragePrice
     FROM users FULL OUTER JOIN portfolios ON users.id = portfolios.user_id FULL OUTER JOIN competition_users ON portfolios.user_id = competition_users.user_id LEFT JOIN portfolio_datas ON portfolios.id = portfolio_datas.portfolio_id
     WHERE users.id = $1`,
     [req.params.id]
@@ -102,6 +102,14 @@ app.get("/users", (req, res) => {
 
 app.get("/portfolios/:id", (req, res) => {
   db.query(`SELECT * FROM portfolios WHERE user_id = $1`, [req.params["id"]])
+    .then((data) => {
+      res.json(data.rows);
+    })
+    .catch((err) => res.json({ message: err }));
+});
+
+app.get("/portfoliosID/:id", (req, res) => {
+  db.query(`SELECT * FROM portfolios WHERE id = $1`, [req.params["id"]])
     .then((data) => {
       res.json(data.rows);
     })
@@ -204,7 +212,8 @@ app.get("/value/:id", (req, res) => {
   WHERE portfolio_id = $1`;
   db.query(query, [id]).then((data) => {
     res.json(data.rows);
-  });
+  })
+});
 
   app.put("/portfolios/:id/add", (req, res) => {
     /* console.log(req.body.ticker_id);
@@ -222,7 +231,7 @@ app.get("/value/:id", (req, res) => {
   });
 
   app.put("/editPortfolios", (req, res) => {
-    let funds = Math.round(req.body.funds);
+    let funds = Number(req.body.funds);
     let id = Number(req.body.portfolioId);
 
     db.query(
@@ -238,12 +247,25 @@ app.get("/value/:id", (req, res) => {
     });
   });
 
+
+  app.get("/portfolio_datas", (reg, res) => {
+    const searchTerm = reg.query.query;
+    if (searchTerm === "") {
+      return res.json({});
+    }
+    const query = `SELECT * FROM portfolio_datas;`;
+    db.query(query)
+      .then((data) => {
+        res.json(data.rows);
+      })
+      .catch((err) => res.json({ message: err }));
+  });
+ 
   app.put("/editPortfolio_datas", (req, res) => {
     if (req.body.existing) {
-      console.log(req.body.quantity, req.body.portfolioId, req.body.tickerId)
       db.query(
-        `UPDATE portfolio_datas SET quantity = $1 WHERE portfolio_id = $2 AND ticker_id = $3`,
-        [req.body.quantity ,req.body.portfolioId, req.body.tickerId]
+        `UPDATE portfolio_datas SET quantity = $1, avgPrice = $2 WHERE portfolio_id = $3 AND ticker_id = $4`,
+        [req.body.quantity ,req.body.originalPrice, req.body.portfolioId, req.body.tickerId, ]
       )
         .then((data) => {
           res.json("success");
@@ -253,8 +275,8 @@ app.get("/value/:id", (req, res) => {
           console.log(err);
       })}else {
       db.query(
-        `INSERT INTO portfolio_datas (quantity, portfolio_id, ticker_id) VALUES ($1, $2, $3)`,
-        [req.body.quantity ,req.body.portfolioId, req.body.tickerId]
+        `INSERT INTO portfolio_datas (quantity, portfolio_id, ticker_id, avgPrice) VALUES ($1, $2, $3, $4)`,
+        [req.body.quantity ,req.body.portfolioId, req.body.tickerId, req.body.originalPrice]
       )
         .then((data) => {
           res.json("success");
@@ -267,11 +289,10 @@ app.get("/value/:id", (req, res) => {
     
   });
 
-
   app.post("/newTransactions", (req, res) => {
     db.query(
-      `INSERT INTO transactions (type, amount, ticker_id, user_id) VALUES ($1, $2, $3, $4)`,
-      [req.body.type ,req.body.amount, req.body.ticker_id, req.body.userId]
+      `INSERT INTO transactions (type, amount, ticker_id, user_id, price) VALUES ($1, $2, $3, $4, $5)`,
+      [req.body.type ,req.body.amount, req.body.ticker_id, req.body.userId, req.body.tickerPrice]
     )
       .then((data) => {
         res.json("success");
@@ -290,7 +311,31 @@ app.post("/deleteTicker", (req, res) => {
     .catch((err) => res.json({ message: err }));
   })
 
+app.get("/latestPortfolioValue/:id", (req, res) => {
+  db.query(
+    `SELECT * FROM portfolio_values WHERE portfolio_id = $1 ORDER BY datetime DESC LIMIT 1 `,
+    [req.params.id]
+  )
+  .then((data) => {
+    res.json(data.rows);
+  })
+  .catch((err) => res.json({ message: err }));
 });
+
+app.put("/updatePortfolioTotal", (req, res) => {
+  db.query(
+    `UPDATE portfolios SET total_value = $1 WHERE id = $2;`,
+    [req.body.value, req.body.id]
+  )
+    .then((data) => {
+      res.json("success");
+    })
+    .catch((err) => {
+      res.json({ message: err })
+  
+  });
+});
+
 
 
 

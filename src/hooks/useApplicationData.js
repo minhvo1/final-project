@@ -6,6 +6,7 @@ import {
   checkObject,
   findCompetitionById,
   findIndex,
+  updateTotalValues
 } from "../helpers/sidebarHelper";
 
 export default function useApplicationData() {
@@ -68,6 +69,7 @@ export default function useApplicationData() {
         };
 
         for (let x = 0; x < ans[0].data.length; x++) {
+          updateTotalValues(ans[0].data[x]["portfolio_id"]);
           if (
             ans[0]["data"][x]["portfoliocompetition"] &&
             !usersCompetitionArray.includes(
@@ -96,6 +98,7 @@ export default function useApplicationData() {
                 {
                   tickerId: ans[0].data[x]["portfoliodatastickerid"],
                   tickerQuantity: ans[0].data[x]["tickerquantity"],
+                  tickerAvgPrice : ans[0].data[x]["tickeraverageprice"]
                 },
               ],
             });
@@ -103,6 +106,7 @@ export default function useApplicationData() {
             portfolio[index].tickers.push({
               tickerId: ans[0].data[x]["portfoliodatastickerid"],
               tickerQuantity: ans[0].data[x]["tickerquantity"],
+              tickerAvgPrice : ans[0].data[x]["tickeraverageprice"]
             });
           }
         }
@@ -206,7 +210,6 @@ export default function useApplicationData() {
   };
 
   const buyTicker = (data) => {
-    console.log(data);
     Promise.all([
       axios.put(`http://localhost:3001/editPortfolios`, {
       portfolioId : data["portfolioId"], 
@@ -216,16 +219,21 @@ export default function useApplicationData() {
         quantity : data["quantity"]["amount"],
         existing: data["quantity"]["existing"],
         portfolioId : data["portfolioId"],
-        tickerId : data["transaction"]["ticker_id"]
+        tickerId : data["transaction"]["ticker_id"],
+        originalPrice : data["originalPrice"]
       }),
       axios.post(`http://localhost:3001/newTransactions`, {
         type : data["transaction"]["type"],
         amount : data["transaction"]["amount"],
         ticker_id : data["transaction"]["ticker_id"],
         userId : data["transaction"]["userId"],
+        tickerPrice : data["tickerPrice"]
       }),
     ]).then((ans) => {
-      console.log(ans);
+      console.log(ans[2])
+      axios.get(`http://localhost:3001/portfolio/${data["portfolioId"]}/updateValue`). then (() => {
+        updateTotalValues( data["portfolioId"]);
+      })
     }).catch((err) => {
       console.log(err);
     })
@@ -240,16 +248,20 @@ export default function useApplicationData() {
       quantity : data["quantity"]["amount"],
       existing: data["quantity"]["existing"],
       portfolioId : data["portfolioId"],
-      tickerId : data["transaction"]["ticker_id"]
+      tickerId : data["transaction"]["ticker_id"],
+      originalPrice : data["originalPrice"]
     }),
     axios.post(`http://localhost:3001/newTransactions`, {
       type : data["transaction"]["type"],
       amount : data["transaction"]["amount"],
       ticker_id : data["transaction"]["ticker_id"],
       userId : data["transaction"]["userId"],
-
+      tickerPrice : data["tickerPrice"]
     }),
   ]).then((ans) => {
+    axios.get(`http://localhost:3001/portfolio/${data["portfolioId"]}/updateValue`).then(() => {
+      updateTotalValues(data["portfolioId"]);
+    })
     console.log(ans);
   }).catch((err) => {
     console.log(err);
