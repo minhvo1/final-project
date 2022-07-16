@@ -5,7 +5,7 @@ import MenuList from "./MenuList";
 import PortfoliosList from "./PortfoliosList";
 
 export default function Sidebar(props) {
-  const menu = [
+  let menu = [
     {
       id: 1,
       name: "Dashboard",
@@ -20,21 +20,27 @@ export default function Sidebar(props) {
     },
   ];
 
+ 
+
   return (
     <div className="sidebar">
       <Logo />
+      {props.userId !== 1 &&(
       <MenuList
         menus={menu}
         selected={props.menu}
         setMenu={props.setMenu}
         setNewPopup={props.setNewPopup}
-      />
+      />   )}
+      {props.userId !== 1 &&(
       <PortfoliosList
         portfolios={props.portfolios}
         selected={props.portfolio}
         setPortfolio={props.setPortfolio}
         setMenu={props.setMenu}
-      />
+      /> )}
+   
+   {props.userId === 1 && (<h2>Hello Admin</h2>)}
     </div>
   );
 }

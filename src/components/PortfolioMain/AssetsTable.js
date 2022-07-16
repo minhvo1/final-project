@@ -19,7 +19,6 @@ export default function AssetTable(props) {
     props.setNewPopup("Ticker", dataToRender)
   }
 
-console.log(props);
 
 let dataToShow = props.data.map(ticker => {
   let indexTicker = findTickerIndex(ticker.id, props.assetData["portfolios"][index]["tickers"])

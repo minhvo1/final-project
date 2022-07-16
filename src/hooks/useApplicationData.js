@@ -10,6 +10,8 @@ import {
 } from "../helpers/sidebarHelper";
 
 export default function useApplicationData() {
+  const userId = 1;
+
   const [view, setView] = useState({
     menu: "Dashboard",
     portfolio: null,
@@ -51,7 +53,6 @@ export default function useApplicationData() {
   };
 
   useEffect(() => {
-    const userId = 2;
     const profileURL = `http://localhost:3001/userdata/${userId}`;
     const competitionURL = `http://localhost:3001/compUsers`;
 
@@ -69,7 +70,7 @@ export default function useApplicationData() {
         };
 
         for (let x = 0; x < ans[0].data.length; x++) {
-          updateTotalValues(ans[0].data[x]["portfolio_id"]);
+          //updateTotalValues(ans[0].data[x]["portfolio_id"]);
           if (
             ans[0]["data"][x]["portfoliocompetition"] &&
             !usersCompetitionArray.includes(
@@ -280,17 +281,23 @@ export default function useApplicationData() {
 
   };
 
+
+
+
+
   return {
     view,
     setMenu,
     setPortfolio,
     info,
     loading,
+    setLoading,
     popup,
     setNewPopup,
     savePortfolio,
     buyTicker,
     sellTicker,
     deleteTicker,
+    userId,
   };
 }

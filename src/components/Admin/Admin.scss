@@ -1,0 +1,123 @@
+$mainfont: 'Poppins';
+$headerfont:'Vollkorn';
+$bgcolor: #313335;
+$textcolor: #F0F0F0;
+$textcolor-selected: #A374D2;
+$textcolor-positive: #33C15B;
+$textcolor-small: #878080;
+$divcolor: #1F1F1F;
+$divcolor-selected: #9967CA;
+$radius: 1rem;
+
+.popup {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  display: flex;
+  justify-content : center;
+  align-items: center;
+  color : #A374D2;
+  background-color: #313335;
+}
+
+h1{
+  font-size: 1.2rem;
+  color: #878080;
+}
+
+.title-admin {
+  font-size: larger;
+  margin-bottom: 1rem;
+  color : #A374D2;
+
+}
+
+.users-info {
+  margin-left: 1rem;
+}
+
+.user-container { 
+  height: 45%;
+  overflow-y: scroll;
+  width: 45%;
+}
+
+.portfolios-container {
+  height: 40%;
+  overflow-y: scroll;
+  width: 45%;
+
+}
+.competitions-container {
+  height: 40%;
+  overflow-y: scroll;
+  width: 45%;
+}
+.user-list {
+  margin-bottom: 1rem;
+}
+.title-admin-portfolios{
+  margin-top: 1rem;
+}
+
+.competition-title {
+  margin-bottom: 1rem;
+  margin-top : 1rem;
+}
+
+.competitions-list{
+  border-radius: 20px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+.portfolio-title {
+  margin-bottom: 0.5rem;
+}
+
+.portfolio-comp-list {
+  margin-bottom: 0.5rem;
+}
+
+.admin-dashboard {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  position: relative;
+  padding: 32px;
+  width: 100rem;
+  height: 55rem;
+  margin-right: 10rem;
+  margin-bottom : 10rem;
+  background-color: #1F1F1F;
+  border-radius: 20px;
+  color: $textcolor;
+}
+
+.green { 
+  color: #33C15B;
+}
+
+.title-admin-new {
+  margin-top:3rem;
+}
+.new-container {
+  height: 40%;
+  overflow-y: scroll;
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+}
+
+.newCompForms {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  margin-left : 2rem;
+  background-color: transparent;
+  color: white;
+}
+
+.join-button-comp {
+  margin-left: 35rem;
+}

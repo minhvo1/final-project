@@ -16,7 +16,7 @@ export default function PortfolioMain(props) {
   const promiseArray = getPromiseArrayTickers(tickers);
   
 useEffect(() => {
-  async function render () {
+
     Promise.all(promiseArray)
       .then((result) => {
         let resultArray = [];
@@ -65,8 +65,6 @@ useEffect(() => {
           })
       })
 
-}
-  await render()
 }, [props.selectedPortfolio]);
 
 

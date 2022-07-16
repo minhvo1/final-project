@@ -98,7 +98,6 @@ export function findTickerIndex(id, ticker) {
   }
 }
 
-
 export function updateTotalValues(portfolio_id) {
   Promise.all([
     axios.get(`http://localhost:3001/latestPortfolioValue/${portfolio_id}`),
@@ -110,4 +109,55 @@ export function updateTotalValues(portfolio_id) {
     Promise.all([axios.put(`http://localhost:3001/updatePortfolioTotal`,{id: portfolio_id, value : totalValue })]).then((ans) => {
     })
   });
+}
+
+export function addNewComp (name, start_amount, date) {
+  Promise.all([
+    axios.post(`http://localhost:3001/newComp`, {name : name, startAmount : start_amount, date: date}),
+  ]).then((ans) => {
+   console.log(ans);
+  });
+}
+
+
+
+export function AdminData () {
+  let userArray = [];
+  let competitionArray = [];
+  let portfolioArray = [];
+
+   Promise.all([
+    axios.get(`http://localhost:3001/users`),
+    axios.get(`http://localhost:3001/competitions`),
+    axios.get(`http://localhost:3001/allPortfolio`),
+    axios.get(`http://localhost:3001/allCompetitionPortfolios`),
+  ]).then((ans) => {
+    for (let user of ans[0]["data"]) {
+      userArray.push(user);
+    }
+    for (let portfolio of ans[2]["data"]) {
+      portfolioArray.push(portfolio);
+    }
+    for (let competition of ans[1]["data"]) {
+      let eachComp = {
+          compInfo : competition,
+          compPortfolios : []
+      };
+      for (let compPort of ans[3]["data"]) {
+          if (competition.id === compPort.competition_id) {
+              eachComp.compPortfolios.push(compPort);
+          }
+      }
+      competitionArray.push(eachComp);
+    }
+  })
+  // eslint-disable-next-line
+
+let returnValue = {
+  userArray : userArray, 
+  competitionArray : competitionArray,
+  portfolioArray : portfolioArray,
+}
+
+return returnValue
 }
