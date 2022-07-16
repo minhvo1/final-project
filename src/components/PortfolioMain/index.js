@@ -14,9 +14,8 @@ export default function PortfolioMain(props) {
   const [portfolioValue, setPortfolioValue] = useState([]);
   const tickers = getPortfolioTickers(props.selectedPortfolio, props.data);
   const promiseArray = getPromiseArrayTickers(tickers);
-  
-useEffect(() => {
-  async function render () {
+
+  useEffect(() => {
     Promise.all(promiseArray)
       .then((result) => {
         let resultArray = [];
@@ -32,17 +31,16 @@ useEffect(() => {
         return newResultArray;
       })
       .then((result) => {
-
-        let url = "https://api.polygon.io/v2/snapshot/locale/us/markets/stocks/tickers?tickers="
+        let url =
+          "https://api.polygon.io/v2/snapshot/locale/us/markets/stocks/tickers?tickers=";
         for (const item of result) {
-          url = url + item.ticker + ','
+          url = url + item.ticker + ",";
         }
-        url += '&apiKey=KR_4M5C_Bx0OkMvz3ncgz2brEnmUmDPp';
-  
+        url += "&apiKey=KR_4M5C_Bx0OkMvz3ncgz2brEnmUmDPp";
+
         Promise.all([axios.get(url)])
           .then((response) => {
-
-            let responseDataTicker = response[0].data.tickers
+            let responseDataTicker = response[0].data.tickers;
             for (const i in result) {
               for (const j in responseDataTicker) {
                 if (result[i].ticker === responseDataTicker[j].ticker) {
@@ -50,37 +48,38 @@ useEffect(() => {
                 }
               }
               if (!result[i].price) result[i].price = null;
-              result[i].amount =  result[i].price * result[i].quantity
+              result[i].amount = result[i].price * result[i].quantity;
             }
-        
+
             return result;
-          }) . then((result) => {
-            setTickersData(result)
+          })
+          .then((result) => {
+            setTickersData(result);
           })
           .then(() => {
-            Promise.all([axios.get(`http://localhost:3001/value/${props.selectedPortfolioId}`)])
-              .then((response) => {
-                setPortfolioValue(response[0].data)
-              })
-          })
-      })
-
-}
-  await render()
-}, [props.selectedPortfolio]);
-
+            Promise.all([
+              axios.get(
+                `http://localhost:3001/value/${props.selectedPortfolioId}`
+              ),
+            ]).then((response) => {
+              setPortfolioValue(response[0].data);
+            });
+          });
+      });
+  }, [props.selectedPortfolio]);
 
   return (
     <div className="portfolio-main">
-      <PortfolioInfo data={tickersData}
-      assetData = {props.data}
-      portfolio = {props.selectedPortfolio}
+      <PortfolioInfo
+        data={tickersData}
+        assetData={props.data}
+        portfolio={props.selectedPortfolio}
       />
       <PerformanceGraph data={portfolioValue} />
       <AssetTable
         selectedPortfolio={props.selectedPortfolio}
         data={tickersData}
-        assetData = {props.data}
+        assetData={props.data}
         setNewPopup={props.setNewPopup}
       />
     </div>

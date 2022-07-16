@@ -3,6 +3,7 @@ import Sidebar from "./components/Sidebar";
 import PortfolioMain from "./components/PortfolioMain/index";
 import Header from "./components/Header/index";
 import Competitions from "./components/CompetitionMain/index";
+import Login from "./components/Login/Login"
 import { React, useEffect, useState, Fragment } from "react";
 import { getPortfolios } from "./helpers/sidebarHelper";
 import useApplicationData from "./hooks/useApplicationData";
@@ -16,6 +17,9 @@ db.connect();
 */
 
 function App() {
+  const [user, setUser] =useState({name: "", email: ""});
+  const [error, setError] = useState("")
+
   const {
     view,
     setMenu,
@@ -40,51 +44,59 @@ function App() {
   // }, [])
   return (
     <div className="App">
-      {loading ? (
-        <div>Loading...</div>
-      ) : (
-        <Fragment>
-          <Sidebar
-            portfolio={view.portfolio}
-            setPortfolio={setPortfolio}
-            portfolios={info.portfolios}
-            menu={view.menu}
-            setMenu={setMenu}
-            setNewPopup={setNewPopup}
-          />
-          <div className="main-container">
-            <Header
-              portfolios={info.portfolios}
-              selectedPortfolio={view.portfolio}
-            />
-            {view.menu === "Dashboard"  && popup.popupStatus === false && (
-              <PortfolioMain data={info} selectedPortfolio={view.portfolio} selectedPortfolioId={view.portfolio_id} setNewPopup={setNewPopup} />
-            )}
-            {view.menu === "Competitions" && popup.popupStatus === false &&(
-              <Competitions
-                competitions={info.competitions}
-                user_competitions={info.user_competitions}
-                setNewPopup={setNewPopup}
-                data = {info}
-              />
-            )}
-            {popup.popupStatus === true && (
-              <Popup
-                type={popup.page}
-                info = {popup.info}
-                competitions={info.competitions}
-                portfolios = {info.portfolios}
-                setMenu={setMenu}
-                savePortfolio={savePortfolio}
-                userId={info.user.id}
-                buyTicker = {buyTicker}
-                sellTicker = {sellTicker}
-                deleteTicker = {deleteTicker}
-              />
-            )}
-          </div>
-        </Fragment>
-      )}
+      {(user.email === "") ?
+       (
+         loading ? (
+           <div>Loading...</div>
+         ) : (
+           <Fragment>
+             <Sidebar
+               portfolio={view.portfolio}
+               setPortfolio={setPortfolio}
+               portfolios={info.portfolios}
+               menu={view.menu}
+               setMenu={setMenu}
+               setNewPopup={setNewPopup}
+             />
+             <div className="main-container">
+               <Header
+                 portfolios={info.portfolios}
+                 selectedPortfolio={view.portfolio}
+               />
+               {view.menu === "Dashboard"  && popup.popupStatus === false && (
+                 <PortfolioMain data={info} selectedPortfolio={view.portfolio} selectedPortfolioId={view.portfolio_id} setNewPopup={setNewPopup} />
+               )}
+               {view.menu === "Competitions" && popup.popupStatus === false &&(
+                 <Competitions
+                   competitions={info.competitions}
+                   user_competitions={info.user_competitions}
+                   setNewPopup={setNewPopup}
+                   data = {info}
+                 />
+               )}
+               {popup.popupStatus === true && (
+                 <Popup
+                   type={popup.page}
+                   info = {popup.info}
+                   competitions={info.competitions}
+                   portfolios = {info.portfolios}
+                   setMenu={setMenu}
+                   savePortfolio={savePortfolio}
+                   userId={info.user.id}
+                   buyTicker = {buyTicker}
+                   sellTicker = {sellTicker}
+                   deleteTicker = {deleteTicker}
+                 />
+               )}
+             </div>
+           </Fragment>
+         )
+       )
+       :
+        (
+          <Login></Login>
+        )
+       }
     </div>
   );
 }
