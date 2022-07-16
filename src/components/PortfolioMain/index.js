@@ -14,8 +14,9 @@ export default function PortfolioMain(props) {
   const [portfolioValue, setPortfolioValue] = useState([]);
   const tickers = getPortfolioTickers(props.selectedPortfolio, props.data);
   const promiseArray = getPromiseArrayTickers(tickers);
+  
+useEffect(() => {
 
-  useEffect(() => {
     Promise.all(promiseArray)
       .then((result) => {
         let resultArray = [];
@@ -57,16 +58,15 @@ export default function PortfolioMain(props) {
             setTickersData(result);
           })
           .then(() => {
-            Promise.all([
-              axios.get(
-                `http://localhost:3001/value/${props.selectedPortfolioId}`
-              ),
-            ]).then((response) => {
-              setPortfolioValue(response[0].data);
-            });
-          });
-      });
-  }, [props.selectedPortfolio]);
+            Promise.all([axios.get(`http://localhost:3001/value/${props.selectedPortfolioId}`)])
+              .then((response) => {
+                setPortfolioValue(response[0].data)
+              })
+          })
+      })
+
+}, [props.selectedPortfolio]);
+
 
   return (
     <div className="portfolio-main">

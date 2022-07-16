@@ -82,6 +82,22 @@ app.get("/competitions", (req, res) => {
     .catch((err) => res.json({ message: err }));
 });
 
+app.get("/allPortfolio", (req, res) => {
+  db.query(`SELECT * FROM portfolios`)
+    .then((data) => {
+      res.json(data.rows);
+    })
+    .catch((err) => res.json({ message: err }));
+});
+
+app.get("/allCompetitionPortfolios", (req, res) => {
+  db.query(`SELECT * FROM portfolios WHERE competition_id IS NOT NULL `)
+    .then((data) => {
+      res.json(data.rows);
+    })
+    .catch((err) => res.json({ message: err }));
+});
+
 app.get("/competitions/user/:id", (req, res) => {
   db.query(`SELECT * FROM competition_users WHERE user_id = $1`, [
     req.params["id"],
@@ -103,6 +119,19 @@ app.get("/userdata/:id", (req, res) => {
   )
     .then((data) => {
       //console.log(data);
+      res.json(data.rows);
+    })
+    .catch((err) => res.json({ message: err }));
+});
+
+app.get("/portfolio_values", (reg, res) => {
+  const searchTerm = reg.query.query;
+  if (searchTerm === "") {
+    return res.json({});
+  }
+  const query = `SELECT * FROM portfolio_values;`;
+  db.query(query)
+    .then((data) => {
       res.json(data.rows);
     })
     .catch((err) => res.json({ message: err }));
@@ -223,18 +252,6 @@ app.post("/newPortfolioValue", (req, res) => {
     .catch((err) => res.json({ message: err }));
 });
 
-app.get("/portfolio_values", (reg, res) => {
-  const searchTerm = reg.query.query;
-  if (searchTerm === "") {
-    return res.json({});
-  }
-  const query = `SELECT * FROM portfolio_values;`;
-  db.query(query)
-    .then((data) => {
-      res.json(data.rows);
-    })
-    .catch((err) => res.json({ message: err }));
-});
 
 app.post("/value", (req, res) => {
   const { portfolio_id, datetime, value } = req.body;
@@ -370,6 +387,13 @@ app.put("/updatePortfolioTotal", (req, res) => {
   
   });
 });
+app.post('/newComp', (req,res) => {
+  db.query(`INSERT INTO competitions (name, end_datetime, start_amount) VALUES ($1, $2, $3)`, [req.body.name, req.body.date, req.body.startAmount])
+.then((data) => {
+  res.json("success")
+})    .catch((err) => {
+  res.json({ message: err })})
+})
 
 
 
