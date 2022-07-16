@@ -3,6 +3,8 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const axios = require("axios");
+const bcrypt = require("bcryptjs");
+var cookieSession = require('cookie-session')
 
 // Handle schedule jobs
 const scheduledFunctions = require("./scheduled_jobs/cron");
@@ -17,6 +19,14 @@ app.use(
   })
 );
 
+app.use(cookieSession({
+  name: 'session',
+  keys: [process.env.COOKIE_KEY1, process.env.COOKIE_KEY2],
+
+  // Cookie Options
+  maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}))
+
 const bodyparser = require("body-parser");
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(bodyparser.json());
@@ -26,6 +36,7 @@ const dbParams = require("./lib/db.js");
 const { json } = require("express");
 const db = new Pool(dbParams);
 db.connect();
+
 
 // Call schedule jobs
 //scheduledFunctions.initScheduledJobs(db);
@@ -38,6 +49,30 @@ app.get("/", (req, res) => {
     })
     .catch((err) => res.json({ message: err }));
 });
+
+app.post("/login", (req, res) => {
+  const { email, password } = req.body;
+
+  db.query(`SELECT * FROM users WHERE email = $1`, [email])
+    .then((data) => {
+      const user = data.rows[0];
+
+      if (!user)
+        return res.status(422).send({ message: "invalid email/password" });
+
+      //const validCredential = bcrypt.compareSync(password, user.password);
+
+      if (password !== user.password)
+        return res.status(422).send({ message: "invalid email/password" });
+
+      req.session.userId = user.id;
+
+      res.redirect("/");
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+})
 
 app.get("/competitions", (req, res) => {
   db.query(`SELECT * FROM competitions`)
@@ -428,6 +463,8 @@ app.get("/portfolio/:id/updateValue", (req, res) => {
       console.log(error);
       res.json({ message: error })
     });
+
+    
 });
 
 app.listen(PORT, () => {
