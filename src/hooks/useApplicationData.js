@@ -282,9 +282,6 @@ export default function useApplicationData() {
   };
 
 
-
-
-
   return {
     view,
     setMenu,
