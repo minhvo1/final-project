@@ -10,7 +10,7 @@ import {
 } from "../helpers/sidebarHelper";
 
 export default function useApplicationData() {
-  const userId = 1;
+  const userId = 2;
 
   const [view, setView] = useState({
     menu: "Dashboard",
