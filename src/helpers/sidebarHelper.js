@@ -90,12 +90,38 @@ export function findCompetition(id, competitions) {
   }
 }
 
+export function highestPortfolio(portfolios) {
+  let highestPortfolio = {
+    name : null,
+    value : 0
+  }
+  for (let port of portfolios) {
+    if (port.totalValue >= highestPortfolio.value){
+      highestPortfolio.name = port.name; 
+      highestPortfolio.value = port.totsalValue;
+    }
+  }
+
+  return highestPortfolio
+}
+
+
 export function findTickerIndex(id, ticker) {
   for (let i = 0; i < ticker.length; i++) {
     if (ticker[i].tickerId == id) {
       return i;
     }
   }
+}
+
+export function finduserCompname(portfolios, comp) {
+    for (let port of portfolios) {
+      for (let comps of comp["portfolios"]) {
+          if (port.name === comps.name) {
+            return port;
+          }
+      }
+    }
 }
 
 export function updateTotalValues(portfolio_id) {

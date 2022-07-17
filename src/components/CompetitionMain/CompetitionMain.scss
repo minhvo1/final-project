@@ -85,9 +85,30 @@ td {
   align-items: center;
 }
 
+.active-button {
+  width: 5rem;
+  background-color: rgba($color: #33C15B, $alpha: .29);
+  border-radius: 10px;
+  color: #33C15B ;
+}
+
+.active-button:hover {
+  text-shadow: 4px 4px 4px  #878080;
+}
+
+.finish-button:hover {
+  text-shadow: 4px 4px 4px  #878080;
+}
+
+.finish-button {
+  width: 5rem;
+  background-color: rgba($color: red, $alpha: .29);
+  border-radius: 10px;
+  color: red ;
+}
 
 .join-button {
-    width: 4rem;
+  width: 5rem;
     background-color: rgba($color: #9967CA, $alpha: .29);
     border-radius: 10px;
     color: #A374D2 ;

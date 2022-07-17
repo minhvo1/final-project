@@ -25,7 +25,7 @@ export default function NewPortfolio(props) {
     setError("");
     let startValue = 0;
     let competition_ID ;
-    if (competition === "Portfolio") {
+    if (competition === "Standard Portfolio") {
       competition_ID = null; 
       startValue = funding;
     } else {
@@ -79,7 +79,7 @@ export default function NewPortfolio(props) {
             {competitions}
           </select>
         </div>
-        {competition === "Portfolio" && (
+        {competition === "Standard Portfolio" && (
           <div className="input-info">
             <h2>How much funding?</h2>
             <br />
@@ -97,11 +97,11 @@ export default function NewPortfolio(props) {
         <section className="error-message">{error}</section>
         <div className="buttons">
 
-          <button className="save-button" confirm onClick={validate}>
+          <button className="save-button" type="button" onClick={validate}>
             Save
           </button>
 
-          <button className="cancel-button" danger onClick={cancel}>
+          <button className="cancel-button" type="button" onClick={cancel}>
             Cancel
           </button>
         </div>

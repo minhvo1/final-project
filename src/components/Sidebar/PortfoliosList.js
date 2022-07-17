@@ -1,8 +1,9 @@
-import React from "react";
+import {React, useEffect } from "react";
 import PortfoliosItem from "./PortfoliosItem.js";
 import CompetitionPortfoliosItem from "./CompetitionPortfoliosItem.js";
 
 export default function PortfoliosList(props) {
+
   const portfolioslists = props.portfolios.map((portfolio) => {
     if (!portfolio.portfolio_competition) {
       return (

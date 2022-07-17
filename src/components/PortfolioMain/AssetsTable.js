@@ -5,39 +5,51 @@ import {
   numberWithCommas
 } from "../../helpers/portfolioMainHelper";
 import { checkArray, findTickerIndex } from '../../helpers/sidebarHelper';
+import classNames from "classnames";
+import { data } from "autoprefixer";
 
 
 export default function AssetTable(props) {
+  const [dataToShow, setDataToShow] = useState([])
 
-  let index = checkArray(props.selectedPortfolio, props.assetData["portfolios"])
+  useEffect(() => {
 
-  const moreInfo = (ticker) => {
-    let dataToRender = {
-      ticker : ticker, 
-      portfolio : props.selectedPortfolio
+    let index = checkArray(props.selectedPortfolio, props.assetData["portfolios"])
+  
+    const moreInfo = (ticker) => {
+      let dataToRender = {
+        ticker : ticker, 
+        portfolio : props.selectedPortfolio
+      }
+      props.setNewPopup("Ticker", dataToRender)
     }
-    props.setNewPopup("Ticker", dataToRender)
-  }
-
-
-let dataToShow = props.data.map(ticker => {
-  let indexTicker = findTickerIndex(ticker.id, props.assetData["portfolios"][index]["tickers"])
-  let totalBoughtPrice = (props.assetData["portfolios"][index]["tickers"][indexTicker]["tickerAvgPrice"] * props.assetData["portfolios"][index]["tickers"][indexTicker]["tickerQuantity"]);
-  let returnAmount = ticker.amount - totalBoughtPrice;
-  ticker.avgBoughtPrice = Number(props.assetData["portfolios"][index]["tickers"][indexTicker]["tickerAvgPrice"]); 
-  ticker.returnAmount = Number(returnAmount); 
-  return (
-    <tr>
-      <td className="ticker-name">{ticker.company_name}</td>
-      <td>{ticker.ticker}</td>
-      <td>{`$${numberWithCommas(Math.round((ticker.price + Number.EPSILON) * 100) / 100)}`}</td>
-      <td>{ticker.quantity}</td>
-      <td>{`$${numberWithCommas(Math.round((ticker.amount + Number.EPSILON) * 100) / 100)}`}</td>
-      <td>{`$${numberWithCommas(Math.round((returnAmount + Number.EPSILON) * 100) / 100)}`}</td>
-      <td><button className = "join-button" onClick={() => {moreInfo(ticker)}}>Info</button></td>
-    </tr>
-  )
-})
+      setDataToShow(props.data.map(ticker => {
+        let indexTicker = findTickerIndex(ticker.id, props.assetData["portfolios"][index]["tickers"])
+        let totalBoughtPrice = (props.assetData["portfolios"][index]["tickers"][indexTicker]["tickerAvgPrice"] * props.assetData["portfolios"][index]["tickers"][indexTicker]["tickerQuantity"]);
+        let returnAmount = ticker.amount - totalBoughtPrice;
+    
+        const assetListClass = classNames("asset-profit", {
+          "asset-profit-gain" : returnAmount > 0 ,
+        });
+    
+    
+    
+      ticker.avgBoughtPrice = Number(props.assetData["portfolios"][index]["tickers"][indexTicker]["tickerAvgPrice"]); 
+      ticker.returnAmount = Number(returnAmount); 
+      return (
+        <tr>
+          <td className="ticker-name">{ticker.company_name}</td>
+          <td>{ticker.ticker}</td>
+          <td>{`$${numberWithCommas(Math.round((ticker.price + Number.EPSILON) * 100) / 100)}`}</td>
+          <td>{ticker.quantity}</td>
+          <td>{`$${numberWithCommas(Math.round((ticker.amount + Number.EPSILON) * 100) / 100)}`}</td>
+          <td className = {assetListClass}>{`$${numberWithCommas(Math.round((returnAmount + Number.EPSILON) * 100) / 100)}`}</td>
+          <td><button className = "join-button" onClick={() => {moreInfo(ticker)}}>Info</button></td>
+        </tr>
+      )
+    }))
+    
+  }, [props.data])
 
   return (
     <div className="asset-table">
