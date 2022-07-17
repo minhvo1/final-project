@@ -232,11 +232,19 @@ h1{
 }
 
 .confirm-delete-button{
-  margin-top:20rem;
+  margin-top:5rem;
   width: 5rem;
   background-color: rgba($color: red, $alpha: .29);
   border-radius: 10px;
   color: red ;
+}
+
+.confirm-profit-button {
+  margin-top:5rem;
+  width: 5rem;
+  background-color: rgba($color: #33C15B, $alpha: .29);
+  border-radius: 10px;
+  color: #33C15B;
 }
 
 .competition-over{
@@ -245,11 +253,37 @@ h1{
 }
 
 .you-lose{
-
   margin-top: 2rem;
   margin-left:2rem;
   color: #A374D2;
 }
+
+.you-win {
+  margin-top: 2rem;
+  margin-left:2rem;
+  color: #A374D2;
+}
+
 .you-lose h1{
   color: white;
+}
+
+.you-lose h2{
+  margin-top:1rem;
+}
+
+.you-lose b{
+  color: white;
+}
+
+.you-lose h1{
+  color: white;
+}
+
+.you-lose h2 {
+  margin-top:1rem;
+}
+
+.you-lose b {
+  color:white;
 }

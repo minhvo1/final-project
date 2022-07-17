@@ -79,7 +79,7 @@ export default function NewPortfolio(props) {
             {competitions}
           </select>
         </div>
-        {competition === "Portfolio" && (
+        {competition === "Standard Portfolio" && (
           <div className="input-info">
             <h2>How much funding?</h2>
             <br />
