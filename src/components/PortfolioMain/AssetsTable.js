@@ -14,9 +14,6 @@ export default function AssetTable(props) {
 
   useEffect(() => {
 
-    
-   
-  
     let index = checkArray(props.selectedPortfolio, props.assetData["portfolios"])
   
     const moreInfo = (ticker) => {
@@ -26,8 +23,6 @@ export default function AssetTable(props) {
       }
       props.setNewPopup("Ticker", dataToRender)
     }
-  
-
       setDataToShow(props.data.map(ticker => {
         let indexTicker = findTickerIndex(ticker.id, props.assetData["portfolios"][index]["tickers"])
         let totalBoughtPrice = (props.assetData["portfolios"][index]["tickers"][indexTicker]["tickerAvgPrice"] * props.assetData["portfolios"][index]["tickers"][indexTicker]["tickerQuantity"]);
@@ -55,7 +50,7 @@ export default function AssetTable(props) {
     }))
     
   }, [props.data])
-  console.log(dataToShow)
+
   return (
     <div className="asset-table">
       <div>

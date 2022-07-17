@@ -35,9 +35,7 @@ export default function PerformanceGraph(props) {
       <div>
         <span>Performance Graph</span>
         <div className="timeframe-buttons">
-          {timeframes.map((time) => {
-            return <button key={time}>{time}</button>;
-          })}
+     
         </div>
       </div>
       <ResponsiveContainer width="100%" height="100%">
