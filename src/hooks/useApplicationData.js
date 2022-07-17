@@ -6,11 +6,12 @@ import {
   checkObject,
   findCompetitionById,
   findIndex,
-  updateTotalValues
+  updateTotalValues,
+  finduserCompname
 } from "../helpers/sidebarHelper";
 
 export default function useApplicationData() {
-  const userId = 1;
+  const userId = 2;
 
   const [view, setView] = useState({
     menu: "Dashboard",
@@ -55,7 +56,7 @@ export default function useApplicationData() {
   useEffect(() => {
     const profileURL = `http://localhost:3001/userdata/${userId}`;
     const competitionURL = `http://localhost:3001/compUsers`;
-
+   
     Promise.all([axios.get(profileURL), axios.get(competitionURL)])
       .then((ans) => {
         setLoading(true);
@@ -129,6 +130,7 @@ export default function useApplicationData() {
                 portfolios: [
                   {
                     name: ans[1].data[i]["portfolio_name"],
+                    totalValue : ans[1].data[i]["portfoliototalvalue"]
                   },
                 ],
                 userComp: false,
@@ -136,6 +138,7 @@ export default function useApplicationData() {
             } else {
               competitions[index].portfolios.push({
                 name: ans[1].data[i]["portfolio_name"],
+                totalValue : ans[1].data[i]["portfoliototalvalue"]
               });
             }
           }
@@ -154,11 +157,50 @@ export default function useApplicationData() {
           usersCompetition.push(
             findCompetitionById(usersCompetitionArray[i], competitions)
           );
-
           let index = findIndex(usersCompetitionArray[i], competitions);
           competitions[index]["userComp"] = true;
+          
+          let userComp = finduserCompname(portfolio, competitions[index])
+          competitions[index]["userCompPortfolio"] = userComp;
         }
+
         setPortfolio(portfolio[0]["name"], portfolio[0]["id"]);
+
+        for (let x = 0; x < competitions.length; x++ ) {
+          let enddate = competitions[x]["end_date"].slice(0,10)
+          let currentDate = new Date().toISOString().slice(0,10)
+
+          if(enddate < currentDate && competitions[x]["avaliability"]) {
+            let highestPortfolio = {
+              name : '',
+              totalValue : 0,
+              id : 0
+            };
+            for (let portfolio in competitions[x]["portfolios"]) {
+                if(portfolio.totalValue > highestPortfolio.totalValue) {
+                  highestPortfolio.name = portfolio.name;
+                  highestPortfolio.totalValue = portfolio.totalValue;
+                  highestPortfolio.id = portfolio.id;
+                }
+            }
+
+            for (let portfolios in portfolio) {
+              if (portfolios.id === highestPortfolio.id) {
+                portfolios.winner = true;
+              } 
+              if(portfolios.portfolio_competition === competitions[x]["id"] && portfolios.id !== highestPortfolio.id ) {
+                portfolios.winner = false;
+              }
+            }
+
+            Promise.all([axios.put(`http://localhost:3001/deactivateComp`,{
+                  competition : competitions[x]["id"]
+            })]).then ((ans)=>{
+              console.log(ans);
+            })
+          }
+        }
+   
         return [user, usersCompetition, portfolio, competitions];
       })
       .then((ans) => {
@@ -281,6 +323,17 @@ export default function useApplicationData() {
 
   };
 
+  const deletePortfolio = (portfolio_id) => {
+    console.log("this");
+    Promise.all([axios.post(`http://localhost:3001/deletePortfolios`,{
+      id : portfolio_id
+    })]).then((ans) => {
+      console.log(ans);
+    }).catch((err) => {
+      console.log(err);
+    })
+  };
+
 
   return {
     view,
@@ -296,5 +349,6 @@ export default function useApplicationData() {
     sellTicker,
     deleteTicker,
     userId,
+    deletePortfolio
   };
 }

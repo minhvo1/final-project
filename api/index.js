@@ -138,12 +138,17 @@ app.get("/portfolio_values", (reg, res) => {
 });
 
 app.get("/compUsers", (req, res) => {
-  const query = `SELECT competitions.id as competition_id, competitions.name as competition_Name, competitions.start_datetime as startTime, competitions.end_datetime as endTime, competitions.start_amount as startAmount, competitions.avaliability as avaliabilty, portfolios.name as portfolio_name FROM portfolios FULL OUTER JOIN competitions ON portfolios.competition_id = competitions.id`;
+  const query = `SELECT competitions.id as competition_id, 
+  competitions.name as competition_Name, competitions.start_datetime as startTime, competitions.end_datetime as endTime, 
+  competitions.start_amount as startAmount, competitions.avaliability as avaliabilty, 
+  portfolios.name as portfolio_name, portfolios.total_value as portfoliototalvalue FROM portfolios FULL OUTER JOIN competitions ON portfolios.competition_id = competitions.id`;
   db.query(query)
     .then((data) => {
       res.json(data.rows);
     })
-    .catch((err) => res.json({ message: err }));
+    .catch((err) => {res.json({ message: err })
+  console.log(err);
+  });
 });
 
 app.get("/portfolio_datas", (req, res) => {
@@ -282,6 +287,15 @@ app.get("/value/:id", (req, res) => {
       .catch((err) => res.json({ message: err }));
   });
 
+  app.get("/resetCOMP", (req, res) => {
+    db.query(
+      `UPDATE competitions SET avaliability = true where avaliability = false`)
+      .then((data) => {
+        res.json("success");
+      })
+      .catch((err) => res.json({ message: err }));
+  });
+
   app.put("/editPortfolios", (req, res) => {
     let funds = Number(req.body.funds);
     let id = Number(req.body.portfolioId);
@@ -291,13 +305,28 @@ app.get("/value/:id", (req, res) => {
       [funds, id]
     )
       .then((data) => {
-        res.json("success");
+         res.json("success");
       })
       .catch((err) => {
         res.json({ message: err })
     
     });
   });
+
+  app.get("/competition_end", (req,res) => {
+    db.query(
+      `SELECT competitions.name as competition_Name, competitions.start_amount as startAmount, competitions.end_datetime as endTime, 
+      portfolios.name as portfolio_Name, portfolios.total_value as portfolio_totalValue FROM competitions FULL OUTER JOIN portfolios ON competitions.id = portfolios.competition_id 
+      `
+    )
+      .then((data) => {
+        res.json(data["rows"]);
+      })
+      .catch((err) => {
+        res.json({ message: err })
+        console.log(err);
+    })
+  })
 
 
   app.get("/portfolio_datas", (reg, res) => {
@@ -395,6 +424,24 @@ app.post('/newComp', (req,res) => {
   res.json({ message: err })})
 })
 
+app.put('/deactivateComp', (req,res) => {
+  db.query(`UPDATE competitions SET avaliability = false WHERE id = $1`, [req.body.competition])
+.then((data) => {
+  res.json("success")
+})    .catch((err) => {
+  res.json({ message: err })})
+})
+
+
+app.post('/deletePortfolios', (req,res) => {
+  console.log(req.body.id);
+  db.query(`DELETE from portfolios WHERE id = $1 `, [req.body.id])
+.then((data) => {
+  res.json("success")
+})    .catch((err) => {
+  console.log(err);
+  res.json({ message: err })})
+})
 
 
 

@@ -210,6 +210,8 @@ h1{
   height: 10rem;
 }
 
+
+
 .ticker-info p {
   color: #A374D2;
   margin-top : 0.5rem;
@@ -227,4 +229,27 @@ h1{
   background-color: rgba($color: red, $alpha: .29);
   border-radius: 10px;
   color: red ;
+}
+
+.confirm-delete-button{
+  margin-top:20rem;
+  width: 5rem;
+  background-color: rgba($color: red, $alpha: .29);
+  border-radius: 10px;
+  color: red ;
+}
+
+.competition-over{
+  display: flex;
+  flex-direction: column;
+}
+
+.you-lose{
+
+  margin-top: 2rem;
+  margin-left:2rem;
+  color: #A374D2;
+}
+.you-lose h1{
+  color: white;
 }
