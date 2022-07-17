@@ -5,15 +5,15 @@ import { numberWithCommas } from "../../helpers/portfolioMainHelper"
 
 export default function UserCompetitionsTable (props) {
 
-  
-  const user_competition = props.user_competitions.map((competition) => {
 
+  const user_competition = props.user_competitions.map((competition) => {
     const userCompPortfolio = findUserCompPortfolio(props.data.portfolios, competition);
     let profit = userCompPortfolio.total_value - competition.capital
     profit = `$${numberWithCommas(Math.round((profit + Number.EPSILON) * 100) / 100)}`
     return (
       <UserCompetitionsItem
       key={competition.id}
+      id = {competition.id}
       name={competition.name}
       lobby = {competition.users}
       capital = {competition.capital}
@@ -21,6 +21,9 @@ export default function UserCompetitionsTable (props) {
       startDate = {competition.start_date}
       endDate = {competition.end_date}
       profit = {profit}
+      avaliability = {competition.avaliability}
+      setNewPopup = {props.setNewPopup}
+      dataForPop = {props.user_competitions}
       />
     );
   });
@@ -40,7 +43,8 @@ export default function UserCompetitionsTable (props) {
       <th>Prize Pool</th>
       <th>Start Date</th>
       <th>End Date</th>
-      <th className = "end-th">Profit Status</th>
+      <th>Profit Status</th>
+      <th className = "end-th">Status</th>
     </tr>
   </thead>
   <tbody>

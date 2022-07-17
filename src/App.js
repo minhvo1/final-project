@@ -36,6 +36,7 @@ function App() {
     sellTicker,
     deleteTicker,
     userId,
+    deletePortfolio
   } = useApplicationData();
 
   let adminData = AdminData();
@@ -105,6 +106,7 @@ function App() {
                   buyTicker={buyTicker}
                   sellTicker={sellTicker}
                   deleteTicker={deleteTicker}
+                  deletePortfolio ={deletePortfolio}
                 />
               )}
             </div>

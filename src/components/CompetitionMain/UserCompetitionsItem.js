@@ -2,6 +2,15 @@ import React from 'react';
 import classNames from "classnames";
 
 export default function UserCompetitionsItem (props) {
+
+  const moreInfo = () => {
+    props.setNewPopup("Competitions", props.id);
+  };
+
+  const winner = () => {
+    props.setNewPopup("CompetitionOver", props.dataForPop);
+  };
+
   const menuListClass = classNames("competition-profit", {
     "competition-profit-gain" : props.profit > 0 ,
   });
@@ -12,8 +21,8 @@ export default function UserCompetitionsItem (props) {
   let dateEnd = new Date(props.endDate);
   dateEnd = `${dateEnd.getMonth()}/${dateEnd.getDate()}/${dateEnd.getFullYear()}` 
 
-    return (
 
+    return (
       <tr>
       <td>{props.name}</td>
       <td>{props.lobby}</td>
@@ -22,7 +31,16 @@ export default function UserCompetitionsItem (props) {
       <td>{dateStart}</td>
       <td>{dateEnd}</td>
       <td className = {menuListClass}>{props.profit}</td>
-
+      {!props.avaliability && <td> 
+          <button className="finish-button" disabled= {false} onClick ={winner}>
+           Result
+          </button>
+      </td>}
+      {props.avaliability && <td> 
+          <button className="active-button" disabled= {false} onClick = {moreInfo}>
+           Active
+          </button>
+      </td>}
     </tr>
   
     )

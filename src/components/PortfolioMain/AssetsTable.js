@@ -5,9 +5,11 @@ import {
   numberWithCommas
 } from "../../helpers/portfolioMainHelper";
 import { checkArray, findTickerIndex } from '../../helpers/sidebarHelper';
+import classNames from "classnames";
 
 
 export default function AssetTable(props) {
+
 
   let index = checkArray(props.selectedPortfolio, props.assetData["portfolios"])
 
@@ -24,6 +26,13 @@ let dataToShow = props.data.map(ticker => {
   let indexTicker = findTickerIndex(ticker.id, props.assetData["portfolios"][index]["tickers"])
   let totalBoughtPrice = (props.assetData["portfolios"][index]["tickers"][indexTicker]["tickerAvgPrice"] * props.assetData["portfolios"][index]["tickers"][indexTicker]["tickerQuantity"]);
   let returnAmount = ticker.amount - totalBoughtPrice;
+
+  const assetListClass = classNames("asset-profit", {
+    "asset-profit-gain" : returnAmount > 0 ,
+  });
+
+
+
   ticker.avgBoughtPrice = Number(props.assetData["portfolios"][index]["tickers"][indexTicker]["tickerAvgPrice"]); 
   ticker.returnAmount = Number(returnAmount); 
   return (
@@ -33,7 +42,7 @@ let dataToShow = props.data.map(ticker => {
       <td>{`$${numberWithCommas(Math.round((ticker.price + Number.EPSILON) * 100) / 100)}`}</td>
       <td>{ticker.quantity}</td>
       <td>{`$${numberWithCommas(Math.round((ticker.amount + Number.EPSILON) * 100) / 100)}`}</td>
-      <td>{`$${numberWithCommas(Math.round((returnAmount + Number.EPSILON) * 100) / 100)}`}</td>
+      <td className = {assetListClass}>{`$${numberWithCommas(Math.round((returnAmount + Number.EPSILON) * 100) / 100)}`}</td>
       <td><button className = "join-button" onClick={() => {moreInfo(ticker)}}>Info</button></td>
     </tr>
   )

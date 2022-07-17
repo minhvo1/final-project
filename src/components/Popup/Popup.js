@@ -3,6 +3,8 @@ import "./Popup.scss";
 import Competition from "./Competition.js";
 import Ticker from "./Ticker.js";
 import NewPortfolio from "./NewPortfolio.js";
+import CompetitionOver from "./CompetitionOver.js";
+
 
 export default function Popup(props) {
   const exit = () => {
@@ -29,7 +31,6 @@ export default function Popup(props) {
         portfolios = {props.portfolios}
         deleteTicker = {props.deleteTicker}
         userId = {props.userId}
-
         />}
         {props.type === "Competitions" && <Competition
          competitions = {props.competitions}
@@ -38,7 +39,12 @@ export default function Popup(props) {
          userId = {props.userId}
          info = {props.info}
         />}
-      </div>
+         {props.type === "CompetitionOver" && <CompetitionOver
+         setMenu = {props.setMenu}
+         info = {props.info}
+         deletePortfolio = {props.deletePortfolio}
+        />}
+  </div>
     </div>
   );
 }

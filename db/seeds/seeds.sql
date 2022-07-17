@@ -24,6 +24,8 @@ INSERT INTO users (type, name, email, password) VALUES (false,  'Obie Howell', '
 
 INSERT INTO competitions (name, start_datetime, end_datetime, start_amount) VALUES ('WSB Competition', '2022-06-12T08:00:00.000Z', '2022-06-19T08:00:00.000Z', 10000);
 
+INSERT INTO competitions (name, start_datetime, end_datetime, start_amount) VALUES ('Yay Competition', '2022-06-12T08:00:00.000Z', '2022-07-19T08:00:00.000Z', 10000);
+
 INSERT INTO competitions (name, start_datetime, end_datetime, start_amount) VALUES ('Crypto Competition', '2022-06-12T08:00:00.000Z', '2022-06-19T08:00:00.000Z', 30000);
 
 INSERT INTO competitions (name, start_datetime, end_datetime, start_amount) VALUES ('FAANG Competition', '2022-06-12T08:00:00.000Z', '2022-06-19T08:00:00.000Z', 50000);
