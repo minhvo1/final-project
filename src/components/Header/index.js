@@ -22,7 +22,7 @@ export default function Header(props) {
         portfolios={props.portfolios}
         selectedPortfolio={props.selectedPortfolio}
       />
-      <UserIcon />
+      <UserIcon logout={props.logout}/>
     </div>
   );
 }

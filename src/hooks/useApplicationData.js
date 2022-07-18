@@ -12,7 +12,6 @@ import {
 
 export default function useApplicationData() {
 
-  const userId = 1;
 
   const [added, setSetAdded] = useState ({
     added : null
@@ -21,12 +20,28 @@ export default function useApplicationData() {
 const setAdded = (input) => {
   setSetAdded({...added, added:input})
 }
+  const [userId, setUserId] = useState(0);
 
   const [view, setView] = useState({
     menu: "Dashboard",
     portfolio: null,
     portfolio_id: null,
   });
+
+  const login = function(email, password) {
+    axios.post(`http://localhost:3001/login`, {email, password})
+    .then(response => {
+      console.log(response);
+      setUserId(response.data.userId);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  };
+
+  const logout = function() {
+    setUserId(0);
+  }
 
   const [popup, setPopup] = useState({
     popupStatus: false,
@@ -65,6 +80,7 @@ const setAdded = (input) => {
   };
 
   useEffect(() => {
+    console.log(userId);
     const profileURL = `http://localhost:3001/userdata/${userId}`;
     const competitionURL = `http://localhost:3001/compUsers`;
    
@@ -265,7 +281,7 @@ const setAdded = (input) => {
       })
 
     // eslint-disable-next-line
-  }, [added]);
+  }, [added, userId]);
 
   const savePortfolio = (
     portfolio_name,
@@ -404,6 +420,8 @@ const setAdded = (input) => {
     deletePortfolio,
     added,
     setAdded,
-    adminData
+    adminData,
+    login,
+    logout
   };
 }

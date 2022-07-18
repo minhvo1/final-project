@@ -4,6 +4,7 @@ import Competition from "./Competition.js";
 import Ticker from "./Ticker.js";
 import NewPortfolio from "./NewPortfolio.js";
 import CompetitionOver from "./CompetitionOver.js";
+import Login from "./Login.js";
 
 
 export default function Popup(props) {
@@ -48,6 +49,7 @@ export default function Popup(props) {
          info = {props.info}
          deletePortfolio = {props.deletePortfolio}
         />}
+        {props.type === "login" && <Login login={props.login}  />}
   </div>
     </div>
   );

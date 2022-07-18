@@ -57,17 +57,7 @@ app.post("/login", (req, res) => {
     .then((data) => {
       const user = data.rows[0];
 
-      if (!user)
-        return res.status(422).send({ message: "invalid email/password" });
-
-      //const validCredential = bcrypt.compareSync(password, user.password);
-
-      if (password !== user.password)
-        return res.status(422).send({ message: "invalid email/password" });
-
-      req.session.userId = user.id;
-
-      res.redirect("/");
+      res.json({userId : user.id});
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });

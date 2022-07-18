@@ -39,7 +39,9 @@ function App() {
     deletePortfolio,
     added,
     setAdded,
-    adminData
+    adminData,
+    login,
+    logout
   } = useApplicationData();
   console.log(adminData);
   let adminData1 = AdminData();;
@@ -53,7 +55,7 @@ function App() {
   // }, [])
   return (
     <div className="App">
-      {user.email === "" ? (
+      {userId > 0 ? (
         loading ? (
           <div>Loading...</div>
         ) : (
@@ -74,6 +76,7 @@ function App() {
                 portfolios={info.portfolios}
                 selectedPortfolio={view.portfolio}
                 userId={userId}
+                logout = {logout}
               />
               {view.menu === "Dashboard" &&
                 popup.popupStatus === false &&
@@ -124,7 +127,14 @@ function App() {
           </Fragment>
         )
       ) : (
-        <Login></Login>
+        <Fragment>
+                  {
+          popup.popupStatus === false  && (
+            <Popup type="login" login={login}/>
+          )
+        }
+        </Fragment>
+        //<Login></Login>
       )}
     </div>
   );
