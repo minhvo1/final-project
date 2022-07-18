@@ -11,9 +11,7 @@ import { data } from "autoprefixer";
 
 export default function AssetTable(props) {
   const [dataToShow, setDataToShow] = useState([])
-
-  useEffect(() => {
-
+ 
     let index = checkArray(props.selectedPortfolio, props.assetData["portfolios"])
   
     const moreInfo = (ticker) => {
@@ -23,18 +21,25 @@ export default function AssetTable(props) {
       }
       props.setNewPopup("Ticker", dataToRender)
     }
-      setDataToShow(props.data.map(ticker => {
+
+    
+      let DataToShow = (props.data.map(ticker => {
         let indexTicker = findTickerIndex(ticker.id, props.assetData["portfolios"][index]["tickers"])
-        let totalBoughtPrice = (props.assetData["portfolios"][index]["tickers"][indexTicker]["tickerAvgPrice"] * props.assetData["portfolios"][index]["tickers"][indexTicker]["tickerQuantity"]);
+        let totalBoughtPrice = 0;
+        if(props.assetData["portfolios"][index]["tickers"][indexTicker]) {
+          totalBoughtPrice = (props.assetData["portfolios"][index]["tickers"][indexTicker]["tickerAvgPrice"] * props.assetData["portfolios"][index]["tickers"][indexTicker]["tickerQuantity"]);
+        } 
         let returnAmount = ticker.amount - totalBoughtPrice;
     
         const assetListClass = classNames("asset-profit", {
           "asset-profit-gain" : returnAmount > 0 ,
         });
     
+        if (props.assetData["portfolios"][index]["tickers"][indexTicker]) {
+          ticker.avgBoughtPrice = Number(props.assetData["portfolios"][index]["tickers"][indexTicker]["tickerAvgPrice"]); 
+        }
     
-    
-      ticker.avgBoughtPrice = Number(props.assetData["portfolios"][index]["tickers"][indexTicker]["tickerAvgPrice"]); 
+
       ticker.returnAmount = Number(returnAmount); 
       return (
         <tr>
@@ -49,7 +54,6 @@ export default function AssetTable(props) {
       )
     }))
     
-  }, [props.data])
 
   return (
     <div className="asset-table">
@@ -72,7 +76,7 @@ export default function AssetTable(props) {
           </thead>
           <tbody>
 
-              {dataToShow}
+              {DataToShow}
           </tbody>
          
 

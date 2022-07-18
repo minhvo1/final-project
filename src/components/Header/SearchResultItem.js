@@ -9,7 +9,6 @@ const EMPTY = "EMPTY";
 const SELECTED = "SELECTED";
 
 export default function SearchResultItem(props) {
-  console.log(props);
   const [mode, setMode] = useState(
     props.selected ? SELECTED : EMPTY
   );
@@ -29,6 +28,7 @@ export default function SearchResultItem(props) {
         .then(res => {
           console.log(res);
           setMode(SELECTED);
+          window.location.reload(true);
         });
     }
   }

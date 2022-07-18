@@ -22,7 +22,6 @@ export default function CompetitionsTable (props) {
     );
   });
 
-
     return (
       <div className="competition-list">
             <h1 className = "competition-titles">Competitions</h1>

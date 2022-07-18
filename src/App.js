@@ -36,11 +36,13 @@ function App() {
     sellTicker,
     deleteTicker,
     userId,
-    deletePortfolio
+    deletePortfolio,
+    added,
+    setAdded,
+    adminData
   } = useApplicationData();
-
-  let adminData = AdminData();
-
+  console.log(adminData);
+  let adminData1 = AdminData();;
   // useEffect(() => {
 
   //   schedule.scheduleJob('*/5 * * * * *', () => {
@@ -64,6 +66,8 @@ function App() {
               setMenu={setMenu}
               setNewPopup={setNewPopup}
               userId={userId}
+              refresh={added}
+              setRefresh={setAdded}
             />
             <div className="main-container">
               <Header
@@ -80,6 +84,10 @@ function App() {
                     selectedPortfolioId={view.portfolio_id}
                     setNewPopup={setNewPopup}
                     userId={userId}
+                    view={view}
+                    setPortfolio={setPortfolio}
+                    refresh={added}
+                    setRefresh={setAdded}
                   />
                 )}
               {view.menu === "Competitions" &&
@@ -91,6 +99,7 @@ function App() {
                     setNewPopup={setNewPopup}
                     data={info}
                     userId={userId}
+                    setRefresh={setAdded}
                   />
                 )}
               {userId === 1 && <Admin adminData={adminData} />}
@@ -106,7 +115,9 @@ function App() {
                   buyTicker={buyTicker}
                   sellTicker={sellTicker}
                   deleteTicker={deleteTicker}
-                  deletePortfolio ={deletePortfolio}
+                  deletePortfolio={deletePortfolio}
+                  refresh={added}
+                  setRefresh={setAdded}
                 />
               )}
             </div>
