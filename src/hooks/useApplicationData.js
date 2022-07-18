@@ -11,13 +11,28 @@ import {
 } from "../helpers/sidebarHelper";
 
 export default function useApplicationData() {
-  const userId = 2;
+  const [userId, setUserId] = useState(0);
 
   const [view, setView] = useState({
     menu: "Dashboard",
     portfolio: null,
     portfolio_id: null,
   });
+
+  const login = function(email, password) {
+    axios.post(`http://localhost:3001/login`, {email, password})
+    .then(response => {
+      console.log(response);
+      setUserId(response.data.userId);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  };
+
+  const logout = function() {
+    setUserId(0);
+  }
 
   const [popup, setPopup] = useState({
     popupStatus: false,
@@ -54,6 +69,7 @@ export default function useApplicationData() {
   };
 
   useEffect(() => {
+    console.log(userId);
     const profileURL = `http://localhost:3001/userdata/${userId}`;
     const competitionURL = `http://localhost:3001/compUsers`;
    
@@ -214,7 +230,7 @@ export default function useApplicationData() {
         });
       });
     // eslint-disable-next-line
-  }, []);
+  }, [userId]);
 
   const savePortfolio = (
     portfolio_name,
@@ -349,6 +365,8 @@ export default function useApplicationData() {
     sellTicker,
     deleteTicker,
     userId,
-    deletePortfolio
+    deletePortfolio,
+    login,
+    logout
   };
 }
