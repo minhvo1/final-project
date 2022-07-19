@@ -3,6 +3,7 @@ import { numberWithCommas } from "../../helpers/portfolioMainHelper"
 import { checkArray,findCompetition } from '../../helpers/sidebarHelper';
 
 export default function PortfolioInfo(props) {
+  
   let index = checkArray(props.portfolio, props.assetData["portfolios"])
   let funds = Number(props.assetData["portfolios"][index]["funds"]);
   let totalValue = Number(props.assetData["portfolios"][index]["total_value"]);
