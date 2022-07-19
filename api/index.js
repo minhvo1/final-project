@@ -39,7 +39,7 @@ db.connect();
 
 
 // Call schedule jobs
-//scheduledFunctions.initScheduledJobs(db);
+scheduledFunctions.initScheduledJobs(db);
 
 app.get("/", (req, res) => {
   db.query(`SELECT * FROM tickers`)
