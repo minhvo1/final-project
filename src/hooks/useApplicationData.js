@@ -301,6 +301,7 @@ const profileURL = `http://localhost:3001/userdata/${userId}`;
       }),
     ]).then((ans) => {
       console.log(ans[2])
+      console.log("this working?");
       axios.get(`http://localhost:3001/portfolio/${data["portfolioId"]}/updateValue`). then (() => {
         updateTotalValues( data["portfolioId"]);
       })

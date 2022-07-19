@@ -36,8 +36,6 @@ export default function Ticker(props) {
     let dataToRender = {};
 
     if (action === "buy") {
-      console.log(props.info.ticker)
-
       Msg = `Confirmation to buy ${buyShares} shares of ${props.info.ticker.ticker}?`;
       actionToDo = props.buyTicker;
       if (buyShares === null) {
