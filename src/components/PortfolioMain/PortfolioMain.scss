@@ -91,7 +91,11 @@ $radius: 1rem;
 
 .daily-return span {
   font-size: 35px;
-  color: #33C15B
+  color: $textcolor;
+}
+
+portfolio-return-red {
+  color : red;
 }
 
 .available-funds {

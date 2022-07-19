@@ -194,7 +194,8 @@ const profileURL = `http://localhost:3001/userdata/${userId}`;
         for (let x = 0; x < competitions.length; x++ ) {
           let enddate = competitions[x]["end_date"].slice(0,10)
           let currentDate = new Date().toISOString().slice(0,10)
-          
+          console.log(enddate, currentDate);
+          console.log(enddate < currentDate);
           if(enddate < currentDate && competitions[x]["avaliability"]) {
             let highestPortfolio = {
               name : '',
