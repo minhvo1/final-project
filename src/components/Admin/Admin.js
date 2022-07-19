@@ -50,6 +50,7 @@ const [empty, setEmpty] = useState('');
             onClick: () => {
                 addNewComp(info.name, info.startAmount, info.date)
                 setInfo({...info, name: null, date: null, startAmount: null})
+                window.location.reload(true);
             },
           },
           {
