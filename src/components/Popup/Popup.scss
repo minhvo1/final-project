@@ -20,7 +20,7 @@ $radius: 1rem;
 }
 
 h1{
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   color: #878080;
 }
 
@@ -123,7 +123,7 @@ h1{
   color: $textcolor;
   font-family: 'Poppins';
   background-repeat: no-repeat;
-  background-color: rgba(153, 103, 202, 0.6);
+  background-color: rgba($color: #c6a8e4, $alpha: .1);
   border-radius: 10px;
   border: none;
   overflow: hidden;
@@ -133,6 +133,7 @@ h1{
 .new-portfolio button:hover {
   background-color: rgba($color: #9967CA, $alpha: .29) !important;
   border-radius: 10px;
+  color: #9d66d3 !important;
 }
 
 .competition-info {
@@ -164,6 +165,12 @@ h1{
   color : white;
   margin-top: -0.5rem;
   margin-bottom: 1rem;
+}
+
+.Ticker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .ticker-info {
@@ -201,6 +208,10 @@ h1{
   height: 10rem;
 }
 
+.buy-ticker input{
+  margin-right: 0.5rem
+}
+
 .sell-ticker { 
   background-color: #313335;
   display: flex;
@@ -211,11 +222,27 @@ h1{
   height: 10rem;
 }
 
+.sell-ticker input{
+  margin-right: 0.5rem
+}
 
+.ticker-info h2 {
+  text-align: center;
+  color:$textcolor-small
+
+}
 
 .ticker-info p {
   color: #A374D2;
   margin-top : 0.5rem;
+  text-align: center;
+  font-size: 1.5rem;
+  
+}
+
+.ticker-info p span{
+  color: $textcolor
+
 }
 
 .error-delete {
@@ -234,7 +261,7 @@ h1{
 
 .confirm-delete-button{
   margin-top:5rem;
-  width: 5rem;
+  width: 8rem;
   background-color: rgba($color: red, $alpha: .29);
   border-radius: 10px;
   color: red ;
@@ -242,52 +269,45 @@ h1{
 
 .confirm-profit-button {
   margin-top:5rem;
-  width: 5rem;
+  width: 8rem;
   background-color: rgba($color: #33C15B, $alpha: .29);
   border-radius: 10px;
   color: #33C15B;
 }
 
-.competition-over{
+.results {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  font-size: 1.5rem;
 }
 
 .you-lose{
   margin-top: 2rem;
   margin-left:2rem;
-  color: #A374D2;
+  color: $textcolor-small;
 }
 
 .you-win {
   margin-top: 2rem;
   margin-left:2rem;
-  color: #A374D2;
+  color: $textcolor-small;
 }
 
-.you-lose h1{
-  color: white;
+.results h1{
+  color: $divcolor-selected;
+  font-size: 2rem;
+  padding-bottom: 2rem;
 }
 
-.you-lose h2{
+.results h2{
   margin-top:1rem;
 }
 
-.you-lose b{
-  color: white;
+.results b{
+  color: $textcolor;
 }
 
-.you-lose h1{
-  color: white;
-}
-
-.you-lose h2 {
-  margin-top:1rem;
-}
-
-.you-lose b {
-  color:white;
-}
 
 .email-input-info {
   margin-top: 2rem
@@ -331,4 +351,6 @@ h1{
 .login-button button {
   padding-top: 1.2rem;
 }
+
+
 

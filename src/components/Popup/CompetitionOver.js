@@ -1,6 +1,11 @@
 import React, { Fragment, useState } from "react";
 import "./Popup.scss";
 import { highestPortfolio } from "../../helpers/sidebarHelper";
+import {
+  getPortfolioTickers,
+  getPromiseArrayTickers,
+  numberWithCommas
+} from "../../helpers/portfolioMainHelper";
 
 export default function CompetitionOver(props) {
   const winner = highestPortfolio(props.info[0].portfolios);
@@ -18,7 +23,7 @@ export default function CompetitionOver(props) {
   return (
     <div className="competition-over">
       {result && (
-        <div className="you-win">
+        <div className="results you-win">
           <h1>You Win!</h1>
           <h2>
             You ranked First among <b>{props.info[0].users}</b> users in the
@@ -26,18 +31,18 @@ export default function CompetitionOver(props) {
           </h2>
           <br />
           <h2>
-            Total Value of your portfolio was : <b>{winner.value}</b>
+            Total Value of your portfolio was : <b>{`$${numberWithCommas(Math.round((winner.value + Number.EPSILON) * 100) / 100)}`}</b>
           </h2>
           <br />
           <h2>
-            Your profit was : <b>{winner.value - props.info[0].capital}</b>
+            Your profit was : <b>{`$${numberWithCommas(Math.round((winner.value - props.info[0].capital + Number.EPSILON) * 100) / 100)}`}</b>
           </h2>
           <br />
           <h2>
             Your prize is : <b>{props.info[0].prizePool}</b>
           </h2>
 
-          <h2>Click confirm to exit and grab your profit</h2>
+
 
           <button className="confirm-profit-button" onClick={confirmWon}>
             Confirm
@@ -45,7 +50,7 @@ export default function CompetitionOver(props) {
         </div>
       )}
       {!result && (
-        <div className="you-lose">
+        <div className="results you-lose">
           <h1>You Lost!</h1>
           <h2>
             There were <b>{props.info[0].users}</b> users in the competition
@@ -53,20 +58,19 @@ export default function CompetitionOver(props) {
           <br />
           <h2>
             Total Value of your portfolio was :{" "}
-            <b>{props.info[0].userCompPortfolio.total_value}</b>
+            <b>{`$${numberWithCommas(Math.round((props.info[0].userCompPortfolio.total_value + Number.EPSILON) * 100) / 100)}`}</b>
+            
           </h2>
           <br />
           <h2>
             Your profit was :{" "}
-            <b>
-              {props.info[0].userCompPortfolio.total_value -
-                props.info[0].capital}
-            </b>
+            <b>{`$${numberWithCommas(Math.round((props.info[0].userCompPortfolio.total_value -
+                props.info[0].capital + Number.EPSILON) * 100) / 100)}`}</b>
+ 
           </h2>
           <br />
           <h2>Better luck next time!</h2>
           <br />
-          <h2>Click confirm to delete your loser profile</h2>
 
           <button className="confirm-delete-button" onClick={confirm}>
             Confirm

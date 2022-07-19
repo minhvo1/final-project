@@ -147,41 +147,21 @@ export default function Ticker(props) {
       </div>
       <div className="ticker-info">
         <h2>Current Price</h2>
-        <p>{props.info.ticker.price}</p>
+        <p>${props.info.ticker.price}</p>
       </div>
       <div className="ticker-info">
         <h2>User</h2>
         {props.info.ticker.quantity > 0 && (
           <p>
-            🟢{props.info.ticker.quantity} Share(s), bought average price of{" "}
-            <b>
-              ${" "}
+            <span>{props.info.ticker.quantity} share(s), bought at an average price of</span>{" "}
+        
+              ${""}
               {(Math.round(props.info.ticker.avgBoughtPrice + Number.EPSILON) *
                 100) /
                 100}
-            </b>🟢
+      
             <br />
-            🟢Total Price :{" "}
-            <b>
-              ${" "}
-              {(Math.round(
-                props.info.ticker.quantity * props.info.ticker.price +
-                  Number.EPSILON
-              ) *
-                100) /
-                100}
-            </b>🟢
-            <br/>
-            🟢 Total Return :{" "} 
-            <b>
-            ${" "}
-              {(Math.round(
-                props.info.ticker.returnAmount +
-                  Number.EPSILON
-              ) *
-                100) /
-                100}
-                            </b>🟢
+            
           </p>
         )}
         {!props.info.ticker.quantity && <p>🔴No Shares🔴</p>}
@@ -195,7 +175,7 @@ export default function Ticker(props) {
             }}
           >
             <h2>
-              You can buy up to <b>{maxAmount}</b> share(s){" "}
+              You can <strong>BUY</strong> up to <b>{maxAmount}</b> share(s){" "}
             </h2>
             <input
               type="number"
@@ -229,7 +209,7 @@ export default function Ticker(props) {
             }}
           >
             <h2>
-              You can sell <b>{props.info.ticker.quantity}</b> share(s) at{" "}
+              You can <strong>SELL</strong>  <b>{props.info.ticker.quantity}</b> share(s) at{" "}
               {props.info.ticker.price} ${" "}
             </h2>
             <input

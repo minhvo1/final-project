@@ -1,6 +1,12 @@
 import React from "react";
+import {
+  getPortfolioTickers,
+  getPromiseArrayTickers,
+  numberWithCommas
+} from "../../helpers/portfolioMainHelper";
 
 export default function CompetitionsTableItem(props) {
+ 
   let dateStart = new Date(props.startDate);
   dateStart = `${dateStart.getMonth()}/${dateStart.getDate()}/${dateStart.getFullYear()}`;
 
@@ -15,8 +21,8 @@ export default function CompetitionsTableItem(props) {
     <tr>
       <td>{props.name}</td>
       <td>{props.lobby}</td>
-      <td>{props.capital}</td>
-      <td>{props.prizePool}</td>
+      <td>{`$${numberWithCommas(Math.round((props.capital + Number.EPSILON) * 100) / 100)}`}</td>
+      <td>{`$${numberWithCommas(Math.round((props.prizePool + Number.EPSILON) * 100) / 100)}`}</td>
       <td>{dateStart}</td>
       <td>{dateEnd}</td>
       {props.avaliability === true && (

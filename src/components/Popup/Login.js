@@ -53,7 +53,7 @@ export default function Login(props) {
           ></input>
         </div>    
         <section className="error-message">{error}</section>
-        <div className="login-button">
+        <div className="login-button" onClick={validate}>
           <button className="save-button" type="button"  onClick={validate}>
             Login
           </button>

@@ -111,13 +111,15 @@ td {
 
 .join-button {
   width: 5rem;
-    background-color: rgba($color: #9967CA, $alpha: .29);
+  background-color: rgba($color: #c6a8e4, $alpha: .1);
     border-radius: 10px;
-    color: #A374D2 ;
+    color: $textcolor;
   }
 
 .join-button:hover {
-    text-shadow: 4px 4px 4px  #878080;
+  background-color: rgba($color: #9967CA, $alpha: .29) !important;
+  border-radius: 10px;
+  color: #9d66d3 !important;
   }
 
   .competition-profit {

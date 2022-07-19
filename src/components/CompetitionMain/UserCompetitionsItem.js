@@ -1,5 +1,10 @@
 import React from 'react';
 import classNames from "classnames";
+import {
+  getPortfolioTickers,
+  getPromiseArrayTickers,
+  numberWithCommas
+} from "../../helpers/portfolioMainHelper";
 
 export default function UserCompetitionsItem (props) {
 
@@ -26,8 +31,8 @@ export default function UserCompetitionsItem (props) {
       <tr>
       <td>{props.name}</td>
       <td>{props.lobby}</td>
-      <td>{props.capital}</td>
-      <td>{props.prizePool}</td>
+      <td>{`$${numberWithCommas(Math.round((props.capital + Number.EPSILON) * 100) / 100)}`}</td>
+      <td>{`$${numberWithCommas(Math.round((props.prizePool + Number.EPSILON) * 100) / 100)}`}</td>
       <td>{dateStart}</td>
       <td>{dateEnd}</td>
       <td className = {menuListClass}>{props.profit}</td>
