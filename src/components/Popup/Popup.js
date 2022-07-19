@@ -23,6 +23,9 @@ export default function Popup(props) {
         setMenu = {props.setMenu}
         savePortfolio = {props.savePortfolio}
         userId = {props.userId}
+        setRefresh = {props.setRefresh}
+        refresh = {props.refresh}
+
         />}
         {props.type === "Ticker" &&  <Ticker
         setMenu = {props.setMenu}
@@ -32,6 +35,7 @@ export default function Popup(props) {
         portfolios = {props.portfolios}
         deleteTicker = {props.deleteTicker}
         userId = {props.userId}
+        setRefresh = {props.setRefresh}
         />}
         {props.type === "Competitions" && <Competition
          competitions = {props.competitions}

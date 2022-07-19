@@ -226,6 +226,7 @@ app.post("/newPortfolio", (req, res) => {
     [portfolioName, user_id, competition_id, funds, total_value]
   )
     .then((data) => {
+      console.log(data["rows"])
       res.json(data);
     })
     .catch((err) => res.json({ message: err }));
@@ -268,7 +269,7 @@ app.get("/value/:id", (req, res) => {
      (1, 1, 1);
    */
     db.query(
-      `INSERT INTO portfolio_datas (quantity, portfolio_id, ticker_id) VALUES($1, $2, $3)`,
+      `INSERT INTO portfolio_datas (quantity, portfolio_id, ticker_id, avgPrice) VALUES($1, $2, $3, 0)`,
       [0, req.params.id, req.body.ticker_id]
     )
       .then((data) => {
@@ -333,6 +334,7 @@ app.get("/value/:id", (req, res) => {
   });
  
   app.put("/editPortfolio_datas", (req, res) => {
+    console.log(req.body.originalPrice)
     if (req.body.existing) {
       db.query(
         `UPDATE portfolio_datas SET quantity = $1, avgPrice = $2 WHERE portfolio_id = $3 AND ticker_id = $4`,
@@ -343,7 +345,7 @@ app.get("/value/:id", (req, res) => {
         })
         .catch((err) => {
           res.json({ message: err })
-          console.log(err);
+          console.log("THAT ONE ", err);
       })}else {
       db.query(
         `INSERT INTO portfolio_datas (quantity, portfolio_id, ticker_id, avgPrice) VALUES ($1, $2, $3, $4)`,
@@ -354,7 +356,7 @@ app.get("/value/:id", (req, res) => {
         })
         .catch((err) => {
           res.json({ message: err })
-          console.log(err);
+          console.log("THIS ONE",err);
 
       })}
     
@@ -435,7 +437,7 @@ app.post('/deletePortfolios', (req,res) => {
 
 
 
-/* app.get("/get_tickers", (req, res) => {
+ /*app.get("/get_tickers", (req, res) => {
   const results = [];
 
   fs.createReadStream('./datas/listing_status.csv')
@@ -505,7 +507,7 @@ app.get("/portfolio/:id/updateValue", (req, res) => {
           console.log("Line 228", totalValue);
           // 6. Update the value into Database
           let datetime = new Date();
-          let insertQuery = "INSERT INTO portfolio_values (portfolio_id, datetime, value) VALUES ($1, $2, $3);";
+          let insertQuery = "INSERT INTO portfolio_values (portfolio_id, datetime, value, avgPrice) VALUES ($1, $2, $3, 0);";
           console.log("Line 232, insert query: ", insertQuery);
           db.query(insertQuery, [portfolio_id, datetime, totalValue])
             .then((data) => {

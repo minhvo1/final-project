@@ -6,8 +6,7 @@ export default function PortfolioInfo(props) {
   let index = checkArray(props.portfolio, props.assetData["portfolios"])
   let funds = Number(props.assetData["portfolios"][index]["funds"]);
   let totalValue = Number(props.assetData["portfolios"][index]["total_value"]);
-  let competition = findCompetition(props.assetData["portfolios"][index]["id"], props.assetData["competitions"]);
-
+  let competition = findCompetition(props.assetData["portfolios"][index]["portfolio_competition"], props.assetData["competitions"]);
   let value = 0;
   for (let ticker of props.data) {
     value += (ticker.price * ticker.quantity);
