@@ -16,10 +16,12 @@ export default function CompetitionOver(props) {
     props.setMenu("Dashboard");
     window.location.reload(true);
   };
-
+  
   const confirmWon = () => {
     props.setMenu("Dashboard");
   };
+
+  console.log(props.info[0].userCompPortfolio.total_value);
 
   return (
     <div className="competition-over">
@@ -59,7 +61,7 @@ export default function CompetitionOver(props) {
           <br />
           <h2>
             Total Value of your portfolio was :{" "}
-            <b>{`$${numberWithCommas(Math.round((props.info[0].userCompPortfolio.total_value + Number.EPSILON) * 100) / 100)}`}</b>
+            <b>{`$${numberWithCommas(Math.round((Number(props.info[0].userCompPortfolio.total_value) + Number.EPSILON) * 100) / 100)}`}</b>
             
           </h2>
           <br />

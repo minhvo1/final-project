@@ -1,6 +1,7 @@
 import React from 'react';
 import { numberWithCommas } from "../../helpers/portfolioMainHelper"
 import { checkArray,findCompetition } from '../../helpers/sidebarHelper';
+import classNames from "classnames";
 
 export default function PortfolioInfo(props) {
   let index = checkArray(props.portfolio, props.assetData["portfolios"])
@@ -11,7 +12,8 @@ export default function PortfolioInfo(props) {
   for (let ticker of props.data) {
     value += (ticker.price * ticker.quantity);
   }
-  
+
+ 
 let tickers = (props.assetData["portfolios"][index]["tickers"]);
 let initalValue = 0; 
 
@@ -29,6 +31,13 @@ for (let ticker of tickers) {
   const totalReturnValue = `$${numberWithCommas(Math.round((totalReturn + Number.EPSILON) * 100) / 100)}`
   const stockValue = `$${numberWithCommas(Math.round((value + Number.EPSILON) * 100) / 100)}`
   const portfolioValue = `$${numberWithCommas(Math.round((totalValue + Number.EPSILON) * 100) / 100)}`
+
+  const returnValue = classNames("portfolio-return", {
+    "portfolio-return-red" : totalReturnValue < 0 ,
+  });
+  
+
+
   return (
     <div className="portfolio-info">
       <div className="portfolio-value-return">
@@ -36,7 +45,7 @@ for (let ticker of tickers) {
           <header>Portfolio Value</header>
           <span>{portfolioValue}</span>
         </div>
-        <div className="portfolio-return">
+        <div className={returnValue}>
           <header>Total Return</header>
           <span>{totalReturnValue}</span>
         </div>
