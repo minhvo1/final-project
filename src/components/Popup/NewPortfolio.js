@@ -35,7 +35,7 @@ export default function NewPortfolio(props) {
     props.savePortfolio(portfolio_name, props.userId, competition_ID, startValue);
     props.setMenu("Dashboard");
     setPortfolio_name("");
-    props.setRefresh("New Portfolio")
+    window.location.reload(true);
   }
 
   function cancel() {

@@ -9,6 +9,8 @@ import {
   updateTotalValues,
   finduserCompname
 } from "../helpers/sidebarHelper";
+import Cookies from 'js-cookie'
+
 
 export default function useApplicationData() {
 
@@ -25,6 +27,7 @@ export default function useApplicationData() {
     .then(response => {
       console.log(response);
       setUserId(response.data.userId);
+      Cookies.set('userId',response.data.userId);
     })
     .catch(err => {
       console.log(err);
@@ -33,6 +36,8 @@ export default function useApplicationData() {
 
   const logout = function() {
     setUserId(0);
+    Cookies.remove('userId');
+    window.location.reload(true);
   }
 
   const [popup, setPopup] = useState({
@@ -47,25 +52,6 @@ export default function useApplicationData() {
     competitions: {},
     user_competitions: {},
   });
-
-const addNewPortfolio = (portfolioData) => {
-  setInfo({...info, portfolios: portfolioData})
-}
-
-const addTicker = (tickerData) => {
-  setInfo({...info, portfolios: tickerData})
-}
-
-const editTicker = (tickerData) => {
-  setInfo({...info, portfolios: tickerData})
-}
-
-const deleteTickerAsset = (tickerData) => {
-  setInfo({...info, portfolios: tickerData})
-}
-
-
-
 
   const [adminData, setAdminData] = useState ('')
 
@@ -91,8 +77,9 @@ const deleteTickerAsset = (tickerData) => {
   };
 
   useEffect(() => {
-    console.log(userId);
-    const profileURL = `http://localhost:3001/userdata/${userId}`;
+const userId =Cookies.get('userId');
+
+const profileURL = `http://localhost:3001/userdata/${userId}`;
     const competitionURL = `http://localhost:3001/compUsers`;
    
     Promise.all([axios.get(profileURL), axios.get(competitionURL)])
@@ -392,9 +379,5 @@ const deleteTickerAsset = (tickerData) => {
     deletePortfolio,
     login,
     logout,
-    addNewPortfolio,
-    addTicker,
-    editTicker,
-    deleteTickerAsset
   };
 }
