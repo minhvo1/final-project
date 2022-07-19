@@ -6,6 +6,8 @@ import { numberWithCommas } from "../../helpers/portfolioMainHelper";
 export default function Competitions(props) {
   
 const compPortfolios = props.compPortfolios.map ((portfolios) => {
+  console.log(portfolios.name);
+  console.log(portfolios.total_value);
     <div className="portfolio-comp-list">
         <text>{portfolios.name} : </text>
         <text className="green">{portfolios.total_value}</text>

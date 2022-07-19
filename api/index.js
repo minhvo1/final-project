@@ -507,7 +507,7 @@ app.get("/portfolio/:id/updateValue", (req, res) => {
           console.log("Line 228", totalValue);
           // 6. Update the value into Database
           let datetime = new Date();
-          let insertQuery = "INSERT INTO portfolio_values (portfolio_id, datetime, value, avgPrice) VALUES ($1, $2, $3, 0);";
+          let insertQuery = "INSERT INTO portfolio_values (portfolio_id, datetime, value) VALUES ($1, $2, $3);";
           console.log("Line 232, insert query: ", insertQuery);
           db.query(insertQuery, [portfolio_id, datetime, totalValue])
             .then((data) => {

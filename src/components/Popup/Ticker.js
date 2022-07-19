@@ -95,7 +95,7 @@ export default function Ticker(props) {
             actionToDo(dataToRender);
             props.setRefresh("Bought Tickers");
             props.setMenu("Dashboard");
-
+            window.location.reload(true);
           },
         },
         {

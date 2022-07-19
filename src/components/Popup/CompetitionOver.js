@@ -14,6 +14,7 @@ export default function CompetitionOver(props) {
   const confirm = () => {
     props.deletePortfolio(props.info[0].userCompPortfolio.id);
     props.setMenu("Dashboard");
+    window.location.reload(true);
   };
 
   const confirmWon = () => {

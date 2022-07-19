@@ -10,6 +10,7 @@ import Popup from "./components/Popup/Popup";
 import schedule from "node-schedule";
 import Admin from "./components/Admin/Admin";
 import { AdminData } from ".//helpers/sidebarHelper";
+import Cookies from 'js-cookie'
 
 /*
 const { Pool } = require("pg");
@@ -33,17 +34,13 @@ function App() {
     buyTicker,
     sellTicker,
     deleteTicker,
-    userId,
     deletePortfolio,
     setInfo,
     login,
     logout,
-    addNewPortfolio,
-    addTicker,
-    editTicker,
-    deleteTickerAsset,
+ 
   } = useApplicationData();
-  let adminData1 = AdminData();;
+  let adminData = AdminData();;
   // useEffect(() => {
 
   //   schedule.scheduleJob('*/5 * * * * *', () => {
@@ -54,8 +51,8 @@ function App() {
   // }, [])
 
 
-  console.log(info);
 
+  const userId = Cookies.get('userId')
 
   return (
     <div className="App">
@@ -105,7 +102,7 @@ function App() {
                     userId={userId}
                   />
                 )}
-              {userId === 1 && <Admin adminData1 = {adminData1}/>}
+              {userId === 1 && <Admin adminData = {adminData}/>}
               {popup.popupStatus === true && (
                 <Popup
                   type={popup.page}
@@ -119,10 +116,7 @@ function App() {
                   sellTicker={sellTicker}
                   deleteTicker={deleteTicker}
                   deletePortfolio={deletePortfolio}
-                  addNewPortfolio = {addNewPortfolio}
-                  addTicker= {addTicker}
-                  editTicker = {editTicker}
-                  deleteTickerAsset = {deleteTickerAsset}
+                 
                 />
               )}
             </div>
