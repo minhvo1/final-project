@@ -12,14 +12,6 @@ import {
 
 export default function useApplicationData() {
 
-
-  const [added, setSetAdded] = useState ({
-    added : null
-  })
-  
-const setAdded = (input) => {
-  setSetAdded({...added, added:input})
-}
   const [userId, setUserId] = useState(0);
 
   const [view, setView] = useState({
@@ -55,6 +47,25 @@ const setAdded = (input) => {
     competitions: {},
     user_competitions: {},
   });
+
+const addNewPortfolio = (portfolioData) => {
+  setInfo({...info, portfolios: portfolioData})
+}
+
+const addTicker = (tickerData) => {
+  setInfo({...info, portfolios: tickerData})
+}
+
+const editTicker = (tickerData) => {
+  setInfo({...info, portfolios: tickerData})
+}
+
+const deleteTickerAsset = (tickerData) => {
+  setInfo({...info, portfolios: tickerData})
+}
+
+
+
 
   const [adminData, setAdminData] = useState ('')
 
@@ -229,6 +240,7 @@ const setAdded = (input) => {
         }
    
         return [user, usersCompetition, portfolio, competitions];
+
       })
       .then((ans) => {
         setLoading(false);
@@ -239,49 +251,10 @@ const setAdded = (input) => {
           competitions: ans[3],
           user_competitions: ans[1],
         });
-      }).then (() => {
-
-        let userArray = [];
-        let competitionArray = [];
-        let portfolioArray = [];
-      
-         Promise.all([
-          axios.get(`http://localhost:3001/users`),
-          axios.get(`http://localhost:3001/competitions`),
-          axios.get(`http://localhost:3001/allPortfolio`),
-          axios.get(`http://localhost:3001/allCompetitionPortfolios`),
-        ]).then((ans) => {
-          for (let user of ans[0]["data"]) {
-            userArray.push(user);
-          }
-          for (let portfolio of ans[2]["data"]) {
-            portfolioArray.push(portfolio);
-          }
-          for (let competition of ans[1]["data"]) {
-            let eachComp = {
-                compInfo : competition,
-                compPortfolios : []
-            };
-            for (let compPort of ans[3]["data"]) {
-                if (competition.id === compPort.competition_id) {
-                    eachComp.compPortfolios.push(compPort);
-                }
-            }
-            competitionArray.push(eachComp);
-          }
-        })
-        // eslint-disable-next-line
-      
-      let returnValue = {
-        userArray : userArray, 
-        competitionArray : competitionArray,
-        portfolioArray : portfolioArray,
-      }
-      setAdminData(returnValue);
       })
 
     // eslint-disable-next-line
-  }, [added, userId]);
+  }, [userId]);
 
   const savePortfolio = (
     portfolio_name,
@@ -308,7 +281,7 @@ const setAdded = (input) => {
           }),
         ])
           .then((ans) => {
-            console.log(ans);
+            return newportfolio_id;
           })
           .catch(function (error) {
             console.log(error);
@@ -401,12 +374,11 @@ const setAdded = (input) => {
     })
   };
 
-
-
   return {
     view,
     setMenu,
     setPortfolio,
+    setInfo,
     info,
     loading,
     setLoading,
@@ -418,10 +390,11 @@ const setAdded = (input) => {
     deleteTicker,
     userId,
     deletePortfolio,
-    added,
-    setAdded,
-    adminData,
     login,
-    logout
+    logout,
+    addNewPortfolio,
+    addTicker,
+    editTicker,
+    deleteTickerAsset
   };
 }

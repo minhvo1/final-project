@@ -5,7 +5,6 @@ import axios from "axios";
 import "./Header.scss";
 
 export default function Header(props) {
-  console.log(props)
   return (
     <div className="header">
       {props.userId !== 1 && (

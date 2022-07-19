@@ -95,7 +95,6 @@ export default function Ticker(props) {
             actionToDo(dataToRender);
             props.setRefresh("Bought Tickers");
             props.setMenu("Dashboard");
-            window.location.reload(true);
 
           },
         },
@@ -121,7 +120,6 @@ export default function Ticker(props) {
           onClick: () => {
             props.deleteTicker(portfolio.id, props.info.ticker.id);
             props.setRefresh("Bought Tickers");
-            window.location.reload(true);
             props.setMenu("Dashboard");
           },
         },

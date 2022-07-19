@@ -36,7 +36,6 @@ export default function NewPortfolio(props) {
     props.setMenu("Dashboard");
     setPortfolio_name("");
     props.setRefresh("New Portfolio")
-    window.location.reload(true);
   }
 
   function cancel() {

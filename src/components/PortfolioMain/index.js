@@ -85,7 +85,6 @@ useEffect(() => {
         setNewPopup={props.setNewPopup}
         view = {props.view}
         setPortfolio = {props.setPortfolio}
-        refresh={props.refresh}
       />
     </div>
   );

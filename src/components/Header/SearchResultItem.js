@@ -28,7 +28,6 @@ export default function SearchResultItem(props) {
         .then(res => {
           console.log(res);
           setMode(SELECTED);
-          window.location.reload(true);
         });
     }
   }

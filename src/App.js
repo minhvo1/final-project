@@ -27,7 +27,6 @@ function App() {
     setPortfolio,
     info,
     loading,
-    setLoading,
     popup,
     setNewPopup,
     savePortfolio,
@@ -36,13 +35,14 @@ function App() {
     deleteTicker,
     userId,
     deletePortfolio,
-    added,
-    setAdded,
-    adminData,
+    setInfo,
     login,
-    logout
+    logout,
+    addNewPortfolio,
+    addTicker,
+    editTicker,
+    deleteTickerAsset,
   } = useApplicationData();
-  console.log(adminData);
   let adminData1 = AdminData();;
   // useEffect(() => {
 
@@ -52,6 +52,10 @@ function App() {
 
   //   })
   // }, [])
+
+
+  console.log(info);
+
 
   return (
     <div className="App">
@@ -68,8 +72,6 @@ function App() {
               setMenu={setMenu}
               setNewPopup={setNewPopup}
               userId={userId}
-              refresh={added}
-              setRefresh={setAdded}
             />
             <div className="main-container">
               <Header
@@ -90,8 +92,6 @@ function App() {
                     userId={userId}
                     view={view}
                     setPortfolio={setPortfolio}
-                    refresh={added}
-                    setRefresh={setAdded}
                   />
                 )}
               {view.menu === "Competitions" &&
@@ -103,10 +103,9 @@ function App() {
                     setNewPopup={setNewPopup}
                     data={info}
                     userId={userId}
-                    setRefresh={setAdded}
                   />
                 )}
-              {userId === 1 && <Admin adminData={adminData} />}
+              {userId === 1 && <Admin adminData1 = {adminData1}/>}
               {popup.popupStatus === true && (
                 <Popup
                   type={popup.page}
@@ -120,8 +119,10 @@ function App() {
                   sellTicker={sellTicker}
                   deleteTicker={deleteTicker}
                   deletePortfolio={deletePortfolio}
-                  refresh={added}
-                  setRefresh={setAdded}
+                  addNewPortfolio = {addNewPortfolio}
+                  addTicker= {addTicker}
+                  editTicker = {editTicker}
+                  deleteTickerAsset = {deleteTickerAsset}
                 />
               )}
             </div>
