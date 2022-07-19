@@ -34,7 +34,7 @@ for (let ticker of tickers) {
   const portfolioValue = `$${numberWithCommas(Math.round((totalValue + Number.EPSILON) * 100) / 100)}`
 
   const returnValue = classNames("portfolio-return", {
-    "portfolio-return-red" : totalReturnValue < 0 ,
+    "portfolio-return-red" : totalReturn < 0 ,
   });
   
 

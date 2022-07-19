@@ -158,7 +158,7 @@ export default function Ticker(props) {
             
           </p>
         )}
-        {!props.info.ticker.quantity && <p>🔴No Shares🔴</p>}
+        {!props.info.ticker.quantity && <p>🔴No shares🔴</p>}
       </div>
 
       <div className="buy-sell">
