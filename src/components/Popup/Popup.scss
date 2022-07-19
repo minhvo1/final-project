@@ -1,6 +1,6 @@
 $mainfont: 'Poppins';
 $bgcolor: #313335;
-$textcolor: #F0F0F0;
+$textcolor: #ccc9cf;
 $textcolor-selected: #A374D2;
 $textcolor-positive: #33C15B;
 $textcolor-small: #878080;
@@ -71,6 +71,7 @@ h1{
 .input-info {
   margin-top: 5rem; 
   font-size: x-large;
+  width: 100%;
 } 
 
 .input-info h2 {
@@ -287,3 +288,47 @@ h1{
 .you-lose b {
   color:white;
 }
+
+.email-input-info {
+  margin-top: 2rem
+}
+
+.frm-login{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.frm-login form {
+  width: 80%;
+}
+
+.frm-login h1 {
+  padding-top: 2rem;
+  font-family: "Fredoka One";
+  font-size: 5rem;
+  color:rgba($color: #ccc9cf, $alpha: .8);
+
+  letter-spacing: 0.2rem;
+}
+
+.login-button {
+  height: 4rem;
+  font-size: 1.2rem;
+  text-align: center;
+  margin-top: 5rem;
+  background-color: rgba($color: #c6a8e4, $alpha: .1);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.login-button:hover {
+  background-color: rgba($color: #9967CA, $alpha: .29) !important;
+  border-radius: 10px;
+  color: #9d66d3 !important;
+}
+
+.login-button button {
+  padding-top: 1.2rem;
+}
+

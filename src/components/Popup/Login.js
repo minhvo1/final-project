@@ -22,13 +22,14 @@ export default function Login(props) {
 
   return (
     <div className="frm-login">
+      <h1>FOLIO</h1>
       <form
         onSubmit={(event) => {
           event.preventDefault();
         }}
       >
-        <div className="input-info">
-          <h3>Enter email</h3>
+        <div className="input-info email-input-info">
+          <h3>Email</h3>
           <input
             value={email}
             className="input"
@@ -39,8 +40,8 @@ export default function Login(props) {
             }}
           ></input>
         </div>    
-        <div className="input-info">
-          <h3>Enter password</h3>
+        <div className="input-info ">
+          <h3>Password</h3>
           <input
             value={password}
             className="input"
@@ -52,7 +53,7 @@ export default function Login(props) {
           ></input>
         </div>    
         <section className="error-message">{error}</section>
-        <div className="buttons">
+        <div className="login-button">
           <button className="save-button" type="button"  onClick={validate}>
             Login
           </button>

@@ -19,8 +19,7 @@ db.connect();
 */
 
 function App() {
-  const [user, setUser] = useState({ name: "", email: "" });
-  const [error, setError] = useState("");
+
 
   const {
     view,
@@ -51,6 +50,7 @@ function App() {
 
   //   })
   // }, [])
+
   return (
     <div className="App">
       {userId > 0 ? (
@@ -72,6 +72,7 @@ function App() {
                 portfolios={info.portfolios}
                 selectedPortfolio={view.portfolio}
                 userId={userId}
+                userName={info.user.name}
                 logout = {logout}
               />
               {view.menu === "Dashboard" &&
@@ -83,6 +84,7 @@ function App() {
                     selectedPortfolioId={view.portfolio_id}
                     setNewPopup={setNewPopup}
                     userId={userId}
+                
                   />
                 )}
               {view.menu === "Competitions" &&
@@ -119,7 +121,7 @@ function App() {
         <Fragment>
                   {
           popup.popupStatus === false  && (
-            <Popup type="login" login={login}/>
+            <Popup type="Login" login={login}/>
           )
         }
         </Fragment>

@@ -45,7 +45,7 @@ export default function Popup(props) {
          info = {props.info}
          deletePortfolio = {props.deletePortfolio}
         />}
-        {props.type === "login" && <Login login={props.login}  />}
+        {props.type === "Login" && <Login login={props.login}  />}
   </div>
     </div>
   );

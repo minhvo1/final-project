@@ -52,7 +52,8 @@ export default function PerformanceGraph(props) {
             dataKey="value" 
             name="Value" 
             domain={["auto", "auto"]} 
-            dx={-10}
+            width={80}
+            dx={-5}
             type="number"
             tickFormatter={value => {
               return (`$${numberWithCommas(value)}`)

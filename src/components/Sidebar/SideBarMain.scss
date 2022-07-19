@@ -23,13 +23,18 @@ $radius: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
- 
+  
 }
 
-.logo-image {
-  width: 3rem;
-  height: 3rem;
+.Logo h1 {
+  font-family: "Fredoka One";
+  font-size: 3.4rem;
+  color:rgba($color: #ccc9cf, $alpha: .8);
+
+  letter-spacing: 0.2rem;
 }
+
+
 
 .menus-lists {
   width: 100%;

@@ -5,11 +5,14 @@ import axios from "axios";
 import "./Header.scss";
 
 export default function Header(props) {
+  console.log(props)
   return (
     <div className="header">
       {props.userId !== 1 && (
         <div className="header_portfolio-info">
-          {props.selectedPortfolio || "YOLO Portfolio"}
+          <p className="user-name">Welcome, {props.userName}!</p>
+          <p className="portfolio-name">{props.selectedPortfolio}</p>
+          
         </div>
       )}
    {props.userId === 1 && (

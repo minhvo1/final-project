@@ -113,6 +113,7 @@ $radius: 1rem;
 }
 
 .performance-graph {
+  
   background-color: $divcolor;
   height: 45%;
   margin: 0.9rem 1.8rem 0.9rem 1.8rem;
@@ -132,6 +133,12 @@ $radius: 1rem;
 
 .recharts-surface {
   margin: 0 0 0 1.2rem;
+ 
+}
+
+.recharts-cartesian-axis-ticks{
+  width:5rem;
+  z-index: 9999;
 }
 
 .timeframe-buttons {
