@@ -141,9 +141,14 @@ h1{
   margin-left : 2rem;
   display: flex;
   flex-direction:column;
-  justify-content: flex-start;
+  justify-content: center;
+  
   height: 85%;
   overflow-y: scroll;
+}
+
+.competition-info-box {
+  text-align: center;
 }
 
 .competition-info-box button {

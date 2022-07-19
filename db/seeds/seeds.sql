@@ -12852,7 +12852,7 @@ INSERT INTO portfolio_values (portfolio_id, datetime, value) VALUES (1,'2022-07-
 INSERT INTO portfolio_values (portfolio_id, datetime, value) VALUES (1,'2022-07-19T08:00:00.000Z',5844.4);
 
 
-INSERT INTO portfolio_values (portfolio_id, datetime, value) VALUES (2,'2022-07-12T08:00:00.000Z',10000);
+INSERT INTO portfolio_values (portfolio_id, datetime, value) VALUES (2,'2022-07-12T08:00:00.000Z',10000.00);
 
 INSERT INTO portfolio_values (portfolio_id, datetime, value) VALUES (2,'2022-07-13T08:00:00.000Z',10040.18);
 

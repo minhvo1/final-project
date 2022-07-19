@@ -17,6 +17,7 @@ import {
 import moment from "moment";
 
 export default function PerformanceGraph(props) {
+  console.log(props.data)
   const timeframes = ["1D", "1W", "1M", "3M", "1Y", "All"];
   // const test = new Date(props.data[0].datetime).getTime()
   // console.log(test)
@@ -29,7 +30,7 @@ export default function PerformanceGraph(props) {
   //   method: "GET",
   //   url: "https://api.polygon.io/v2/aggs/ticker/AAPL/range/1/day/2020-06-01/2020-06-17?apiKey=KR_4M5C_Bx0OkMvz3ncgz2brEnmUmDPpo&region=US&interval=1d&lang=en&events=div%2Csplit"
   // };
-
+ 
   return (
     <div className="performance-graph">
       <div>
