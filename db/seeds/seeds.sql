@@ -54,7 +54,7 @@ INSERT INTO competition_users (competition_id, user_id) VALUES (3, 10);
 
 INSERT INTO portfolios (name, date_created, funds, total_value, user_id, competition_id) VALUES ('Stephanies savings', '2019-06-12T08:00:00.000Z', 5000, 5844.4, 2, NULL);
 
-INSERT INTO portfolios (name, date_created, funds, total_value, user_id, competition_id) VALUES ('Stephanies playing money', '2019-06-12T08:00:00.000Z', 8000, 9716.2, 2, 1);
+INSERT INTO portfolios (name, date_created, funds, total_value, user_id, competition_id) VALUES ('Stephanies playing money', '2019-06-12T08:00:00.000Z', 8435.49, 10151.69, 2, 1);
 
 INSERT INTO portfolios (name, date_created, funds, total_value, user_id, competition_id) VALUES ('STAN TO THE MOON', '2019-06-12T08:00:00.000Z', 1000, 5000,  3, 1);
 
@@ -12852,20 +12852,20 @@ INSERT INTO portfolio_values (portfolio_id, datetime, value) VALUES (1,'2022-07-
 INSERT INTO portfolio_values (portfolio_id, datetime, value) VALUES (1,'2022-07-19T08:00:00.000Z',5844.4);
 
 
-INSERT INTO portfolio_values (portfolio_id, datetime, value) VALUES (2,'2022-07-12T08:00:00.000Z',9564.51);
+INSERT INTO portfolio_values (portfolio_id, datetime, value) VALUES (2,'2022-07-12T08:00:00.000Z',10000);
 
-INSERT INTO portfolio_values (portfolio_id, datetime, value) VALUES (2,'2022-07-13T08:00:00.000Z',9604.69);
+INSERT INTO portfolio_values (portfolio_id, datetime, value) VALUES (2,'2022-07-13T08:00:00.000Z',10040.18);
 
-INSERT INTO portfolio_values (portfolio_id, datetime, value) VALUES (2,'2022-07-14T08:00:00.000Z',9554.97);
+INSERT INTO portfolio_values (portfolio_id, datetime, value) VALUES (2,'2022-07-14T08:00:00.000Z',9990.46);
 
-INSERT INTO portfolio_values (portfolio_id, datetime, value) VALUES (2,'2022-07-15T08:00:00.000Z',9611.77);
+INSERT INTO portfolio_values (portfolio_id, datetime, value) VALUES (2,'2022-07-15T08:00:00.000Z',10047.26);
 
-INSERT INTO portfolio_values (portfolio_id, datetime, value) VALUES (2,'2022-07-16T08:00:00.000Z',9658.62);
+INSERT INTO portfolio_values (portfolio_id, datetime, value) VALUES (2,'2022-07-16T08:00:00.000Z',10094.11);
 
-INSERT INTO portfolio_values (portfolio_id, datetime, value) VALUES (2,'2022-07-17T08:00:00.000Z',9658.62);
+INSERT INTO portfolio_values (portfolio_id, datetime, value) VALUES (2,'2022-07-17T08:00:00.000Z',10094.11);
 
-INSERT INTO portfolio_values (portfolio_id, datetime, value) VALUES (2,'2022-07-18T08:00:00.000Z',9658.62);
+INSERT INTO portfolio_values (portfolio_id, datetime, value) VALUES (2,'2022-07-18T08:00:00.000Z',10094.11);
 
-INSERT INTO portfolio_values (portfolio_id, datetime, value) VALUES (2,'2022-07-19T08:00:00.000Z',9716.2);
+INSERT INTO portfolio_values (portfolio_id, datetime, value) VALUES (2,'2022-07-19T08:00:00.000Z',10151.69);
 
 
