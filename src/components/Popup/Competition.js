@@ -1,6 +1,11 @@
 import React, { Fragment, useState } from "react";
 import "./Popup.scss";
 import {findCompetitionById} from "../../helpers/sidebarHelper";
+import {
+  getPortfolioTickers,
+  getPromiseArrayTickers,
+  numberWithCommas
+} from "../../helpers/portfolioMainHelper";
 
 export default function Competition(props) {
     const competition1 = findCompetitionById(props.info, props.competitions)  
@@ -36,7 +41,8 @@ export default function Competition(props) {
           <div className="competition-info-box">
             <h2>Prize Pool</h2>
             <br />
-           <h2 className = "title">{competition1.prizePool}</h2>
+       
+           <h2 className = "title">{`$${numberWithCommas(Math.round((competition1.prizePool + Number.EPSILON) * 100) / 100)}`}</h2>
           </div>
 
           <div className="competition-info-box">
