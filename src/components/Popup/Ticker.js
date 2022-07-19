@@ -93,7 +93,6 @@ export default function Ticker(props) {
           label: "Yes",
           onClick: () => {
             actionToDo(dataToRender);
-            props.setRefresh("Bought Tickers");
             props.setMenu("Dashboard");
             window.location.reload(true);
           },
@@ -119,7 +118,6 @@ export default function Ticker(props) {
           label: "Yes",
           onClick: () => {
             props.deleteTicker(portfolio.id, props.info.ticker.id);
-            props.setRefresh("Bought Tickers");
             props.setMenu("Dashboard");
           },
         },

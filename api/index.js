@@ -456,13 +456,27 @@ app.post('/deletePortfolios', (req,res) => {
     });
 });*/
 
+app.get("/lol", (req, res) => {
+  db.query(
+    `SELECT DISTINCT portfolios.id as portfolio_id, tickers.ticker, portfolio_datas.quantity as quantity, portfolios.funds as funds   
+                  from portfolios 
+                  LEFT JOIN portfolio_datas ON portfolios.id = portfolio_datas.portfolio_id 
+                  LEFT JOIN tickers ON portfolio_datas.ticker_id = tickers.id 
+                  WHERE portfolios.id = 1;`
+  )
+  .then((data) => {
+    res.json(data.rows);
+  })
+  .catch((err) => res.json({ message: err }));
+});
+
 app.get("/portfolio/:id/updateValue", (req, res) => {
   if (!req.params.id) {
     return res.json({"error":"Must provide portfolio_id"})
   }
   const portfolio_id = req.params.id;
 
-  const pQuery = `SELECT DISTINCT portfolios.id as portfolio_id, tickers.ticker, portfolio_datas.quantity as quantity   
+  const pQuery = `SELECT DISTINCT portfolios.id as portfolio_id, tickers.ticker, portfolio_datas.quantity as quantity, portfolios.funds as funds   
                   from portfolios 
                   LEFT JOIN portfolio_datas ON portfolios.id = portfolio_datas.portfolio_id 
                   LEFT JOIN tickers ON portfolio_datas.ticker_id = tickers.id 
@@ -501,6 +515,7 @@ app.get("/portfolio/:id/updateValue", (req, res) => {
                   totalValue += portfolioDatas.rows[i].quantity * (responseDataTicker[j].day.c || responseDataTicker[j].prevDay.c);
                   console.log("Total Value: ", totalValue);
                 }
+                totalValue += Number(portfolioDatas.rows[0]["funds"]); 
               }
             }
           }
