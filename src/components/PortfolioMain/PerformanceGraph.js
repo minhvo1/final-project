@@ -65,6 +65,7 @@ export default function PerformanceGraph(props) {
             dataKey="value"
             stroke="#A374D2"
             dot={false}
+            strokeWidth={2}
             type="monotone"
             name="Values"
           />
