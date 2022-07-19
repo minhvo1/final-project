@@ -36,8 +36,6 @@ export default function Ticker(props) {
     let dataToRender = {};
 
     if (action === "buy") {
-      console.log(props.info.ticker)
-
       Msg = `Confirmation to buy ${buyShares} shares of ${props.info.ticker.ticker}?`;
       actionToDo = props.buyTicker;
       if (buyShares === null) {
@@ -93,7 +91,6 @@ export default function Ticker(props) {
           label: "Yes",
           onClick: () => {
             actionToDo(dataToRender);
-            props.setRefresh("Bought Tickers");
             props.setMenu("Dashboard");
             window.location.reload(true);
           },
@@ -119,7 +116,6 @@ export default function Ticker(props) {
           label: "Yes",
           onClick: () => {
             props.deleteTicker(portfolio.id, props.info.ticker.id);
-            props.setRefresh("Bought Tickers");
             props.setMenu("Dashboard");
           },
         },

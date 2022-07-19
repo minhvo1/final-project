@@ -52,7 +52,7 @@ function App() {
 
 
 
-  const userId = Cookies.get('userId')
+  const userId = Number(Cookies.get('userId'))
 
   return (
     <div className="App">

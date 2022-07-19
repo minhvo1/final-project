@@ -68,7 +68,6 @@ useEffect(() => {
 }, [props.selectedPortfolio, props.view, props.data]);
 
 
-
   return (
     <div className="portfolio-main">
       <PortfolioInfo

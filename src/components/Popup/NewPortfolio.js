@@ -8,7 +8,10 @@ export default function NewPortfolio(props) {
   const [funding, setFunding] = useState(0);
 
   const competitions = props.competitions.map((competition) => {
-    return <option value={competition.id}>{competition.name}</option>;
+    if(competition.avaliability === true) {
+      return <option value={competition.id}>{competition.name}</option>;
+
+    }
   });
 
   const [error, setError] = useState("");
