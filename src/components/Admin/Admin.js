@@ -106,10 +106,10 @@ const [empty, setEmpty] = useState('');
       );
     });
     let dateStart = new Date(competitions.compInfo.start_datetime);
-    dateStart = `${dateStart.getMonth()}/${dateStart.getDate()}/${dateStart.getFullYear()}`;
+    dateStart = `${dateStart.getMonth()+ 1}/${dateStart.getDate()}/${dateStart.getFullYear()}`;
 
     let dateEnd = new Date(competitions.compInfo.end_datetime);
-    dateEnd = `${dateEnd.getMonth()}/${dateEnd.getDate()}/${dateEnd.getFullYear()}`;
+    dateEnd = `${dateEnd.getMonth()+ 1}/${dateEnd.getDate()}/${dateEnd.getFullYear()}`;
 
     return (
       <div className="competitions-list">

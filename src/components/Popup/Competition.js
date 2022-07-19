@@ -10,7 +10,7 @@ export default function Competition(props) {
     });
   
     let dateEnd = new Date(competition1.end_date);
-    dateEnd = `${dateEnd.getMonth()}/${dateEnd.getDate()}/${dateEnd.getFullYear()}` 
+    dateEnd = `${dateEnd.getMonth()+ 1}/${dateEnd.getDate()}/${dateEnd.getFullYear()}` 
    
     const [error, setError] = useState("");
   

@@ -21,10 +21,10 @@ export default function UserCompetitionsItem (props) {
   });
 
   let dateStart = new Date(props.startDate);
-  dateStart = `${dateStart.getMonth()}/${dateStart.getDate()}/${dateStart.getFullYear()}` 
+  dateStart = `${dateStart.getMonth()+ 1}/${dateStart.getDate()}/${dateStart.getFullYear()}` 
 
   let dateEnd = new Date(props.endDate);
-  dateEnd = `${dateEnd.getMonth()}/${dateEnd.getDate()}/${dateEnd.getFullYear()}` 
+  dateEnd = `${dateEnd.getMonth()+ 1}/${dateEnd.getDate()}/${dateEnd.getFullYear()}` 
 
 
     return (
