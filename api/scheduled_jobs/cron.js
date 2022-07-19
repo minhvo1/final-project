@@ -13,7 +13,7 @@ exports.initScheduledJobs = (db) => {
           for (const portfolio of data.rows) {
             //console.log("Line 203", portfolio);
             let portfolio_id = portfolio.id;
-            const pQuery = `select DISTINCT portfolios.id as portfolio_id, tickers.ticker, portfolio_datas.quantity as quantity   
+            const pQuery = `select DISTINCT portfolios.id as portfolio_id, tickers.ticker, portfolio_datas.quantity as quantity, portfolios.funds as funds   
                           from portfolios 
                           left join portfolio_datas ON portfolios.id = portfolio_datas.portfolio_id 
                           left join tickers ON portfolio_datas.ticker_id = tickers.id 
@@ -52,6 +52,7 @@ exports.initScheduledJobs = (db) => {
                         }
                       }
                     }
+                    totalValue += Number(portfolioDatas.rows[0]["funds"]); 
                     //console.log("Line 228", totalValue);
                     // 6. Update the value into Database
                     let datetime = new Date();
