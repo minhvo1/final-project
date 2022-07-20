@@ -179,11 +179,11 @@ export function AdminData () {
   })
   // eslint-disable-next-line
 
-let returnValue = {
-  userArray : userArray, 
-  competitionArray : competitionArray,
-  portfolioArray : portfolioArray,
-}
+  let returnValue = {
+    userArray : userArray, 
+    competitionArray : competitionArray,
+    portfolioArray : portfolioArray,
+  }
 
-return returnValue
+  return returnValue
 }

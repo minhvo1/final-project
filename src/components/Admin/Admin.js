@@ -6,65 +6,73 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 import { addNewComp } from "../../helpers/sidebarHelper";
 
 export default function Admin(props) {
-const [error, setError] = useState("");
-const [info, setInfo] = useState({
-    name : null,
-    startAmount : null,
-    date : null
-})
+  const [error, setError] = useState("");
+  const [adminInfo, setAdminInfo] = useState({
+    name: null,
+    startAmount: null,
+    date: null
+  })
+  
 
-//const [users, setUsers] = useState('');
-//const [portfolios, setPortfolios] = useState('');
-//const [competitions, setCompetitions] = useState('');
-const [loading, setLoading] = useState(2);
-const [empty, setEmpty] = useState('');
+  //const [users, setUsers] = useState('');
+  //const [portfolios, setPortfolios] = useState('');
+  //const [competitions, setCompetitions] = useState('');
+  const [loading, setLoading] = useState(1);
+  const [empty, setEmpty] = useState('');
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(2);
+    }, 2000);
+  }, []); // <- add empty brackets here
 
   let userCounter = 0;
   let portfoliosCounter = 0;
   let date = Date.now();
-
+  console.log(loading);
+  console.log(props.adminData)
   const validate = () => {
 
-    if(!info.name) {
-        setError("You must have a competition name")
-        return
+    if (!adminInfo.name) {
+      setError("You must have a competition name")
+      return
     }
-    if(!info.startAmount) {
-        setError("You must have a starting amount")
-        return
+    if (!adminInfo.startAmount) {
+      setError("You must have a starting amount")
+      return
     }
 
-    if(!info.date) {
-        setError("You must have a finishing date")
-        return
+    if (!adminInfo.date) {
+      setError("You must have a finishing date")
+      return
     }
 
     setError('')
 
     confirmAlert({
-        title: "Confirm to submit",
-        message: "Create new Competition?",
-        buttons: [
-          {
-            label: "Yes",
-            onClick: () => {
-                addNewComp(info.name, info.startAmount, info.date)
-                setInfo({...info, name: null, date: null, startAmount: null})
-                window.location.reload(true);
-            },
+      title: "Confirm to submit",
+      message: "Create new Competition?",
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => {
+            addNewComp(adminInfo.name, adminInfo.startAmount, adminInfo.date)
+            setAdminInfo({ ...adminInfo, name: null, date: null, startAmount: null })
+            window.location.reload(true);
           },
-          {
-            label: "No",
-            onClick: () => {
-              return;
-            },
+        },
+        {
+          label: "No",
+          onClick: () => {
+            return;
           },
-        ],
-      });
-    }
+        },
+      ],
+    });
+  }
 
 
-  let users =(props.adminData.userArray.map((users) => {
+  let users = (props.adminData.userArray.map((users) => {
     userCounter++;
     return (
       <div className="user-list">
@@ -76,28 +84,28 @@ const [empty, setEmpty] = useState('');
       </div>
     );
   }));
-
+  console.log(users);
   let portfolios = (props.adminData.portfolioArray.map((portfolio) => {
     portfoliosCounter++;
 
-   
+
     return (
       <div className="user-list">
         <h3>{portfoliosCounter}</h3>{" "}
         <h3 className="users-info">
           {" "}
-          Name : {portfolio.name} <br /> Total Value : <text className = "green">{portfolio.total_value}{" "}</text>
+          Name : {portfolio.name} <br /> Total Value : <text className="green">{portfolio.total_value}{" "}</text>
         </h3>
       </div>
     );
   }));
 
- 
+  console.log(portfolios);
 
   let competitions = (props.adminData.competitionArray.map((competitions) => {
     const compPortfolios = competitions.compPortfolios.map((portfolios) => {
 
-    
+
       return (
         <div className="portfolio-comp-list">
           <text>{portfolios.name} : </text>
@@ -106,10 +114,10 @@ const [empty, setEmpty] = useState('');
       );
     });
     let dateStart = new Date(competitions.compInfo.start_datetime);
-    dateStart = `${dateStart.getMonth()+ 1}/${dateStart.getDate()}/${dateStart.getFullYear()}`;
+    dateStart = `${dateStart.getMonth() + 1}/${dateStart.getDate()}/${dateStart.getFullYear()}`;
 
     let dateEnd = new Date(competitions.compInfo.end_datetime);
-    dateEnd = `${dateEnd.getMonth()+ 1}/${dateEnd.getDate()}/${dateEnd.getFullYear()}`;
+    dateEnd = `${dateEnd.getMonth() + 1}/${dateEnd.getDate()}/${dateEnd.getFullYear()}`;
 
     return (
       <div className="competitions-list">
@@ -137,85 +145,85 @@ const [empty, setEmpty] = useState('');
       </div>
     );
   }))
-
+  console.log(competitions);
 
   return (
     <div className="popup">
       {loading === 1 && (<div>Loading...</div>)}
-      {loading === 2 && 
-           <div className="admin-dashboard">
-           <h2 className="title-admin">
-             <b>Users</b> : {users.length} users
-           </h2>
-           <div className="user-container">{users}</div>
-           <h2 className="title-admin title-admin-portfolios">
-             <b>Portfolios</b> : {portfolios.length} portfolios
-           </h2>
-           <div className="portfolios-container">{portfolios}</div>
-           <h2 className="title-admin">
-             <b> Competitions</b>: {competitions.length} competitions
-           </h2>
-           <div className="competitions-container">{competitions}</div>
-           <h2 className="title-admin title-admin-new">
-             <b> New Competition</b>
-           </h2>
-           <div className="new-container">
-             <form  onSubmit={(event) => {
-                 event.preventDefault();
-               }}>
-               <div>
-                 {" "}
-                 <h2>Name :</h2>
-                 <input className="newCompForms" name="name" type="text"
-                 placeholder="Name"
-                 onChange={(e) => {
-                   setInfo({...info, name : e.target.value })
-                 }}
-                 ></input>
-               </div>
-               <div>
-                 {" "}
-                 <h2>Start Amount :</h2>
-                 <input
-                   className="newCompForms"
-                   name="start-amount"
-                   type="number"
-                   placeholder="10000"
-                   onChange={(e) => {
-                       setInfo({...info, startAmount : e.target.value })
-                     }}
-                 ></input>
-               </div>
-   
-               <div>
-                 <h2>End Date :</h2>
-                 <input
-                   className="newCompForms"
-                   name="date-end"
-                   type="date"
-                   onChange={(e) => {
-                       setInfo({...info, date : e.target.value })
-                     }}
-                   placeholder={date}
-                 ></input>
-               </div>
-   
-   
-               <button
-                 className="join-button join-button-comp"
-                 onClick={validate}
-               >
+      {loading === 2 &&
+        <div className="admin-dashboard">
+          <h2 className="title-admin">
+            <b>Users</b> : {users.length} users
+          </h2>
+          <div className="user-container">{users}</div>
+          <h2 className="title-admin title-admin-portfolios">
+            <b>Portfolios</b> : {portfolios.length} portfolios
+          </h2>
+          <div className="portfolios-container">{portfolios}</div>
+          <h2 className="title-admin">
+            <b> Competitions</b>: {competitions.length} competitions
+          </h2>
+          <div className="competitions-container">{competitions}</div>
+          <h2 className="title-admin title-admin-new">
+            <b> New Competition</b>
+          </h2>
+          <div className="new-container">
+            <form onSubmit={(event) => {
+              event.preventDefault();
+            }}>
+              <div>
+                {" "}
+                <h2>Name :</h2>
+                <input className="newCompForms" name="name" type="text"
+                  placeholder="Name"
+                  onChange={(e) => {
+                    setAdminInfo({ ...adminInfo, name: e.target.value })
+                  }}
+                ></input>
+              </div>
+              <div>
+                {" "}
+                <h2>Start Amount :</h2>
+                <input
+                  className="newCompForms"
+                  name="start-amount"
+                  type="number"
+                  placeholder="10000"
+                  onChange={(e) => {
+                    setAdminInfo({ ...adminInfo, startAmount: e.target.value })
+                  }}
+                ></input>
+              </div>
+
+              <div>
+                <h2>End Date :</h2>
+                <input
+                  className="newCompForms"
+                  name="date-end"
+                  type="date"
+                  onChange={(e) => {
+                    setAdminInfo({ ...adminInfo, date: e.target.value })
+                  }}
+                  placeholder={date}
+                ></input>
+              </div>
+
+
+              <button
+                className="join-button join-button-comp"
+                onClick={validate}
+              >
                 Create   </button>
-             </form>
-   
-             <section className="error-message">{error}</section>
-   
-           </div>
-         </div>
-      
-      
+            </form>
+
+            <section className="error-message">{error}</section>
+
+          </div>
+        </div>
+
+
       }
- 
+
     </div>
   );
 }

@@ -40,7 +40,8 @@ function App() {
     logout,
  
   } = useApplicationData();
-  let adminData = AdminData();;
+  const adminData = AdminData();
+  console.log(adminData);
   // useEffect(() => {
 
   //   schedule.scheduleJob('*/5 * * * * *', () => {
@@ -125,7 +126,7 @@ function App() {
                     userId={userId}
                   />
                 )}
-              {userId === 1 && <Admin adminData = {adminData}/>}
+              {userId === 1 && <Admin adminData={adminData}/>}
               {popup.popupStatus === true && (
                 <Popup
                   type={popup.page}
