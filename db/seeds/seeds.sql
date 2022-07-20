@@ -52,9 +52,9 @@ INSERT INTO competition_users (competition_id, user_id) VALUES (3, 10);
 
 -- portfolios table seeds here (Example)
 
-INSERT INTO portfolios (name, date_created, funds, total_value, user_id, competition_id) VALUES ('Stephanies savings', '2019-06-12T08:00:00.000Z', 9000, 9844.4, 2, NULL);
+INSERT INTO portfolios (name, date_created, funds, total_value, user_id, competition_id) VALUES ('Binhs savings', '2019-06-12T08:00:00.000Z', 9000, 9844.4, 2, NULL);
 
-INSERT INTO portfolios (name, date_created, funds, total_value, user_id, competition_id) VALUES ('Stephanies playing money', '2019-06-12T08:00:00.000Z', 4435.49, 6151.69, 2, 1);
+INSERT INTO portfolios (name, date_created, funds, total_value, user_id, competition_id) VALUES ('Minhs playing money', '2019-06-12T08:00:00.000Z', 4435.49, 6151.69, 2, 1);
 
 INSERT INTO portfolios (name, date_created, funds, total_value, user_id, competition_id) VALUES ('STAN TO THE MOON', '2019-06-12T08:00:00.000Z', 1000, 5000,  3, 1);
 
