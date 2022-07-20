@@ -10,7 +10,6 @@ export default function NewPortfolio(props) {
   const competitions = props.competitions.map((competition) => {
     if(competition.avaliability === true) {
       return <option value={competition.id}>{competition.name}</option>;
-
     }
   });
 

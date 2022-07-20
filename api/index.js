@@ -518,6 +518,7 @@ app.get("/portfolio/:id/updateValue", (req, res) => {
               }
             }
           }
+          console.log(totalValue);
           totalValue += Number(portfolioDatas.rows[0]["funds"]); 
           console.log("Line 228", totalValue);
           // 6. Update the value into Database

@@ -68,13 +68,13 @@ export default function Ticker(props) {
       }
       dataToRender = {
         portfolioId: portfolio.id,
-        funds: portfolio.funds + buyShares * props.info.ticker.price,
+        funds: portfolio.funds + (sellShares * props.info.ticker.price),
         tickerPrice: props.info.ticker.price,
         quantity: {
           amount: props.info.ticker.quantity - sellShares,
           existing: true,
         },
-        originalPrice : ((props.info.ticker.avgBoughtPrice * props.info.ticker.quantity) - (props.info.ticker.price * Number(buyShares)))/ (props.info.ticker.quantity - Number(buyShares)),
+        originalPrice : ((props.info.ticker.avgBoughtPrice * props.info.ticker.quantity) - (props.info.ticker.price * Number(sellShares)))/ (props.info.ticker.quantity - Number(sellShares)),
         transaction: {
           type: false,
           amount: sellShares,
@@ -117,6 +117,7 @@ export default function Ticker(props) {
           onClick: () => {
             props.deleteTicker(portfolio.id, props.info.ticker.id);
             props.setMenu("Dashboard");
+            window.location.reload(true);
           },
         },
         {

@@ -53,6 +53,8 @@ exports.initScheduledJobs = (db) => {
                       }
                     }
                     totalValue += Number(portfolioDatas.rows[0]["funds"]); 
+                    console.log(totalValue);
+
                     //console.log("Line 228", totalValue);
                     // 6. Update the value into Database
                     let datetime = new Date();
