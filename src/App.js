@@ -53,7 +53,25 @@ function App() {
 
 
   const userId = Number(Cookies.get('userId'))
-
+  const handleChange = function(ticker_id) {
+    console.log("selected portfolio: ",view.portfolio);
+    console.log("set change at app.js",ticker_id);
+    const tickerObj = {
+      tickerId: ticker_id,
+      tickerQuantity: 0,
+      tickerAvgPrice: 0
+    };
+    let newPortfolios = info.portfolios
+    for (const idx in info.portfolios) {
+      if (info.portfolios[idx].name === view.portfolio) {
+        newPortfolios[idx].tickers.push(tickerObj);
+      }
+    }
+    setInfo({
+      ...info,
+      portfolios: newPortfolios,
+    });
+  }
   return (
     <div className="App">
       {userId > 0 ? (
@@ -72,6 +90,8 @@ function App() {
             />
             <div className="main-container">
               <Header
+                data={info}
+                setChange={handleChange}
                 portfolios={info.portfolios}
                 selectedPortfolio={view.portfolio}
                 userId={userId}

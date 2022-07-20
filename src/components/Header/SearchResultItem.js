@@ -28,7 +28,10 @@ export default function SearchResultItem(props) {
         .then(res => {
           console.log(res);
           setMode(SELECTED);
-          window.location.reload(true);
+          props.setChange(ticker_id)
+          //window.location.reload(true);
+          // Update data
+          // Set change
         });
     }
   }

@@ -5,6 +5,11 @@ import axios from "axios";
 import "./Header.scss";
 
 export default function Header(props) {
+
+  const handleChange = function(ticker_id) {
+    console.log("Set change at index.js: ",ticker_id);
+    props.setChange(ticker_id);
+  }
   return (
     <div className="header">
       {props.userId !== 1 && (
@@ -23,6 +28,8 @@ export default function Header(props) {
       <SearchBar
         portfolios={props.portfolios}
         selectedPortfolio={props.selectedPortfolio}
+        setChange={handleChange}
+        data={props.data}
       />
       <UserIcon logout={props.logout}/>
     </div>

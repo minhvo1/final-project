@@ -44,6 +44,10 @@ export default function SearchBar(props) {
   
   }, [query]); */
   
+  const handleChange = function(ticker_id) {
+    console.log("Set change at search bar: ",ticker_id);
+    props.setChange(ticker_id);
+  }
 
   const lists = Object.values(results).map((result) => {
     // Check symbol was in portfolio
@@ -59,6 +63,8 @@ export default function SearchBar(props) {
         //onClick={() => selectsymbol(result.id)}
         //selectsymbol={selectsymbol}
         selected={check}
+        setChange={handleChange}
+        data={props.data}
       />
     /* if (check === false) {
       return (
