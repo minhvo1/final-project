@@ -68,7 +68,7 @@ export default function Ticker(props) {
       }
       dataToRender = {
         portfolioId: portfolio.id,
-        funds: portfolio.funds + (sellShares * props.info.ticker.price),
+        funds: Number(portfolio.funds) + Number(sellShares * props.info.ticker.price),
         tickerPrice: props.info.ticker.price,
         quantity: {
           amount: props.info.ticker.quantity - sellShares,

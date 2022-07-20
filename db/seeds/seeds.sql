@@ -2,7 +2,7 @@
 
 INSERT INTO users (type, name, email, password) VALUES (true, 'Keith Gills', 'roaringkitty@gmail.com','1234');
 
-INSERT INTO users (type, name, email, password) VALUES (false, 'Binh Vo', 'gunter@gmail.com', '1234');
+INSERT INTO users (type, name, email, password) VALUES (false, 'LightHouse Labs', 'test@gmail.com', '1234');
 
 INSERT INTO users (type, name, email, password) VALUES (false, 'Stan Miller', 'mcdermott.maxie@schoen', '1234');
 
@@ -22,13 +22,13 @@ INSERT INTO users (type, name, email, password) VALUES (false,  'Obie Howell', '
 
 -- competitions table seeds here (Example)
 
-INSERT INTO competitions (name, start_datetime, end_datetime, start_amount) VALUES ('WSB Competition', '2022-06-12T08:00:00.000Z', '2022-07-18T08:00:00.000Z', 6000);
+INSERT INTO competitions (name, start_datetime, end_datetime, start_amount) VALUES ('First Competition of the App!', '2022-06-12T08:00:00.000Z', '2022-07-21T08:00:00.000Z', 6000);
 
-INSERT INTO competitions (name, start_datetime, end_datetime, start_amount) VALUES ('Yay Competition', '2022-06-12T08:00:00.000Z', '2022-07-19T08:00:00.000Z', 10000);
+INSERT INTO competitions (name, start_datetime, end_datetime, start_amount) VALUES ('Lets see who can win!', '2022-06-12T08:00:00.000Z', '2022-07-30T08:00:00.000Z', 10000);
 
-INSERT INTO competitions (name, start_datetime, end_datetime, start_amount) VALUES ('Crypto Competition', '2022-06-12T08:00:00.000Z', '2022-06-19T08:00:00.000Z', 30000);
+INSERT INTO competitions (name, start_datetime, end_datetime, start_amount) VALUES ('30000 Money competition!', '2022-06-12T08:00:00.000Z', '2022-06-19T08:00:00.000Z', 30000);
 
-INSERT INTO competitions (name, start_datetime, end_datetime, start_amount) VALUES ('FAANG Competition', '2022-06-12T08:00:00.000Z', '2022-06-19T08:00:00.000Z', 50000);
+INSERT INTO competitions (name, start_datetime, end_datetime, start_amount) VALUES ('50000 Money Competition!', '2022-06-12T08:00:00.000Z', '2022-06-19T08:00:00.000Z', 50000);
 
 -- competition_users table seeds here (Example)
 
