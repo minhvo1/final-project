@@ -54,8 +54,9 @@ function App() {
 
   const userId = Number(Cookies.get('userId'))
   const handleChange = function(ticker_id) {
-    console.log("selected portfolio: ",view.portfolio);
-    console.log("set change at app.js",ticker_id);
+    //console.log("selected portfolio: ",view.portfolio);
+    //console.log("set change at app.js",ticker_id);
+    // Form new tocker object data
     const tickerObj = {
       tickerId: ticker_id,
       tickerQuantity: 0,
@@ -64,9 +65,11 @@ function App() {
     let newPortfolios = info.portfolios
     for (const idx in info.portfolios) {
       if (info.portfolios[idx].name === view.portfolio) {
+        // Push new ticker into current selected portofolio's ticker array
         newPortfolios[idx].tickers.push(tickerObj);
       }
     }
+    // Set Info
     setInfo({
       ...info,
       portfolios: newPortfolios,

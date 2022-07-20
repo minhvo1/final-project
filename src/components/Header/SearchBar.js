@@ -45,7 +45,7 @@ export default function SearchBar(props) {
   }, [query]); */
   
   const handleChange = function(ticker_id) {
-    console.log("Set change at search bar: ",ticker_id);
+    //console.log("Set change at search bar: ",ticker_id);
     props.setChange(ticker_id);
   }
 

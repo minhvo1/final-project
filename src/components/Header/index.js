@@ -7,7 +7,7 @@ import "./Header.scss";
 export default function Header(props) {
 
   const handleChange = function(ticker_id) {
-    console.log("Set change at index.js: ",ticker_id);
+    //console.log("Set change at index.js: ",ticker_id);
     props.setChange(ticker_id);
   }
   return (

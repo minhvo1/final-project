@@ -26,7 +26,7 @@ export default function SearchResultItem(props) {
 
       return axios.put(url, { ticker_id })
         .then(res => {
-          console.log(res);
+          //console.log(res);
           setMode(SELECTED);
           props.setChange(ticker_id)
           //window.location.reload(true);
