@@ -17,7 +17,6 @@ import {
 import moment from "moment";
 
 export default function PerformanceGraph(props) {
-  console.log(props.data)
   const timeframes = ["1D", "1W", "1M", "3M", "1Y", "All"];
   // const test = new Date(props.data[0].datetime).getTime()
   // console.log(test)
